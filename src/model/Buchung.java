@@ -17,6 +17,10 @@ public class Buchung implements Comparable<Buchung>{
 		this.fahrzeug = new SimpleObjectProperty<Fahrzeug>(_fahrzeug);
 	}
 
+	public Buchung() {
+		this(0, null, null);
+	}
+
 	@Override
 	public int compareTo(Buchung bu) {
 		if (this.getId().compareTo(bu.getId()) == 0)

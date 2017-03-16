@@ -17,6 +17,10 @@ public class Fahrzeug implements Comparable<Fahrzeug> {
 		this.klasse = new SimpleStringProperty(_klasse);
 	}
 
+	public Fahrzeug() {
+		this(null, null, null, null);
+	}
+
 	@Override
 	public int compareTo(Fahrzeug fa) {
 		if (this.getMarke().compareTo(fa.getMarke()) == 0)
