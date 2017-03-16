@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
-// import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter; // aus tutorial
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter; // aus tutorial
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
