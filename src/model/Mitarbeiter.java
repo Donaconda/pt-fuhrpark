@@ -29,6 +29,10 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 		this.plz = new SimpleIntegerProperty(_plz);
 		this.geburtstag = new SimpleObjectProperty<LocalDate>(_geburtstag);
 	}
+	
+    public Mitarbeiter() {
+        this(null, null, null, null, 0, null);
+    }
 
 	@Override
 	public int compareTo(Mitarbeiter mi) {
