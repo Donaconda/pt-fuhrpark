@@ -19,8 +19,27 @@ public class Fahrzeug implements Comparable<Fahrzeug> {
 
 	@Override
 	public int compareTo(Fahrzeug fa) {
-		// TODO ------------------------------------------
-		return 0;
+		if (this.getMarke().compareTo(fa.getMarke()) == 0)
+			if (this.getModel().compareTo(fa.getModel()) == 0)
+				if (this.getKennzeichen().compareTo(fa.getKennzeichen()) == 0)
+					if (this.getKlasse().compareTo(fa.getKlasse()) == 0)
+						return 0;
+					else if (this.getKlasse().compareTo(fa.getKlasse()) < 0)
+						return -1;
+					else
+						return 1;
+				else if (this.getKennzeichen().compareTo(fa.getKennzeichen()) < 0)
+					return -1;
+				else
+					return 1;
+			else if (this.getModel().compareTo(fa.getModel()) < 0)
+				return -1;
+			else
+				return 1;
+		else if (this.getMarke().compareTo(fa.getMarke()) < 0)
+			return -1;
+		else
+			return 1;
 	}
 
 	public String getMarke() {

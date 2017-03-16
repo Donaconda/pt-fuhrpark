@@ -18,12 +18,26 @@ public class Buchung implements Comparable<Buchung>{
 	}
 
 	@Override
-	public int compareTo(Buchung arg0) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int compareTo(Buchung bu) {
+		if (this.getId().compareTo(bu.getId()) == 0)
+			if (this.getMitarbeiter().compareTo(bu.getMitarbeiter()) == 0)
+				if (this.getFahrzeug().compareTo(bu.getFahrzeug()) == 0)
+					return 0;
+				else if (this.getFahrzeug().compareTo(bu.getFahrzeug()) < 0)
+					return -1;
+				else
+					return 1;
+			else if (this.getMitarbeiter().compareTo(bu.getMitarbeiter()) < 0)
+				return -1;
+			else
+				return 1;
+		else if (this.getId().compareTo(bu.getId()) < 0)
+			return -1;
+		else
+			return 1;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id.get();
 	}
 

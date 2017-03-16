@@ -29,7 +29,7 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 		this.plz = new SimpleIntegerProperty(_plz);
 		this.geburtstag = new SimpleObjectProperty<LocalDate>(_geburtstag);
 	}
-	
+
     public Mitarbeiter() {
         this(null, null, null, null, 0, null);
     }
@@ -40,10 +40,38 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 			if (this.getVorname().compareTo(mi.getVorname()) == 0) {
 				if (this.getStrasse().compareTo(mi.getStrasse()) == 0) {
 					if (this.getWohnort().compareTo(mi.getWohnort()) == 0) {
-						return 0;
+						if (this.getPlz().compareTo(mi.getPlz()) == 0) {
+							if (this.getGeburtstag().compareTo(mi.getGeburtstag()) == 0) {
+								return 0;
+							} else if (this.getGeburtstag().compareTo(mi.getGeburtstag()) < 0) {
+								return -1;
+							} else {
+								return 1;
+							}
+						} else if (this.getPlz().compareTo(mi.getPlz()) < 0) {
+							return -1;
+						} else {
+							return 1;
+						}
+					} else if (this.getWohnort().compareTo(mi.getWohnort()) < 0) {
+						return -1;
+					} else {
+						return 1;
 					}
+				} else if (this.getStrasse().compareTo(mi.getStrasse()) < 0) {
+					return -1;
+				} else {
+					return 1;
 				}
+			} else if (this.getVorname().compareTo(mi.getVorname()) < 0) {
+				return -1;
+			} else {
+				return 1;
 			}
+		} else if (this.getNachname().compareTo(mi.getNachname()) < 0) {
+			return -1;
+		} else {
+			return 1;
 		}
 		//return 1; // this object is greater than the specified object
 		//return -1; // this object is less than the specified object
