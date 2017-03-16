@@ -32,8 +32,18 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 
 	@Override
 	public int compareTo(Mitarbeiter mi) {
-		// TODO -------------------------------------------------------
-		return 0;
+		if (this.getNachname().compareTo(mi.getNachname()) == 0) {
+			if (this.getVorname().compareTo(mi.getVorname()) == 0) {
+				if (this.getStrasse().compareTo(mi.getStrasse()) == 0) {
+					if (this.getWohnort().compareTo(mi.getWohnort()) == 0) {
+						return 0;
+					}
+				}
+			}
+		}
+		//return 1; // this object is greater than the specified object
+		//return -1; // this object is less than the specified object
+		//return 0;
 	}
 
 	public String getVorname() {
