@@ -8,15 +8,16 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import view.StartFensterController;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Mitarbeiter;
 import model.MitarbeiterListWrapper;
@@ -24,12 +25,14 @@ import model.Buchung;
 import model.BuchungListWrapper;
 import model.Fahrzeug;
 import model.FahrzeugListWrapper;
+import view.MitarbeiterController;
+import view.MitarbeiterDialogController;
 
 
-public class MainApp {
+public class MainApp extends Application{
 
 	private Stage primaryStage;
-    private BorderPane rootLayout;
+    private BorderPane startFenster;
 
     /**
      * The data as an observable list of Persons.
@@ -38,27 +41,31 @@ public class MainApp {
     private ObservableList<Buchung> buchungData = FXCollections.observableArrayList();
     private ObservableList<Fahrzeug> fahrzeugData = FXCollections.observableArrayList();
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+    
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("AddressApp");
+        this.primaryStage.setTitle("Fuhrparkverwaltung BSK");
 
-        initRootLayout();
+        initStartFenster();
     }
 
-    public void initRootLayout() {
+    public void initStartFenster() {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class
-                    .getResource("view/RootLayout.fxml"));
-            rootLayout = (BorderPane) loader.load();
+                    .getResource("/view/StartFenster.fxml"));
+            startFenster = (BorderPane) loader.load();
 
             // Show the scene containing the root layout.
-            Scene scene = new Scene(rootLayout);
+            Scene scene = new Scene(startFenster);
             primaryStage.setScene(scene);
 
             // Give the controller access to the main app.
-            RootLayoutController controller = loader.getController();
+            MitarbeiterController controller = loader.getController();
             controller.setMainApp(this);
 
             primaryStage.show();
@@ -72,7 +79,36 @@ public class MainApp {
             loadMitarbeiterDataFromFile(file);
         }
     }
+    
+    public boolean zeigeMitarbeiterDialog(Mitarbeiter ma){
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/MitarbeiterDialog.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
 
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Mitarbeiter bearbeiten");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            MitarbeiterDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setMitarbeiter(ma);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     public ObservableList<Mitarbeiter> getMitarbeiterData() {
         return mitarbeiterData;
@@ -318,6 +354,4 @@ public class MainApp {
         	alert.showAndWait();
         }
     }
->>>>>>> branch 'develop' of https://github.com/donaconda/pt-fuhrpark.git
-
 }
