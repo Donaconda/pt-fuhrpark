@@ -4,18 +4,26 @@ import java.io.File;
 import java.io.IOException;
 import java.util.prefs.Preferences;
 
-import ch.makery.address.MainApp;
-import ch.makery.address.view.RootLayoutController;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+
+import view.StartFensterController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Mitarbeiter;
+import model.MitarbeiterListWrapper;
 import model.Buchung;
+import model.BuchungListWrapper;
 import model.Fahrzeug;
+import model.FahrzeugListWrapper;
 
 
 public class MainApp {
@@ -157,5 +165,158 @@ public class MainApp {
 	        primaryStage.setTitle("AddressApp");
 	    }
 	}
+	
+    public void loadMitarbeiterDataFromFile(File file) {
+        try {
+            JAXBContext context = JAXBContext
+                    .newInstance(MitarbeiterListWrapper.class);
+            Unmarshaller um = context.createUnmarshaller();
+
+            // Reading XML from the file and unmarshalling.
+            MitarbeiterListWrapper wrapper = (MitarbeiterListWrapper) um.unmarshal(file);
+
+            mitarbeiterData.clear();
+            mitarbeiterData.addAll(wrapper.getMitarbeiter());
+
+            // Save the file path to the registry.
+            setMitarbeiterFilePath(file);
+
+        } catch (Exception e) { // catches ANY exception
+        	Alert alert = new Alert(AlertType.ERROR);
+        	alert.setTitle("Error");
+        	alert.setHeaderText("Could not load data");
+        	alert.setContentText("Could not load data from file:\n" + file.getPath());
+        	
+        	alert.showAndWait();
+        }
+    }
+    
+    public void loadFahrzeugDataFromFile(File file) {
+        try {
+            JAXBContext context = JAXBContext
+                    .newInstance(FahrzeugListWrapper.class);
+            Unmarshaller um = context.createUnmarshaller();
+
+            // Reading XML from the file and unmarshalling.
+            FahrzeugListWrapper wrapper = (FahrzeugListWrapper) um.unmarshal(file);
+
+            fahrzeugData.clear();
+            fahrzeugData.addAll(wrapper.getFahrzeug());
+
+            // Save the file path to the registry.
+            setFahrzeugFilePath(file);
+
+        } catch (Exception e) { // catches ANY exception
+        	Alert alert = new Alert(AlertType.ERROR);
+        	alert.setTitle("Error");
+        	alert.setHeaderText("Could not load data");
+        	alert.setContentText("Could not load data from file:\n" + file.getPath());
+        	
+        	alert.showAndWait();
+        }
+    }
+    
+    public void loadBuchungDataFromFile(File file) {
+        try {
+            JAXBContext context = JAXBContext
+                    .newInstance(BuchungListWrapper.class);
+            Unmarshaller um = context.createUnmarshaller();
+
+            // Reading XML from the file and unmarshalling.
+            BuchungListWrapper wrapper = (BuchungListWrapper) um.unmarshal(file);
+
+            buchungData.clear();
+            buchungData.addAll(wrapper.getBuchung());
+
+            // Save the file path to the registry.
+            setBuchungFilePath(file);
+
+        } catch (Exception e) { // catches ANY exception
+        	Alert alert = new Alert(AlertType.ERROR);
+        	alert.setTitle("Error");
+        	alert.setHeaderText("Could not load data");
+        	alert.setContentText("Could not load data from file:\n" + file.getPath());
+        	
+        	alert.showAndWait();
+        }
+    }
+    
+    public void saveMitarbeiterDataToFile(File file) {
+        try {
+            JAXBContext context = JAXBContext
+                    .newInstance(MitarbeiterListWrapper.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+            // Wrapping our person data.
+            MitarbeiterListWrapper wrapper = new MitarbeiterListWrapper();
+            wrapper.setMitarbeiter(mitarbeiterData);
+
+            // Marshalling and saving XML to the file.
+            m.marshal(wrapper, file);
+
+            // Save the file path to the registry.
+            setMitarbeiterFilePath(file);
+        } catch (Exception e) { // catches ANY exception
+        	Alert alert = new Alert(AlertType.ERROR);
+        	alert.setTitle("Error");
+        	alert.setHeaderText("Could not save data");
+        	alert.setContentText("Could not save data to file:\n" + file.getPath());
+        	
+        	alert.showAndWait();
+        }
+    }
+    
+    public void saveFahrzeugDataToFile(File file) {
+        try {
+            JAXBContext context = JAXBContext
+                    .newInstance(FahrzeugListWrapper.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+            // Wrapping our person data.
+            FahrzeugListWrapper wrapper = new FahrzeugListWrapper();
+            wrapper.setFahrzeug(fahrzeugData);
+
+            // Marshalling and saving XML to the file.
+            m.marshal(wrapper, file);
+
+            // Save the file path to the registry.
+            setFahrzeugFilePath(file);
+        } catch (Exception e) { // catches ANY exception
+        	Alert alert = new Alert(AlertType.ERROR);
+        	alert.setTitle("Error");
+        	alert.setHeaderText("Could not save data");
+        	alert.setContentText("Could not save data to file:\n" + file.getPath());
+        	
+        	alert.showAndWait();
+        }
+    }
+    
+    public void savePersonDataToFile(File file) {
+        try {
+            JAXBContext context = JAXBContext
+                    .newInstance(BuchungListWrapper.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+            // Wrapping our person data.
+            BuchungListWrapper wrapper = new BuchungListWrapper();
+            wrapper.setBuchung(buchungData);
+
+            // Marshalling and saving XML to the file.
+            m.marshal(wrapper, file);
+
+            // Save the file path to the registry.
+            setBuchungFilePath(file);
+        } catch (Exception e) { // catches ANY exception
+        	Alert alert = new Alert(AlertType.ERROR);
+        	alert.setTitle("Error");
+        	alert.setHeaderText("Could not save data");
+        	alert.setContentText("Could not save data to file:\n" + file.getPath());
+        	
+        	alert.showAndWait();
+        }
+    }
 
 }
