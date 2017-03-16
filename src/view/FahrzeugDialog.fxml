@@ -23,10 +23,10 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="firstNameField" GridPane.columnIndex="1" />
-            <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="streetField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="cityField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="markeFeld" GridPane.columnIndex="1" />
+            <TextField fx:id="modellFeld" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="kennzeichenFeld" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="klasseFeld" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label text="Marke" />
             <Label text="Modell" GridPane.rowIndex="1" />
             <Label text="Kennzeichen" GridPane.rowIndex="2" />

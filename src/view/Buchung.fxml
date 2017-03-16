@@ -17,10 +17,10 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="200.0">
                <children>
-                  <TableView layoutX="28.0" layoutY="65.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="buchungSpalte" layoutX="28.0" layoutY="65.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="100.0" text="ID" />
-                      <TableColumn prefWidth="100.0" text="Mitarbeiter" />
+                      <TableColumn fx:id="idSpalte" prefWidth="100.0" text="ID" />
+                      <TableColumn fx:id="mitarbeiterSpalte" prefWidth="100.0" text="Mitarbeiter" />
                     </columns>
                   </TableView>
                </children>
@@ -43,17 +43,17 @@
                     </rowConstraints>
                      <children>
                         <Label text="ID" />
-                        <Label text="Label" GridPane.columnIndex="1" />
+                        <Label fx:id="idLabel" text="Label" GridPane.columnIndex="1" />
                         <Label text="Mitarbeiter" GridPane.rowIndex="1" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="mitarbeiterLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Startdatum" GridPane.rowIndex="4" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="fahrzeugLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="Enddatum" GridPane.rowIndex="5" />
                         <Label text="Fahrzeug" GridPane.rowIndex="2" />
                         <Label text="Zweck" GridPane.rowIndex="3" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="zweckLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="startdatumLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="enddatumLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
                   <ButtonBar layoutX="81.0" layoutY="244.0" prefHeight="40.0" prefWidth="300.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="5.0">

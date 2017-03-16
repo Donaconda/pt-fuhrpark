@@ -17,10 +17,10 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="200.0">
                <children>
-                  <TableView layoutX="28.0" layoutY="65.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="fahrzeugTabelle" layoutX="28.0" layoutY="65.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="100.0" text="Kennzeichen" />
-                      <TableColumn prefWidth="100.0" text="Modell" />
+                      <TableColumn fx:id="kennzeichenSpalte" prefWidth="100.0" text="Kennzeichen" />
+                      <TableColumn fx:id="modellSpalte" prefWidth="100.0" text="Modell" />
                     </columns>
                   </TableView>
                </children>
@@ -41,13 +41,13 @@
                     </rowConstraints>
                      <children>
                         <Label text="Marke" />
-                        <Label text="Label" GridPane.columnIndex="1" />
+                        <Label fx:id="markeLabel" text="Label" GridPane.columnIndex="1" />
                         <Label text="Modell" GridPane.rowIndex="1" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="modellLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Kennzeichen" GridPane.rowIndex="2" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="kennzeichenLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="Klasse" GridPane.rowIndex="3" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="klasseLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                   <ButtonBar layoutX="81.0" layoutY="244.0" prefHeight="40.0" prefWidth="300.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="5.0">
