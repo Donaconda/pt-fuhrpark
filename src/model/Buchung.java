@@ -36,7 +36,6 @@ public class Buchung implements Comparable<Buchung>{
 		else
 			return 1;
 	}
-	// test
 
 	public Integer getId() {
 		return id.get();
