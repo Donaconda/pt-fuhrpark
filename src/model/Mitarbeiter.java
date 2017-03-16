@@ -34,6 +34,8 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
         this(null, null, null, null, 0, null);
     }
 
+    //test kommentar
+
 
 	@Override
 	public int compareTo(Mitarbeiter mi) {
