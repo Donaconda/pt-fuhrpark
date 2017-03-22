@@ -25,6 +25,7 @@ import model.Buchung;
 import model.BuchungListWrapper;
 import model.Fahrzeug;
 import model.FahrzeugListWrapper;
+import view.StartFensterController;
 import view.MitarbeiterController;
 import view.MitarbeiterDialogController;
 
@@ -43,6 +44,10 @@ public class MainApp extends Application{
 
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    public MainApp(){
+    	
     }
     
     public void start(Stage primaryStage) {
@@ -65,7 +70,8 @@ public class MainApp extends Application{
             primaryStage.setScene(scene);
 
             // Give the controller access to the main app.
-            MitarbeiterController controller = loader.getController();
+            
+            StartFensterController controller = loader.getController();
             controller.setMainApp(this);
 
             primaryStage.show();
