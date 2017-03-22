@@ -11,9 +11,9 @@
    <top>
       <AnchorPane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefWidth="200.0" text="Mitarbeiter" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="30.0" />
-            <Button layoutX="200.0" mnemonicParsing="false" prefWidth="200.0" text="Fahrzeuge" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="30.0" />
-            <Button mnemonicParsing="false" prefWidth="200.0" text="Buchungen" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
+            <Button mnemonicParsing="false" onAction="#handleTabMitarbeiter" prefWidth="200.0" text="Mitarbeiter" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="30.0" />
+            <Button layoutX="200.0" mnemonicParsing="false" onAction="#handleTabFahrzeug" prefWidth="200.0" text="Fahrzeuge" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="30.0" />
+            <Button mnemonicParsing="false" onAction="#handleTabBuchung" prefWidth="200.0" text="Buchungen" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
             <MenuBar prefHeight="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <menus>
                 <Menu mnemonicParsing="false" text="Datei">

@@ -26,6 +26,8 @@ import model.BuchungListWrapper;
 import model.Fahrzeug;
 import model.FahrzeugListWrapper;
 import view.StartFensterController;
+import view.BuchungController;
+import view.FahrzeugController;
 import view.MitarbeiterController;
 import view.MitarbeiterDialogController;
 
@@ -79,10 +81,67 @@ public class MainApp extends Application{
             e.printStackTrace();
         }
 
-        // Try to load last opened person file.
-        File file = getMitarbeiterFilePath();
-        if (file != null) {
-            loadMitarbeiterDataFromFile(file);
+//        // Try to load last opened person file.
+//        File file = getMitarbeiterFilePath();
+//        if (file != null) {
+//            loadMitarbeiterDataFromFile(file);
+//        }
+    }
+    
+    public void zeigeMitarbeiterFenster() {
+        try {
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/view/Mitarbeiter.fxml"));
+            AnchorPane mitarbeiterFenster = (AnchorPane) loader.load();
+
+            // Set person overview into the center of root layout.
+            startFenster.setCenter(mitarbeiterFenster);
+
+            // Give the controller access to the main app.
+            MitarbeiterController controller = loader.getController();
+            controller.setMainApp(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void zeigeFahrzeugFenster() {
+        try {
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/view/Fahrzeug.fxml"));
+            AnchorPane fahrzeugFenster = (AnchorPane) loader.load();
+
+            // Set person overview into the center of root layout.
+            startFenster.setCenter(fahrzeugFenster);
+
+            // Give the controller access to the main app.
+            FahrzeugController controller = loader.getController();
+            controller.setMainApp(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void zeigeBuchungFenster() {
+        try {
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/view/Buchung.fxml"));
+            AnchorPane buchungFenster = (AnchorPane) loader.load();
+
+            // Set person overview into the center of root layout.
+            startFenster.setCenter(buchungFenster);
+
+            // Give the controller access to the main app.
+            BuchungController controller = loader.getController();
+            controller.setMainApp(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     
@@ -90,7 +149,7 @@ public class MainApp extends Application{
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/MitarbeiterDialog.fxml"));
+            loader.setLocation(MainApp.class.getResource("/view/MitarbeiterDialog.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             // Create the dialog Stage.

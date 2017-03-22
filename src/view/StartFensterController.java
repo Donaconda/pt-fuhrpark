@@ -1,11 +1,7 @@
 package view;
 
 import controller.MainApp;
-import java.io.File;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.stage.FileChooser;
 
 public class StartFensterController {
 	
@@ -15,15 +11,18 @@ public class StartFensterController {
 		this.mainApp = mainApp;
 	}
 	
+	@FXML
 	public void handleTabMitarbeiter(){
-		
+		mainApp.zeigeMitarbeiterFenster();
 	}
 	
+	@FXML
 	public void handleTabFahrzeug(){
-		
+		mainApp.zeigeFahrzeugFenster();
 	}
 	
+	@FXML
 	public void handleTabBuchung(){
-		
+		mainApp.zeigeBuchungFenster();
 	}
 }
