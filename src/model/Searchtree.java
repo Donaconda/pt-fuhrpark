@@ -42,4 +42,13 @@ public class Searchtree<T extends Comparable<T>> {
 			}
 		}
 	}
+	//TODO ----------------
+//	void delete(T elem) {
+//		Knoten knoten = wurzel;
+//		while (elem.compareTo(knoten.wert) != 0) {
+//			if (elem.compareTo(knoten.wert) < 0) {
+//
+//			}
+//		}
+//	}
 }
