@@ -55,7 +55,7 @@ public class Buchung implements Comparable<Buchung>{
 			return 1;
 	}
 
-	public long dauer() { // Dauer in Stunden
+	public long dauer() { // Dauer in Stunden returned
 		return this.getBeginn().until(this.getEnde(), ChronoUnit.HOURS);
 	}
 
