@@ -58,16 +58,16 @@ public class Statistik {
 		int motoZaehler = 0;
 		int buchungszaehler = 0;
 		for(Buchung b : list){ // For-Each Schleife
-			durchschnitt.setAusleihzeit(durchschnitt.getAusleihzeit()+b.getDauer());
+			durchschnitt.setAusleihzeit((int) (durchschnitt.getAusleihzeit()+b.getDauer()));
 			buchungszaehler++;
 			if(b.getFahrzeug().getKlasse().toLowerCase().compareTo("pkw")==0){
-				durchschnittPkw.setAusleihzeit(durchschnittPkw.getAusleihzeit()+b.getDauer());
+				durchschnittPkw.setAusleihzeit((int) (durchschnittPkw.getAusleihzeit()+b.getDauer()));
 				pkwZaehler++;
 			} else if(b.getFahrzeug().getKlasse().toLowerCase().compareTo("lkw")==0){
-				durchschnittLkw.setAusleihzeit(durchschnittLkw.getAusleihzeit()+b.getDauer());
+				durchschnittLkw.setAusleihzeit((int) (durchschnittLkw.getAusleihzeit()+b.getDauer()));
 				lkwZaehler++;
 			} else { // Fahrzeug ist kein PKW oder LKW? => Fahrzeug ist Motorrad
-				durchschnittMoto.setAusleihzeit(durchschnittMoto.getAusleihzeit()+b.getDauer());
+				durchschnittMoto.setAusleihzeit((int) (durchschnittMoto.getAusleihzeit()+b.getDauer()));
 				motoZaehler++;
 			}
 		}
@@ -82,12 +82,12 @@ public class Statistik {
 		return eintraege;
 	}
 	
-	public List<Eintrag> mitarbeiterLeihtage(List<Buchung> list){
+	public List<Eintrag> mitarbeiterLeihtage(List<Buchung> list){ // Ausbaustufe VII.3
 		List<Eintrag> eintraege= new ArrayList<Eintrag>();
 		for(Buchung b : list){ // Für jede Buchung: 
 			for(Eintrag e : eintraege){ // FÜr jeden Eintrag
 				if(e.getMitarbeiter() == b.getMitarbeiter()){ // Gibt es schon einen Eintrag für den Mitarbeiter?
-					e.setAusleihzeit(e.getAusleihzeit()+b.getDauer()); // Erhöhe seine Ausleihzeit um die Dauer der Buchung
+					e.setAusleihzeit((int) (e.getAusleihzeit()+b.getDauer())); // Erhöhe seine Ausleihzeit um die Dauer der Buchung
 				} else{	// Sonst:
 					Eintrag a = new Eintrag();				// Erstelle einen neuen Eintrag 
 					a.setMitarbeiter(b.getMitarbeiter());	// für den Mitarbeiter aus der Buchung	
@@ -97,6 +97,5 @@ public class Statistik {
 		}
 		return eintraege;
 	}
-	 
-	//-------------AUSBAUSTUFE VII 2. & 3. einfügen-------------------//
+
 }
