@@ -9,17 +9,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import controller.MainApp;
-import model.Fahrzeug;
 import model.Mitarbeiter;
 import model.Buchung;
 
 public class BuchungController {
 
-	// Attribute/IDs, die zur Verknüpfung der fxml-Dateimit dem Code benötigt werden
+	// Attribute/IDs, die zur Verknüpfung der fxml-Datei mit dem Code benötigt werden
 	@FXML
 	private TableView<Buchung> buchungTabelle;
 	@FXML
-	private TableColumn<Buchung, String> idSpalte;
+	private TableColumn<Buchung, Number> idSpalte;
 	@FXML
 	private TableColumn<Buchung, String> mitarbeiterSpalte;
 	@FXML
@@ -44,7 +43,7 @@ public class BuchungController {
 	private void initialize() {
 		// Initialisiere die Tabelle mit zwei Spalten
 		idSpalte.setCellValueFactory(cellData -> cellData.getValue().idProperty());
-		mitarbeiterSpalte.setCellValueFactory(cellData -> cellData.getValue().MitarbeiterProperty());
+		mitarbeiterSpalte.setCellValueFactory(cellData -> cellData.getValue().getMitarbeiter().vornameProperty().concat(cellData.getValue().getMitarbeiter().nachnameProperty()));
 
 		// Initialisiere die Mitarbeiterinfo
 		zeigeBuchunginfo(null);
@@ -64,12 +63,13 @@ public class BuchungController {
 	private void zeigeBuchunginfo(Buchung bu) {
 		if (bu != null) {
 			// Fülle die Labels mit den Daten aus dem Mitarbeiter Objekt
-			idLabel.setText(bu.getId());
-			mitarbeiterLabel.setText(bu.getMitarbeiter());
-			fahrzeugLabel.setText(bu.getFahrzeug());
+			idLabel.setText(Integer.toString(bu.getId()));
+			mitarbeiterLabel.setText(bu.getMitarbeiter().getVorname() + " " + bu.getMitarbeiter().getNachname());
+			fahrzeugLabel.setText(bu.getFahrzeug().getMarke() + " " + bu.getFahrzeug().getModel() + " [" + bu.getFahrzeug().getKennzeichen() + "]");
 			zweckLabel.setText(bu.getZweck());
-			startdatumLabel.setText(bu.getStartdatum());
-			enddatumLabel.setText(bu.getEnddatum());
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+			startdatumLabel.setText(bu.getBeginn().format(formatter));
+			enddatumLabel.setText(bu.getEnde().format(formatter));
 		} else {
 			// Mitarbeiter ist null, zeige nichts an
 			idLabel.setText("");
