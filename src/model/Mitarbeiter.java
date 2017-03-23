@@ -17,21 +17,21 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 	private final StringProperty nachname;
 	private final StringProperty strasse;
 	private final StringProperty wohnort;
-	private final IntegerProperty plz;
+	private final StringProperty plz;
 	private final ObjectProperty<LocalDate> geburtstag;
 
 	public Mitarbeiter (String _vorname, String _nachname, String _strasse, String _wohnort,
-			int _plz, LocalDate _geburtstag) {
+			String _plz, LocalDate _geburtstag) {
 		this.vorname = new SimpleStringProperty(_vorname);
 		this.nachname = new SimpleStringProperty(_nachname);
 		this.strasse = new SimpleStringProperty(_strasse);
 		this.wohnort = new SimpleStringProperty(_wohnort);
-		this.plz = new SimpleIntegerProperty(_plz);
+		this.plz = new SimpleStringProperty(_plz);
 		this.geburtstag = new SimpleObjectProperty<LocalDate>(_geburtstag);
 	}
 
     public Mitarbeiter() {
-        this(null, null, null, null, 0, null);
+        this("", "", "", "", "", null);
     }
 
     //test kommentar
@@ -129,15 +129,15 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 		return wohnort;
 	}
 
-	public Integer getPlz() {
+	public String getPlz() {
 		return plz.get();
 	}
 
-	public void setPlz(int _plz) {
+	public void setPlz(String _plz) {
 		this.plz.set(_plz);
 	}
 
-	public IntegerProperty plzProperty() {
+	public StringProperty plzProperty() {
 		return plz;
 	}
 

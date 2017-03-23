@@ -84,7 +84,7 @@ public class MitarbeiterController {
 			vornameLabel.setText(ma.getVorname());
 			nachnameLabel.setText(ma.getNachname());
 			strasseLabel.setText(ma.getStrasse());
-			plzLabel.setText(Integer.toString(ma.getPlz()));
+			plzLabel.setText(ma.getPlz());
 			wohnortLabel.setText(ma.getWohnort());
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 			geburtstagLabel.setText(ma.getGeburtstag().format(formatter));

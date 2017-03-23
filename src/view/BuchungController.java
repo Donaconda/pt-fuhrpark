@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import controller.MainApp;
-import model.Mitarbeiter;
 import model.Buchung;
 
 public class BuchungController {
