@@ -6,6 +6,7 @@ public class Eintrag {
 	private Mitarbeiter mitarbeiter;
 	private int ausleihzeit;
 	private int haeufigkeit;
+	
 	public Fahrzeug getFahrzeug() {
 		return fahrzeug;
 	}
