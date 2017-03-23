@@ -21,7 +21,6 @@ public class Buchung implements Comparable<Buchung>{
 	private final StringProperty zweck;
 	private final ObjectProperty<LocalDateTime> beginn;
 	private final ObjectProperty<LocalDateTime> ende;
-	private final LongProperty dauer; // Stunden
 
 	public Buchung(int _id, Mitarbeiter _mitarbeiter, Fahrzeug _fahrzeug, String _zweck, LocalDateTime _beginn, LocalDateTime _ende) {
 		this.id = new SimpleIntegerProperty(_id);
@@ -30,12 +29,6 @@ public class Buchung implements Comparable<Buchung>{
 		this.zweck = new SimpleStringProperty(_zweck);
 		this.beginn = new SimpleObjectProperty<LocalDateTime>(_beginn);
 		this.ende = new SimpleObjectProperty<LocalDateTime>(_ende);
-//		int dauer = (this.getEnde().getDayOfYear() - this.getBeginn().getDayOfYear()) * 24;
-//		dauer -= (24 - this.getBeginn().getHour());
-//		dauer -= (24 - this.getEnde().getHour());
-//		this.dauer = new SimpleIntegerProperty(dauer);
-		long dauer = this.getBeginn().until(this.getEnde(), ChronoUnit.HOURS);
-		this.dauer = new SimpleLongProperty(dauer);
 	}
 
 	public Buchung() {
@@ -60,6 +53,10 @@ public class Buchung implements Comparable<Buchung>{
 			return -1;
 		else
 			return 1;
+	}
+
+	public long dauer() { // Dauer in Stunden
+		return this.getBeginn().until(this.getEnde(), ChronoUnit.HOURS);
 	}
 
 	public Integer getId() {
@@ -132,14 +129,6 @@ public class Buchung implements Comparable<Buchung>{
 
 	public ObjectProperty<LocalDateTime> endeProperty() {
 		return ende;
-	}
-
-	public long getDauer() {
-		return dauer.get();
-	}
-
-	public LongProperty DauerProperty() {
-		return dauer;
 	}
 
 }
