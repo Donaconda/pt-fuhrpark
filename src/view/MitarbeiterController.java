@@ -84,7 +84,7 @@ public class MitarbeiterController {
 			vornameLabel.setText(ma.getVorname());
 			nachnameLabel.setText(ma.getNachname());
 			strasseLabel.setText(ma.getStrasse());
-			plzLabel.setText(Integer.toString(ma.getPlz()));
+			plzLabel.setText(ma.getPlz());
 			wohnortLabel.setText(ma.getWohnort());
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 			geburtstagLabel.setText(ma.getGeburtstag().format(formatter));
@@ -124,10 +124,10 @@ public class MitarbeiterController {
 	 */
 	@FXML
 	private void handleMitarbeiterNeu() {
-		Mitarbeiter tempPerson = new Mitarbeiter();
-		boolean okClicked = mainApp.zeigeMitarbeiterDialog(tempPerson);
+		Mitarbeiter tempItem = new Mitarbeiter();
+		boolean okClicked = mainApp.zeigeMitarbeiterDialog(tempItem);
 		if (okClicked) {
-			mainApp.getMitarbeiterData().add(tempPerson);
+			mainApp.getMitarbeiterData().add(tempItem);
 		}
 	}
 
@@ -137,11 +137,11 @@ public class MitarbeiterController {
 	 */
 	@FXML
 	private void handleMitarbeiterBearbeiten() {
-		Mitarbeiter selectedPerson = mitarbeiterTabelle.getSelectionModel().getSelectedItem();
-		if (selectedPerson != null) {
-			boolean okClicked = mainApp.zeigeMitarbeiterDialog(selectedPerson);
+		Mitarbeiter selectedItem = mitarbeiterTabelle.getSelectionModel().getSelectedItem();
+		if (selectedItem != null) {
+			boolean okClicked = mainApp.zeigeMitarbeiterDialog(selectedItem);
 			if (okClicked) {
-				zeigeMitarbeiterinfo(selectedPerson);
+				zeigeMitarbeiterinfo(selectedItem);
 			}
 		} else {
 			// Wenn nichts ausgewählt ist

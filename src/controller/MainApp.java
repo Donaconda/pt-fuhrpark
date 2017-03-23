@@ -27,7 +27,9 @@ import model.Fahrzeug;
 import model.FahrzeugListWrapper;
 import view.StartFensterController;
 import view.BuchungController;
+import view.BuchungDialogController;
 import view.FahrzeugController;
+import view.FahrzeugDialogController;
 import view.MitarbeiterController;
 import view.MitarbeiterDialogController;
 
@@ -164,6 +166,66 @@ public class MainApp extends Application{
             MitarbeiterDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setMitarbeiter(ma);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean zeigeFahrzeugDialog(Fahrzeug fz){
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/view/FahrzeugDialog.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Fahrzeug bearbeiten");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            FahrzeugDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setFahrzeug(fz);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean zeigeBuchungDialog(Buchung bu){
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/view/BuchungDialog.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Buchung bearbeiten");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            BuchungDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setBuchung(bu);
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();

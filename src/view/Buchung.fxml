@@ -17,7 +17,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="buchungSpalte" layoutX="28.0" layoutY="65.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="buchungTabelle" layoutX="28.0" layoutY="65.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="idSpalte" prefWidth="100.0" text="ID" />
                       <TableColumn fx:id="mitarbeiterSpalte" prefWidth="100.0" text="Mitarbeiter" />
@@ -58,9 +58,8 @@
                   </GridPane>
                   <ButtonBar layoutX="81.0" layoutY="244.0" prefHeight="40.0" prefWidth="300.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="5.0">
                     <buttons>
-                        <Button mnemonicParsing="false" text="Neu..." />
-                      <Button mnemonicParsing="false" text="Bearbeiten..." />
-                        <Button mnemonicParsing="false" text="Löschen" />
+                        <Button mnemonicParsing="false" onAction="#handleBuchungNeu" text="Neu..." />
+                      <Button mnemonicParsing="false" onAction="#handleBuchungBearbeiten" text="Bearbeiten..." />
                     </buttons>
                   </ButtonBar>
                </children>

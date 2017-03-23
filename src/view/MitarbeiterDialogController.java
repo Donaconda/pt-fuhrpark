@@ -61,11 +61,16 @@ public class MitarbeiterDialogController {
         vornameFeld.setText(ma.getVorname());
         nachnameFeld.setText(ma.getNachname());
         strasseFeld.setText(ma.getStrasse());
-        plzFeld.setText(Integer.toString(ma.getPlz()));
+        plzFeld.setText(ma.getPlz());
         wohnortFeld.setText(ma.getWohnort());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        geburtstagFeld.setText(ma.getGeburtstag().format(formatter));
-        geburtstagFeld.setPromptText("dd.mm.yyyy");
+        try {
+        	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            geburtstagFeld.setText(ma.getGeburtstag().format(formatter));
+            geburtstagFeld.setPromptText("dd.mm.yyyy");
+        } catch(Exception e){
+        	
+        }
+        
     }
 
     /**
@@ -84,9 +89,9 @@ public class MitarbeiterDialogController {
     private void handleOk() {
         if (isInputValid()) {
             ma.setVorname(vornameFeld.getText());
-            ma.setNachname(vornameFeld.getText());
+            ma.setNachname(nachnameFeld.getText());
             ma.setStrasse(strasseFeld.getText());
-            ma.setPlz(Integer.parseInt(plzFeld.getText()));
+            ma.setPlz(plzFeld.getText());
             ma.setWohnort(wohnortFeld.getText());
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
             ma.setGeburtstag(LocalDate.parse(geburtstagFeld.getText(), formatter));
