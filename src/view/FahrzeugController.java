@@ -1,7 +1,5 @@
 package view;
 
-
-import java.time.format.DateTimeFormatter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -10,7 +8,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import controller.MainApp;
 import model.Fahrzeug;
-import model.Mitarbeiter;
 
 public class FahrzeugController {
 	
@@ -69,6 +66,58 @@ public class FahrzeugController {
 			modellLabel.setText("");
 			kennzeichenLabel.setText("");
 			klasseLabel.setText("");
+		}
+	}
+	
+	@FXML
+	private void handleFahrzeugLoeschen() {
+		int selectedIndex = fahrzeugTabelle.getSelectionModel().getSelectedIndex();
+		if (selectedIndex >= 0) {
+			fahrzeugTabelle.getItems().remove(selectedIndex);
+		} else {
+			// Wenn nichts ausgewählt ist
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(mainApp.getPrimaryStage());
+			alert.setTitle("Keine Auswahl");
+			alert.setHeaderText("Kein Fahrzeug ausgewählt");
+			alert.setContentText("Bitte wählen Sie zuerst einen Fahrzeug aus der Tabelle aus.");
+			alert.showAndWait();
+		}
+	}
+
+	/**
+	 * Called when the user clicks the new button. Opens a dialog to edit
+	 * details for a new person.
+	 */
+	@FXML
+	private void handleFahrzeugNeu() {
+		Fahrzeug tempItem = new Fahrzeug();
+		boolean okClicked = mainApp.zeigeFahrzeugDialog(tempItem);
+		if (okClicked) {
+			mainApp.getFahrzeugData().add(tempItem);
+		}
+	}
+
+	/**
+	 * Called when the user clicks the edit button. Opens a dialog to edit
+	 * details for the selected person.
+	 */
+	@FXML
+	private void handleFahrzeugBearbeiten() {
+		Fahrzeug selectedItem = fahrzeugTabelle.getSelectionModel().getSelectedItem();
+		if (selectedItem != null) {
+			boolean okClicked = mainApp.zeigeFahrzeugDialog(selectedItem);
+			if (okClicked) {
+				zeigeFahrzeuginfo(selectedItem);
+			}
+		} else {
+			// Wenn nichts ausgewählt ist
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(mainApp.getPrimaryStage());
+			alert.setTitle("Keine Auswahl");
+			alert.setHeaderText("Kein Fahrzeug ausgewählt");
+			alert.setContentText("Bitte wählen Sie zuerst ein Fahrzeug aus der Tabelle aus.");
+			alert.showAndWait();
 		}
 	}
 }

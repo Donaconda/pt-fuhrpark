@@ -174,6 +174,16 @@ public class MainApp extends Application{
             return false;
         }
     }
+    
+    public boolean zeigeFahrzeugDialog(Fahrzeug fz){
+    	//TODO Micky
+    	return true;
+    }
+    
+    public boolean zeigeBuchungDialog(Buchung bu){
+    	//TODO Micky
+    	return true;
+    }
 
     public ObservableList<Mitarbeiter> getMitarbeiterData() {
         return mitarbeiterData;
