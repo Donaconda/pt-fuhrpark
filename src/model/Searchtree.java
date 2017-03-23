@@ -126,3 +126,4 @@ public class Searchtree<T extends Comparable<T>> {
 		}
 	}
 }
+// testkommentar
