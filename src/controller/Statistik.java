@@ -58,16 +58,16 @@ public class Statistik {
 		int motoZaehler = 0;
 		int buchungszaehler = 0;
 		for(Buchung b : list){ // For-Each Schleife
-			durchschnitt.setAusleihzeit((int) (durchschnitt.getAusleihzeit()+b.getDauer()));
+			durchschnitt.setAusleihzeit((int) (durchschnitt.getAusleihzeit()+b.dauer()));
 			buchungszaehler++;
 			if(b.getFahrzeug().getKlasse().toLowerCase().compareTo("pkw")==0){
-				durchschnittPkw.setAusleihzeit((int) (durchschnittPkw.getAusleihzeit()+b.getDauer()));
+				durchschnittPkw.setAusleihzeit((int) (durchschnittPkw.getAusleihzeit()+b.dauer()));
 				pkwZaehler++;
 			} else if(b.getFahrzeug().getKlasse().toLowerCase().compareTo("lkw")==0){
-				durchschnittLkw.setAusleihzeit((int) (durchschnittLkw.getAusleihzeit()+b.getDauer()));
+				durchschnittLkw.setAusleihzeit((int) (durchschnittLkw.getAusleihzeit()+b.dauer()));
 				lkwZaehler++;
 			} else { // Fahrzeug ist kein PKW oder LKW? => Fahrzeug ist Motorrad
-				durchschnittMoto.setAusleihzeit((int) (durchschnittMoto.getAusleihzeit()+b.getDauer()));
+				durchschnittMoto.setAusleihzeit((int) (durchschnittMoto.getAusleihzeit()+b.dauer()));
 				motoZaehler++;
 			}
 		}
@@ -87,7 +87,7 @@ public class Statistik {
 		for(Buchung b : list){ // Für jede Buchung: 
 			for(Eintrag e : eintraege){ // FÜr jeden Eintrag
 				if(e.getMitarbeiter() == b.getMitarbeiter()){ // Gibt es schon einen Eintrag für den Mitarbeiter?
-					e.setAusleihzeit((int) (e.getAusleihzeit()+b.getDauer())); // Erhöhe seine Ausleihzeit um die Dauer der Buchung
+					e.setAusleihzeit((int) (e.getAusleihzeit()+b.dauer())); // Erhöhe seine Ausleihzeit um die Dauer der Buchung
 				} else{	// Sonst:
 					Eintrag a = new Eintrag();				// Erstelle einen neuen Eintrag 
 					a.setMitarbeiter(b.getMitarbeiter());	// für den Mitarbeiter aus der Buchung	
@@ -97,5 +97,4 @@ public class Statistik {
 		}
 		return eintraege;
 	}
-
 }
