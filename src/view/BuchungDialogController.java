@@ -4,12 +4,17 @@ package view;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-	import javafx.fxml.FXML;
+import controller.MainApp;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 	import javafx.scene.control.Alert;
 	import javafx.scene.control.Alert.AlertType;
-	import javafx.scene.control.TextField;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 	import javafx.stage.Stage;
 	import model.Buchung;
+import model.Mitarbeiter;
 
 	/**
 	 * Dialog to edit details of a person.
@@ -19,7 +24,7 @@ import java.time.format.DateTimeFormatter;
 	    @FXML
 	    private TextField idFeld;
 	    @FXML
-	    private TextField mitarbeiterFeld;
+	    private ComboBox mitarbeiterFeld;
 	    @FXML
 	    private TextField fahrzeugFeld;
 	    @FXML
@@ -30,6 +35,7 @@ import java.time.format.DateTimeFormatter;
 	    private TextField enddatumFeld;
 
 	    private Stage dialogStage;
+	    private MainApp mainApp;
 	    private Buchung bu;
 	    private boolean okClicked = false;
 
@@ -39,8 +45,23 @@ import java.time.format.DateTimeFormatter;
 	     */
 	    @FXML
 	    private void initialize() {
+	    	try{
+	    		//Mitarbeiterliste für die ComboBox "mitarbeiterFeld"
+	    		ObservableList<String> maListe = FXCollections.observableArrayList();
+	    		maListe.clear();
+	    		for(Mitarbeiter m : mainApp.getMitarbeiterData()){
+	    			maListe.add(m.toString());
+	    		}
+	    		mitarbeiterFeld.getItems().addAll(maListe);
+	    	} catch(Exception e){
+
+	    	}
 	    }
 
+	    public void setMainApp(MainApp mainApp){
+	    	this.mainApp = mainApp;
+	    }
+	    
 	    /**
 	     * Sets the stage of this dialog.
 	     * 
@@ -61,7 +82,7 @@ import java.time.format.DateTimeFormatter;
 	        idFeld.setText(bu.getId().toString());
 	        zweckFeld.setText(bu.getZweck());
 	        try {
-		        mitarbeiterFeld.setText(bu.getMitarbeiter().getVorname() + " " + bu.getMitarbeiter().getNachname());
+		        mitarbeiterFeld.getSelectionModel().select(0);
 		        fahrzeugFeld.setText(bu.getFahrzeug().getKennzeichen());
 		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 	            startdatumFeld.setText(bu.getBeginn().format(formatter));
@@ -121,9 +142,9 @@ import java.time.format.DateTimeFormatter;
 	        if (idFeld.getText() == null || idFeld.getText().length() == 0) {
 	            errorMessage += "ID ungültig!\n"; 
 	        }
-	        if (mitarbeiterFeld.getText() == null || mitarbeiterFeld.getText().length() == 0) {
-	            errorMessage += "Mitarbeiter ungültig!\n"; 
-	        }
+//	        if (mitarbeiterFeld.getText() == null || mitarbeiterFeld.getText().length() == 0) {
+//	            errorMessage += "Mitarbeiter ungültig!\n"; 
+//	        }
 	        if (fahrzeugFeld.getText() == null || fahrzeugFeld.getText().length() == 0) {
 	            errorMessage += "Fahrzeug ungültig!\n"; 
 	        }

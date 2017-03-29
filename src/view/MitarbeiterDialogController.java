@@ -3,6 +3,7 @@ package view;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import controller.MainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -30,6 +31,7 @@ public class MitarbeiterDialogController {
 
 
     private Stage dialogStage;
+    private MainApp mainApp;
     private Mitarbeiter ma;
     private boolean okClicked = false;
 
@@ -41,6 +43,11 @@ public class MitarbeiterDialogController {
     private void initialize() {
     }
 
+    
+    public void setMainApp(MainApp mainApp){
+    	this.mainApp = mainApp;
+    }
+    
     /**
      * Sets the stage of this dialog.
      * 
@@ -95,7 +102,10 @@ public class MitarbeiterDialogController {
             ma.setWohnort(wohnortFeld.getText());
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
             ma.setGeburtstag(LocalDate.parse(geburtstagFeld.getText(), formatter));
-
+            
+            
+            
+            mainApp.saveMitarbeiterDataToFile(mainApp.getMitarbeiterFilePath());
             okClicked = true;
             dialogStage.close();
         }

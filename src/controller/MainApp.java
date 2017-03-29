@@ -83,10 +83,19 @@ public class MainApp extends Application{
             e.printStackTrace();
         }
 
-//        // Try to load last opened person file.
-//        File file = getMitarbeiterFilePath();
-//        if (file != null) {
-//            loadMitarbeiterDataFromFile(file);
+        // Try to load last opened person file.
+        File maFile = new File("C:/Users/koch_m/git/pt-fuhrpark/src/resources/mitarbeiterData.xml");
+        
+        if (maFile != null) {
+            loadMitarbeiterDataFromFile(maFile);
+        }
+//        File fzFile = getMitarbeiterFilePath();
+//        if (fzFile != null) {
+//            loadMitarbeiterDataFromFile(fzFile);
+//        }
+//        File buFile = getMitarbeiterFilePath();
+//        if (buFile != null) {
+//            loadMitarbeiterDataFromFile(buFile);
 //        }
     }
     
@@ -165,6 +174,7 @@ public class MainApp extends Application{
             // Set the person into the controller.
             MitarbeiterDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
+            controller.setMainApp(this);
             controller.setMitarbeiter(ma);
 
             // Show the dialog and wait until the user closes it
@@ -225,6 +235,7 @@ public class MainApp extends Application{
             // Set the person into the controller.
             BuchungDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
+            controller.setMainApp(this);
             controller.setBuchung(bu);
 
             // Show the dialog and wait until the user closes it
@@ -256,7 +267,7 @@ public class MainApp extends Application{
 
     public File getMitarbeiterFilePath() {
 	    Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-	    String filePath = prefs.get("filePath", null);
+	    String filePath = prefs.get("maFilePath", null);
 	    if (filePath != null) {
 	        return new File(filePath);
 	    } else {
@@ -267,12 +278,12 @@ public class MainApp extends Application{
 	public void setMitarbeiterFilePath(File file) {
 	    Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
 	    if (file != null) {
-	        prefs.put("filePath", file.getPath());
+	        prefs.put("maFilePath", file.getPath());
 
 	        // Update the stage title.
 	        primaryStage.setTitle("AddressApp - " + file.getName());
 	    } else {
-	        prefs.remove("filePath");
+	        prefs.remove("maFilePath");
 
 	        // Update the stage title.
 	        primaryStage.setTitle("AddressApp");
@@ -281,7 +292,7 @@ public class MainApp extends Application{
 
 	public File getBuchungFilePath() {
 	    Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-	    String filePath = prefs.get("filePath", null);
+	    String filePath = prefs.get("buFilePath", null);
 	    if (filePath != null) {
 	        return new File(filePath);
 	    } else {
@@ -292,12 +303,12 @@ public class MainApp extends Application{
 	public void setBuchungFilePath(File file) {
 	    Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
 	    if (file != null) {
-	        prefs.put("filePath", file.getPath());
+	        prefs.put("buFilePath", file.getPath());
 
 	        // Update the stage title.
 	        primaryStage.setTitle("AddressApp - " + file.getName());
 	    } else {
-	        prefs.remove("filePath");
+	        prefs.remove("buFilePath");
 
 	        // Update the stage title.
 	        primaryStage.setTitle("AddressApp");
@@ -306,7 +317,7 @@ public class MainApp extends Application{
 
 	public File getFahrzeugFilePath() {
 	    Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-	    String filePath = prefs.get("filePath", null);
+	    String filePath = prefs.get("fzFilePath", null);
 	    if (filePath != null) {
 	        return new File(filePath);
 	    } else {
@@ -317,12 +328,12 @@ public class MainApp extends Application{
 	public void setFahrzeugFilePath(File file) {
 	    Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
 	    if (file != null) {
-	        prefs.put("filePath", file.getPath());
+	        prefs.put("fzFilePath", file.getPath());
 
 	        // Update the stage title.
 	        primaryStage.setTitle("AddressApp - " + file.getName());
 	    } else {
-	        prefs.remove("filePath");
+	        prefs.remove("fzFilePath");
 
 	        // Update the stage title.
 	        primaryStage.setTitle("AddressApp");
@@ -345,6 +356,7 @@ public class MainApp extends Application{
             setMitarbeiterFilePath(file);
 
         } catch (Exception e) { // catches ANY exception
+        	e.printStackTrace();
         	Alert alert = new Alert(AlertType.ERROR);
         	alert.setTitle("Error");
         	alert.setHeaderText("Could not load data");
@@ -456,7 +468,7 @@ public class MainApp extends Application{
         }
     }
 
-    public void savePersonDataToFile(File file) {
+    public void saveBuchungDataToFile(File file) {
         try {
             JAXBContext context = JAXBContext
                     .newInstance(BuchungListWrapper.class);
