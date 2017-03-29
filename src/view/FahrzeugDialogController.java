@@ -3,9 +3,12 @@ package view;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Fahrzeug;
@@ -22,7 +25,7 @@ public class FahrzeugDialogController {
     @FXML
     private TextField kennzeichenFeld;
     @FXML
-    private TextField klasseFeld;
+    private ComboBox klasseFeld;
 
     private Stage dialogStage;
     private Fahrzeug fz;
@@ -34,6 +37,12 @@ public class FahrzeugDialogController {
      */
     @FXML
     private void initialize() {
+    	ObservableList<String> options = FXCollections.observableArrayList(
+		        "PKW",
+		        "LKW",
+		        "Motorrad"
+		    );
+    	klasseFeld.getItems().addAll(options);
     }
 
     /**
@@ -56,7 +65,14 @@ public class FahrzeugDialogController {
         markeFeld.setText(fz.getMarke());
         modellFeld.setText(fz.getModel());
         kennzeichenFeld.setText(fz.getKennzeichen());
-        klasseFeld.setText(fz.getKlasse());        
+        int a = 0;
+        if(fz.getKlasse() == "PKW")
+        	a = 0;
+        if(fz.getKlasse() == "LKW")
+        	a = 1;
+        if(fz.getKlasse() == "Motorrad")
+        	a = 2;
+        klasseFeld.getSelectionModel().select(a);
     }
 
     /**
@@ -77,7 +93,7 @@ public class FahrzeugDialogController {
             fz.setMarke(markeFeld.getText());
             fz.setModel(modellFeld.getText());
             fz.setKennzeichen(kennzeichenFeld.getText());
-            fz.setKlasse(klasseFeld.getText());
+            fz.setKlasse(klasseFeld.getSelectionModel().getSelectedItem().toString());
 
             okClicked = true;
             dialogStage.close();
@@ -109,10 +125,6 @@ public class FahrzeugDialogController {
         if (kennzeichenFeld.getText() == null || kennzeichenFeld.getText().length() == 0) {
             errorMessage += "Kennzeichen ungültig!\n"; 
         }
-        if (klasseFeld.getText() == null || klasseFeld.getText().length() == 0) {
-            errorMessage += "Klasse ungültig!\n"; 
-        }
-
         if (errorMessage.length() == 0) {
             return true;
         } else {
