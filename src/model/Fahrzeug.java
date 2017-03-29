@@ -46,6 +46,11 @@ public class Fahrzeug implements Comparable<Fahrzeug> {
 			return 1;
 	}
 
+	// Gibt den Marke und Modell im formatierten String aus
+	public String toString(){
+		return getMarke() + " " + getModel();
+	}
+	
 	public String getMarke() {
 		return marke.get();
 	}

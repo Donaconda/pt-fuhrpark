@@ -80,6 +80,11 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 		//return -1; // this object is less than the specified object
 		//return 0;
 	}
+	
+	// Gibt den Vor- und Nachnamen im formatierten String aus
+	public String toString(){
+		return getVorname() + " " + getNachname();
+	}
 
 	public String getVorname() {
 		return vorname.get();
