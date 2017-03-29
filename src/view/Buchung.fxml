@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BuchungController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BuchungController">
    <children>
       <SplitPane dividerPositions="0.3333" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -56,10 +56,10 @@
                         <Label fx:id="enddatumLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
-                  <ButtonBar layoutX="81.0" layoutY="244.0" prefHeight="40.0" prefWidth="300.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="5.0">
+                  <ButtonBar layoutX="25.0" layoutY="219.0" prefHeight="40.0" prefWidth="211.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="5.0">
                     <buttons>
-                        <Button mnemonicParsing="false" onAction="#handleBuchungNeu" text="Neu..." />
-                      <Button mnemonicParsing="false" onAction="#handleBuchungBearbeiten" text="Bearbeiten..." />
+                        <Button mnemonicParsing="false" onAction="#handleBuchungNeu" text="Neu" />
+                      <Button mnemonicParsing="false" onAction="#handleBuchungBearbeiten" text="Bearbeiten" />
                     </buttons>
                   </ButtonBar>
                </children>
