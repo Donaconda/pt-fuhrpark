@@ -46,7 +46,7 @@
                         <Label fx:id="vornameLabel" text="Label" GridPane.columnIndex="1" />
                         <Label text="Nachname" GridPane.rowIndex="1" />
                         <Label fx:id="nachnameLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label text="Stra�e" GridPane.rowIndex="2" />
+                        <Label text="Straße" GridPane.rowIndex="2" />
                         <Label fx:id="strasseLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="Wohnort" GridPane.rowIndex="3" />
                         <Label text="PLZ" GridPane.rowIndex="4" />
@@ -60,7 +60,7 @@
                     <buttons>
                         <Button mnemonicParsing="false" onAction="#handleMitarbeiterNeu" text="Neu..." />
                       <Button mnemonicParsing="false" onAction="#handleMitarbeiterBearbeiten" text="Bearbeiten..." />
-                        <Button mnemonicParsing="false" onAction="#handleMitarbeiterLoeschen" text="L�schen" />
+                        <Button mnemonicParsing="false" onAction="#handleMitarbeiterLoeschen" text="Löschen" />
                     </buttons>
                   </ButtonBar>
                </children>
