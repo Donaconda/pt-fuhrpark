@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <buchungen>
-<buchung>
-<id>001</id>
-<mitarbeiter></mitarbeiter>
-<fahrzeug>mk123</fahrzeug>
-<zweck>zurTanke</zweck>
-<startdatum></startdatum>
-<enddatum></enddatum>
-</buchung>
+    <buchung>
+        <fahrzeug>mk123</fahrzeug>
+        <id>1</id>
+        <mitarbeiter>Micky Koch</mitarbeiter>
+        <zweck>zurTanke</zweck>
+		<beginn>1993-03-10T22:12</beginn>
+        <ende>1993-03-10T22:12</ende>
+    </buchung>
+    <buchung>
+        <beginn>1993-03-10T22:12</beginn>
+        <ende>1993-03-10T22:12</ende>
+        <id>2</id>
+    </buchung>
 </buchungen>

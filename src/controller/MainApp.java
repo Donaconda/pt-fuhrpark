@@ -235,6 +235,7 @@ public class MainApp extends Application{
             BuchungDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setMainApp(this);
+            controller.fillCombobox();
             controller.setBuchung(bu);
 
             // Show the dialog and wait until the user closes it
@@ -381,6 +382,7 @@ public class MainApp extends Application{
             setFahrzeugFilePath(file);
 
         } catch (Exception e) { // catches ANY exception
+        	e.printStackTrace();
         	Alert alert = new Alert(AlertType.ERROR);
         	alert.setTitle("Error");
         	alert.setHeaderText("Could not load data");
@@ -406,6 +408,7 @@ public class MainApp extends Application{
             setBuchungFilePath(file);
 
         } catch (Exception e) { // catches ANY exception
+        	e.printStackTrace();
         	Alert alert = new Alert(AlertType.ERROR);
         	alert.setTitle("Error");
         	alert.setHeaderText("Could not load data");

@@ -17,7 +17,7 @@ public class BuchungController {
 	@FXML
 	private TableView<Buchung> buchungTabelle;
 	@FXML
-	private TableColumn<Buchung, Number> idSpalte;
+	private TableColumn<Buchung, String> idSpalte;
 	@FXML
 	private TableColumn<Buchung, String> mitarbeiterSpalte;
 	@FXML
@@ -42,7 +42,7 @@ public class BuchungController {
 	private void initialize() {
 		// Initialisiere die Tabelle mit zwei Spalten
 		idSpalte.setCellValueFactory(cellData -> cellData.getValue().idProperty());
-		mitarbeiterSpalte.setCellValueFactory(cellData -> cellData.getValue().getMitarbeiter().vornameProperty().concat(cellData.getValue().getMitarbeiter().nachnameProperty()));
+		mitarbeiterSpalte.setCellValueFactory(cellData -> cellData.getValue().mitarbeiterProperty());
 
 		// Initialisiere die Mitarbeiterinfo
 		zeigeBuchunginfo(null);
@@ -62,11 +62,11 @@ public class BuchungController {
 	private void zeigeBuchunginfo(Buchung bu) {
 		if (bu != null) {
 			// Fülle die Labels mit den Daten aus dem Mitarbeiter Objekt
-			idLabel.setText(Integer.toString(bu.getId()));
-			mitarbeiterLabel.setText(bu.getMitarbeiter().getVorname() + " " + bu.getMitarbeiter().getNachname());
-			fahrzeugLabel.setText(bu.getFahrzeug().getMarke() + " " + bu.getFahrzeug().getModel() + " [" + bu.getFahrzeug().getKennzeichen() + "]");
+			idLabel.setText(bu.getId());
+			mitarbeiterLabel.setText(bu.getMitarbeiter());
+			fahrzeugLabel.setText(bu.getFahrzeug());
 			zweckLabel.setText(bu.getZweck());
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 			startdatumLabel.setText(bu.getBeginn().format(formatter));
 			enddatumLabel.setText(bu.getEnde().format(formatter));
 		} else {
@@ -90,6 +90,7 @@ public class BuchungController {
 		boolean okClicked = mainApp.zeigeBuchungDialog(tempItem);
 		if (okClicked) {
 			mainApp.getBuchungData().add(tempItem);
+			mainApp.saveBuchungDataToFile(mainApp.getBuchungFilePath());
 		}
 	}
 
@@ -103,6 +104,7 @@ public class BuchungController {
 		if (selectedItem != null) {
 			boolean okClicked = mainApp.zeigeBuchungDialog(selectedItem);
 			if (okClicked) {
+				mainApp.saveBuchungDataToFile(mainApp.getBuchungFilePath());
 				zeigeBuchunginfo(selectedItem);
 			}
 		} else {

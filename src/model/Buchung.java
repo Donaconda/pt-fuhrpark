@@ -19,24 +19,24 @@ import javafx.beans.property.StringProperty;
 
 public class Buchung implements Comparable<Buchung>{
 
-	public final IntegerProperty id;
+	private final StringProperty id;
 	private final StringProperty mitarbeiter; // Mitarbeiter als String gespeichert mit Vor- und Nachname
 	private final StringProperty fahrzeug; // Fahrzeug als String gespeichert mit Kennzeichen
 	private final StringProperty zweck;
 	private final ObjectProperty<LocalDateTime> beginn;
 	private final ObjectProperty<LocalDateTime> ende;
 
-	public Buchung(int _id, Mitarbeiter _mitarbeiter, Fahrzeug _fahrzeug, String _zweck, LocalDateTime _beginn, LocalDateTime _ende) {
-		this.id = new SimpleIntegerProperty(_id);
-		this.mitarbeiter = new SimpleStringProperty(_mitarbeiter.toString());
-		this.fahrzeug = new SimpleStringProperty(_fahrzeug.getKennzeichen());
+	public Buchung(String _id, String _mitarbeiter, String _fahrzeug, String _zweck, LocalDateTime _beginn, LocalDateTime _ende) {
+		this.id = new SimpleStringProperty(_id);
+		this.mitarbeiter = new SimpleStringProperty(_mitarbeiter);
+		this.fahrzeug = new SimpleStringProperty(_fahrzeug);
 		this.zweck = new SimpleStringProperty(_zweck);
 		this.beginn = new SimpleObjectProperty<LocalDateTime>(_beginn);
 		this.ende = new SimpleObjectProperty<LocalDateTime>(_ende);
 	}
 
 	public Buchung() {
-		this(0, null, null, null, null, null);
+		this(null, null, null, null, null, null);
 	}
 
 	@Override
@@ -63,15 +63,15 @@ public class Buchung implements Comparable<Buchung>{
 		return this.getBeginn().until(this.getEnde(), ChronoUnit.HOURS);
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id.get();
 	}
 
-	public void setId(int _id) {
+	public void setId(String _id) {
 		this.id.set(_id);
 	}
 
-	public IntegerProperty idProperty() {
+	public StringProperty idProperty() {
 		return id;
 	}
 
@@ -79,8 +79,8 @@ public class Buchung implements Comparable<Buchung>{
 		return mitarbeiter.get();
 	}
 
-	public void setMitarbeiter(Mitarbeiter _mitarbeiter) {
-		this.mitarbeiter.set(_mitarbeiter.toString());
+	public void setMitarbeiter(String _mitarbeiter) {
+		this.mitarbeiter.set(_mitarbeiter);
 	}
 
 	public StringProperty mitarbeiterProperty() {
@@ -91,8 +91,8 @@ public class Buchung implements Comparable<Buchung>{
 		return fahrzeug.get();
 	}
 
-	public void setFahrzeug(Fahrzeug _fahrzeug) {
-		this.fahrzeug.set(_fahrzeug.getKennzeichen());
+	public void setFahrzeug(String _fahrzeug) {
+		this.fahrzeug.set(_fahrzeug);
 	}
 
 	public StringProperty fahrzeugProperty() {
