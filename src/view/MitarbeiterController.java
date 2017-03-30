@@ -107,6 +107,7 @@ public class MitarbeiterController {
 		int selectedIndex = mitarbeiterTabelle.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
 			mitarbeiterTabelle.getItems().remove(selectedIndex);
+			mainApp.saveMitarbeiterDataToFile(mainApp.getMitarbeiterFilePath());
 		} else {
 			// Wenn nichts ausgewählt ist
 			Alert alert = new Alert(AlertType.WARNING);
@@ -128,6 +129,7 @@ public class MitarbeiterController {
 		boolean okClicked = mainApp.zeigeMitarbeiterDialog(tempItem);
 		if (okClicked) {
 			mainApp.getMitarbeiterData().add(tempItem);
+			mainApp.saveMitarbeiterDataToFile(mainApp.getMitarbeiterFilePath());
 		}
 	}
 
@@ -141,6 +143,7 @@ public class MitarbeiterController {
 		if (selectedItem != null) {
 			boolean okClicked = mainApp.zeigeMitarbeiterDialog(selectedItem);
 			if (okClicked) {
+				mainApp.saveMitarbeiterDataToFile(mainApp.getMitarbeiterFilePath());
 				zeigeMitarbeiterinfo(selectedItem);
 			}
 		} else {

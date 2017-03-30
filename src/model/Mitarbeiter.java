@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter; // aus tutorial
 
+import controller.LocalDateAdapter;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -146,7 +147,7 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 		return plz;
 	}
 
-	// @XmlJavaTypeAdapter(LocalDateAdapter.class) // aus Tutorial?!
+	@XmlJavaTypeAdapter(LocalDateAdapter.class) // aus Tutorial?!
 	public LocalDate getGeburtstag() {
 		return geburtstag.get();
 	}

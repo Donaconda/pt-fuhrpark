@@ -79,24 +79,24 @@ public class MainApp extends Application{
             controller.setMainApp(this);
 
             primaryStage.show();
+            zeigeMitarbeiterFenster();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         // Try to load last opened person file.
         File maFile = new File("C:/Users/koch_m/git/pt-fuhrpark/src/resources/mitarbeiterData.xml");
-        
         if (maFile != null) {
             loadMitarbeiterDataFromFile(maFile);
         }
-//        File fzFile = getMitarbeiterFilePath();
-//        if (fzFile != null) {
-//            loadMitarbeiterDataFromFile(fzFile);
-//        }
-//        File buFile = getMitarbeiterFilePath();
-//        if (buFile != null) {
-//            loadMitarbeiterDataFromFile(buFile);
-//        }
+        File fzFile = new File("C:/Users/koch_m/git/pt-fuhrpark/src/resources/fahrzeugData.xml");
+        if (fzFile != null) {
+            loadFahrzeugDataFromFile(fzFile);
+        }
+        File buFile = new File("C:/Users/koch_m/git/pt-fuhrpark/src/resources/buchungData.xml");
+        if (buFile != null) {
+            loadBuchungDataFromFile(buFile);
+        }
     }
     
     public void zeigeMitarbeiterFenster() {
@@ -174,7 +174,6 @@ public class MainApp extends Application{
             // Set the person into the controller.
             MitarbeiterDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setMainApp(this);
             controller.setMitarbeiter(ma);
 
             // Show the dialog and wait until the user closes it
@@ -289,6 +288,31 @@ public class MainApp extends Application{
 	        primaryStage.setTitle("AddressApp");
 	    }
 	}
+	
+	public File getFahrzeugFilePath() {
+	    Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+	    String filePath = prefs.get("fzFilePath", null);
+	    if (filePath != null) {
+	        return new File(filePath);
+	    } else {
+	        return null;
+	    }
+	}
+
+	public void setFahrzeugFilePath(File file) {
+	    Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+	    if (file != null) {
+	        prefs.put("fzFilePath", file.getPath());
+
+	        // Update the stage title.
+	        primaryStage.setTitle("AddressApp - " + file.getName());
+	    } else {
+	        prefs.remove("fzFilePath");
+
+	        // Update the stage title.
+	        primaryStage.setTitle("AddressApp");
+	    }
+	}
 
 	public File getBuchungFilePath() {
 	    Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
@@ -309,31 +333,6 @@ public class MainApp extends Application{
 	        primaryStage.setTitle("AddressApp - " + file.getName());
 	    } else {
 	        prefs.remove("buFilePath");
-
-	        // Update the stage title.
-	        primaryStage.setTitle("AddressApp");
-	    }
-	}
-
-	public File getFahrzeugFilePath() {
-	    Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-	    String filePath = prefs.get("fzFilePath", null);
-	    if (filePath != null) {
-	        return new File(filePath);
-	    } else {
-	        return null;
-	    }
-	}
-
-	public void setFahrzeugFilePath(File file) {
-	    Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-	    if (file != null) {
-	        prefs.put("fzFilePath", file.getPath());
-
-	        // Update the stage title.
-	        primaryStage.setTitle("AddressApp - " + file.getName());
-	    } else {
-	        prefs.remove("fzFilePath");
 
 	        // Update the stage title.
 	        primaryStage.setTitle("AddressApp");

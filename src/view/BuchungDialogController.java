@@ -24,7 +24,7 @@ import model.Mitarbeiter;
 	    @FXML
 	    private TextField idFeld;
 	    @FXML
-	    private ComboBox mitarbeiterFeld;
+	    private ComboBox<String> mitarbeiterFeld;
 	    @FXML
 	    private TextField fahrzeugFeld;
 	    @FXML

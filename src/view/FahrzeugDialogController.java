@@ -1,8 +1,5 @@
 package view;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,7 +22,7 @@ public class FahrzeugDialogController {
     @FXML
     private TextField kennzeichenFeld;
     @FXML
-    private ComboBox klasseFeld;
+    private ComboBox<String> klasseFeld;
 
     private Stage dialogStage;
     private Fahrzeug fz;

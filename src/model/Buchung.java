@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import controller.LocalDateAdapter;
+import controller.LocalDateTimeAdapter;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.ObjectProperty;
@@ -106,7 +110,7 @@ public class Buchung implements Comparable<Buchung>{
 	public StringProperty zweckProperty() {
 		return zweck;
 	}
-
+	@XmlJavaTypeAdapter(LocalDateTimeAdapter.class) 
 	public LocalDateTime getBeginn() {
 		return beginn.get();
 	}
@@ -119,6 +123,7 @@ public class Buchung implements Comparable<Buchung>{
 		return beginn;
 	}
 
+	@XmlJavaTypeAdapter(LocalDateTimeAdapter.class) 
 	public LocalDateTime getEnde() {
 		return ende.get();
 	}

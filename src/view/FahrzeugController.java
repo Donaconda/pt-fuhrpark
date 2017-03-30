@@ -74,6 +74,7 @@ public class FahrzeugController {
 		int selectedIndex = fahrzeugTabelle.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
 			fahrzeugTabelle.getItems().remove(selectedIndex);
+			mainApp.saveFahrzeugDataToFile(mainApp.getFahrzeugFilePath());
 		} else {
 			// Wenn nichts ausgewählt ist
 			Alert alert = new Alert(AlertType.WARNING);
@@ -95,6 +96,7 @@ public class FahrzeugController {
 		boolean okClicked = mainApp.zeigeFahrzeugDialog(tempItem);
 		if (okClicked) {
 			mainApp.getFahrzeugData().add(tempItem);
+			mainApp.saveFahrzeugDataToFile(mainApp.getFahrzeugFilePath());
 		}
 	}
 
@@ -108,6 +110,7 @@ public class FahrzeugController {
 		if (selectedItem != null) {
 			boolean okClicked = mainApp.zeigeFahrzeugDialog(selectedItem);
 			if (okClicked) {
+				mainApp.saveFahrzeugDataToFile(mainApp.getFahrzeugFilePath());
 				zeigeFahrzeuginfo(selectedItem);
 			}
 		} else {
