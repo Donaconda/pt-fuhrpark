@@ -20,16 +20,16 @@ import javafx.beans.property.StringProperty;
 public class Buchung implements Comparable<Buchung>{
 
 	public final IntegerProperty id;
-	private final ObjectProperty<Mitarbeiter> mitarbeiter;
-	private final ObjectProperty<Fahrzeug> fahrzeug;
+	private final StringProperty mitarbeiter; // Mitarbeiter als String gespeichert mit Vor- und Nachname
+	private final StringProperty fahrzeug; // Fahrzeug als String gespeichert mit Kennzeichen
 	private final StringProperty zweck;
 	private final ObjectProperty<LocalDateTime> beginn;
 	private final ObjectProperty<LocalDateTime> ende;
 
 	public Buchung(int _id, Mitarbeiter _mitarbeiter, Fahrzeug _fahrzeug, String _zweck, LocalDateTime _beginn, LocalDateTime _ende) {
 		this.id = new SimpleIntegerProperty(_id);
-		this.mitarbeiter = new SimpleObjectProperty<Mitarbeiter>(_mitarbeiter);
-		this.fahrzeug = new SimpleObjectProperty<Fahrzeug>(_fahrzeug);
+		this.mitarbeiter = new SimpleStringProperty(_mitarbeiter.toString());
+		this.fahrzeug = new SimpleStringProperty(_fahrzeug.getKennzeichen());
 		this.zweck = new SimpleStringProperty(_zweck);
 		this.beginn = new SimpleObjectProperty<LocalDateTime>(_beginn);
 		this.ende = new SimpleObjectProperty<LocalDateTime>(_ende);
@@ -75,27 +75,27 @@ public class Buchung implements Comparable<Buchung>{
 		return id;
 	}
 
-	public Mitarbeiter getMitarbeiter() {
+	public String getMitarbeiter() {
 		return mitarbeiter.get();
 	}
 
 	public void setMitarbeiter(Mitarbeiter _mitarbeiter) {
-		this.mitarbeiter.set(_mitarbeiter);
+		this.mitarbeiter.set(_mitarbeiter.toString());
 	}
 
-	public ObjectProperty<Mitarbeiter> mitarbeiterProperty() {
+	public StringProperty mitarbeiterProperty() {
 		return mitarbeiter;
 	}
 
-	public Fahrzeug getFahrzeug() {
+	public String getFahrzeug() {
 		return fahrzeug.get();
 	}
 
 	public void setFahrzeug(Fahrzeug _fahrzeug) {
-		this.fahrzeug.set(_fahrzeug);
+		this.fahrzeug.set(_fahrzeug.getKennzeichen());
 	}
 
-	public ObjectProperty<Fahrzeug> fahrzeugProperty() {
+	public StringProperty fahrzeugProperty() {
 		return fahrzeug;
 	}
 
@@ -110,7 +110,7 @@ public class Buchung implements Comparable<Buchung>{
 	public StringProperty zweckProperty() {
 		return zweck;
 	}
-	@XmlJavaTypeAdapter(LocalDateTimeAdapter.class) 
+	@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
 	public LocalDateTime getBeginn() {
 		return beginn.get();
 	}
@@ -123,7 +123,7 @@ public class Buchung implements Comparable<Buchung>{
 		return beginn;
 	}
 
-	@XmlJavaTypeAdapter(LocalDateTimeAdapter.class) 
+	@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
 	public LocalDateTime getEnde() {
 		return ende.get();
 	}
