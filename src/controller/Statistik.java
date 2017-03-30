@@ -2,7 +2,10 @@ package controller;
 
 import model.Eintrag;
 import java.util.*;
+
+import javafx.collections.ObservableList;
 import model.Fahrzeug;
+import model.Mitarbeiter;
 import model.Buchung;
 
 public class Statistik {
@@ -21,11 +24,11 @@ public class Statistik {
 		eintraege.add(pkwEintrag);
 		Eintrag motoEintrag = new Eintrag();
 		Fahrzeug moto = new Fahrzeug();
-		moto.setKlasse("motorrad");	
+		moto.setKlasse("motorrad");
 		motoEintrag.setFahrzeug(moto);
 		eintraege.add(motoEintrag);
-		
-		
+
+
 		for(int i = 0; i<list.size();i++){
 			if(list.get(i).getKlasse().toLowerCase().compareTo("lkw")==0){
 				eintraege.get(0).setHaeufigkeit(eintraege.get(0).getHaeufigkeit()+1);
@@ -33,12 +36,12 @@ public class Statistik {
 				eintraege.get(0).setHaeufigkeit(eintraege.get(1).getHaeufigkeit()+1);
 			} else if(list.get(i).getKlasse().toLowerCase().compareTo("motorrad")==0){
 				eintraege.get(0).setHaeufigkeit(eintraege.get(2).getHaeufigkeit()+1);
-			} 
+			}
 		}
 		return eintraege;
 	}
-	
-	public static List<Eintrag> avrgTime(List<Buchung> list){ // Ausbaustufe VII.2
+
+	public static List<Eintrag> avrgTime(List<Buchung> list, ObservableList<Fahrzeug> flist){ // Ausbaustufe VII.2
 		List<Eintrag> eintraege = new ArrayList<Eintrag>();
 		Eintrag durchschnitt = new Eintrag();
 		Eintrag durchschnittPkw = new Eintrag();
@@ -60,10 +63,11 @@ public class Statistik {
 		for(Buchung b : list){ // For-Each Schleife
 			durchschnitt.setAusleihzeit((int) (durchschnitt.getAusleihzeit()+b.dauer()));
 			buchungszaehler++;
-			if(b.getFahrzeug().getKlasse().toLowerCase().compareTo("pkw")==0){
+			String fahrzeug = Sucher.sucheFahrzeug(flist, b.getFahrzeug()).getKlasse();
+			if(fahrzeug.toLowerCase().compareTo("pkw")==0){
 				durchschnittPkw.setAusleihzeit((int) (durchschnittPkw.getAusleihzeit()+b.dauer()));
 				pkwZaehler++;
-			} else if(b.getFahrzeug().getKlasse().toLowerCase().compareTo("lkw")==0){
+			} else if(fahrzeug.toLowerCase().compareTo("lkw")==0){
 				durchschnittLkw.setAusleihzeit((int) (durchschnittLkw.getAusleihzeit()+b.dauer()));
 				lkwZaehler++;
 			} else { // Fahrzeug ist kein PKW oder LKW? => Fahrzeug ist Motorrad
@@ -81,16 +85,16 @@ public class Statistik {
 		eintraege.add(durchschnittPkw);
 		return eintraege;
 	}
-	
-	public List<Eintrag> mitarbeiterLeihtage(List<Buchung> list){ // Ausbaustufe VII.3
+
+	public List<Eintrag> mitarbeiterLeihtage(List<Buchung> list, ObservableList<Mitarbeiter> mlist){ // Ausbaustufe VII.3
 		List<Eintrag> eintraege= new ArrayList<Eintrag>();
-		for(Buchung b : list){ // Für jede Buchung: 
+		for(Buchung b : list){ // Für jede Buchung:
 			for(Eintrag e : eintraege){ // FÜr jeden Eintrag
-				if(e.getMitarbeiter() == b.getMitarbeiter()){ // Gibt es schon einen Eintrag für den Mitarbeiter?
+				if(e.getMitarbeiter() == Sucher.sucheMitarbeiter(mlist, b.getMitarbeiter())){ // Gibt es schon einen Eintrag für den Mitarbeiter?
 					e.setAusleihzeit((int) (e.getAusleihzeit()+b.dauer())); // Erhöhe seine Ausleihzeit um die Dauer der Buchung
 				} else{	// Sonst:
-					Eintrag a = new Eintrag();				// Erstelle einen neuen Eintrag 
-					a.setMitarbeiter(b.getMitarbeiter());	// für den Mitarbeiter aus der Buchung	
+					Eintrag a = new Eintrag();				// Erstelle einen neuen Eintrag
+					a.setMitarbeiter(Sucher.sucheMitarbeiter(mlist, b.getMitarbeiter()));	// für den Mitarbeiter aus der Buchung
 					eintraege.add(a);						// und füge ihn der Liste hinzu
 				}
 			}
