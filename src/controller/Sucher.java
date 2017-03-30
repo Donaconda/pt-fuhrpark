@@ -9,7 +9,7 @@ import model.Mitarbeiter;
 
 public class Sucher {
 	
-	public boolean suche(ObservableList<Fahrzeug> liste, Fahrzeug fahrzeug){
+	public static boolean suche(ObservableList<Fahrzeug> liste, Fahrzeug fahrzeug){
 		for(Fahrzeug f : liste){
 			if(f.compareTo(fahrzeug)==0){
 				return true;
@@ -18,7 +18,7 @@ public class Sucher {
 		return false;
 	}
 	
-	public boolean suche(ObservableList<Mitarbeiter> liste, Mitarbeiter mitarbeiter){
+	public static boolean suche(ObservableList<Mitarbeiter> liste, Mitarbeiter mitarbeiter){
 		for(Mitarbeiter m : liste){
 			if(m.compareTo(mitarbeiter)==0){
 				return true;
@@ -27,7 +27,7 @@ public class Sucher {
 		return false;
 	}
 	
-	public boolean suche(ObservableList<Buchung> liste, Buchung buchung){
+	public static boolean suche(ObservableList<Buchung> liste, Buchung buchung){
 		for(Buchung b : liste){
 			if(b.compareTo(buchung)==0){
 				return true;
