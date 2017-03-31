@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <buchungen>
     <buchung>
-        <fahrzeug>mk123</fahrzeug>
+        <beginn>2017-02-10T10:00</beginn>
+        <ende>2017-02-11T11:00</ende>
+        <fahrzeug>VW Golf</fahrzeug>
         <id>1</id>
-        <mitarbeiter>Micky Koch</mitarbeiter>
-        <zweck>zurTanke</zweck>
-		<beginn>1993-03-10T22:12</beginn>
-        <ende>1993-03-10T22:12</ende>
+        <mitarbeiter>Michael Koch</mitarbeiter>
+        <zweck>Stadtfahrt</zweck>
     </buchung>
     <buchung>
-        <beginn>1993-03-10T22:12</beginn>
-        <ende>1993-03-10T22:12</ende>
+        <beginn>2015-04-13T13:00</beginn>
+        <ende>2015-05-13T15:00</ende>
+        <fahrzeug>Honda CBR 1100 XX</fahrzeug>
         <id>2</id>
+        <mitarbeiter>Erik Bong</mitarbeiter>
+        <zweck>Stadtfahrt</zweck>
+    </buchung>
+    <buchung>
+        <beginn>2004-12-12T08:00</beginn>
+        <ende>2004-12-12T10:30</ende>
+        <fahrzeug>Honda CBR 1100 XX</fahrzeug>
+        <id>3</id>
+        <mitarbeiter>Max Mustermann</mitarbeiter>
+        <zweck>Stadtfahrt</zweck>
     </buchung>
 </buchungen>
