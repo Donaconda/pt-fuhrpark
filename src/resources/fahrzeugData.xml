@@ -48,4 +48,10 @@
         <marke>MAN</marke>
         <model>TGM</model>
     </fahrzeug>
+    <fahrzeug>
+        <kennzeichen>PB-MS-1995</kennzeichen>
+        <klasse>LKW</klasse>
+        <marke>Fendt</marke>
+        <model>SuperTrecker5000</model>
+    </fahrzeug>
 </fahrzeuge>

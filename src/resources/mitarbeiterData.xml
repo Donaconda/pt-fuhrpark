@@ -40,4 +40,12 @@
         <vorname>Frauke</vorname>
         <wohnort>Berlin</wohnort>
     </EinMitarbeiter>
+    <EinMitarbeiter>
+        <geburtstag>1995-12-06</geburtstag>
+        <nachname>Schlüter</nachname>
+        <plz>12345</plz>
+        <strasse>abcstraße 5</strasse>
+        <vorname>Michelle</vorname>
+        <wohnort>Meine</wohnort>
+    </EinMitarbeiter>
 </mitarbeiter>

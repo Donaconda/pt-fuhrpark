@@ -1,16 +1,29 @@
 package controller;
 
 import model.Eintrag;
+
+import java.io.File;
 import java.util.*;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
+
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import model.Fahrzeug;
+import model.FahrzeugListWrapper;
 import model.Mitarbeiter;
 import model.Buchung;
 
+
 public class Statistik {
 
-	public static List<Eintrag> calcAusgeliehen(List<Fahrzeug> list){ // Ausbaustufe VII.1
+	private static ObservableList<Fahrzeug> fahrzeugData = FXCollections.observableArrayList();
+	
+	public static ArrayList<Eintrag> calcAusgeliehen(List<Buchung> list){ // Ausbaustufe VII.1
+		ladeFahrzeuge();
 		ArrayList<Eintrag> eintraege= new ArrayList<Eintrag>();
 		Eintrag lkwEintrag = new Eintrag();
 		Fahrzeug lkw = new Fahrzeug();
@@ -30,19 +43,26 @@ public class Statistik {
 
 
 		for(int i = 0; i<list.size();i++){
-			if(list.get(i).getKlasse().toLowerCase().compareTo("lkw")==0){
-				eintraege.get(0).setHaeufigkeit(eintraege.get(0).getHaeufigkeit()+1);
-			} else if(list.get(i).getKlasse().toLowerCase().compareTo("pkw")==0){
-				eintraege.get(0).setHaeufigkeit(eintraege.get(1).getHaeufigkeit()+1);
-			} else if(list.get(i).getKlasse().toLowerCase().compareTo("motorrad")==0){
-				eintraege.get(0).setHaeufigkeit(eintraege.get(2).getHaeufigkeit()+1);
+			Fahrzeug f;
+			String merker = list.get(i).getFahrzeug().toLowerCase();
+			if(Sucher.sucheFahrzeug(fahrzeugData, list.get(i).getFahrzeug())!=null){
+				f = Sucher.sucheFahrzeug(fahrzeugData, list.get(i).getFahrzeug());
+				
+				if(f.getKlasse().toLowerCase().compareTo("lkw")==0){
+					eintraege.get(0).setHaeufigkeit(eintraege.get(0).getHaeufigkeit()+1);
+				} else if(f.getKlasse().toLowerCase().compareTo("pkw")==0){
+					eintraege.get(1).setHaeufigkeit(eintraege.get(1).getHaeufigkeit()+1);
+				} else if(f.getKlasse().toLowerCase().compareTo("motorrad")==0){
+					eintraege.get(2).setHaeufigkeit(eintraege.get(2).getHaeufigkeit()+1);
+				}
 			}
 		}
 		return eintraege;
 	}
 
-	public static List<Eintrag> avrgTime(List<Buchung> list, ObservableList<Fahrzeug> flist){ // Ausbaustufe VII.2
-		List<Eintrag> eintraege = new ArrayList<Eintrag>();
+	public static ArrayList<Eintrag> avrgTime(List<Buchung> list){ // Ausbaustufe VII.2
+		ladeFahrzeuge();
+		ArrayList<Eintrag> eintraege = new ArrayList<Eintrag>();
 		Eintrag durchschnitt = new Eintrag();
 		Eintrag durchschnittPkw = new Eintrag();
 		Eintrag durchschnittLkw = new Eintrag();
@@ -63,7 +83,7 @@ public class Statistik {
 		for(Buchung b : list){ // For-Each Schleife
 			durchschnitt.setAusleihzeit((int) (durchschnitt.getAusleihzeit()+b.dauer()));
 			buchungszaehler++;
-			String fahrzeug = Sucher.sucheFahrzeug(flist, b.getFahrzeug()).getKlasse();
+			String fahrzeug = Sucher.sucheFahrzeug(fahrzeugData, b.getFahrzeug()).getKlasse();
 			if(fahrzeug.toLowerCase().compareTo("pkw")==0){
 				durchschnittPkw.setAusleihzeit((int) (durchschnittPkw.getAusleihzeit()+b.dauer()));
 				pkwZaehler++;
@@ -75,10 +95,14 @@ public class Statistik {
 				motoZaehler++;
 			}
 		}
+		try{
 		durchschnitt.setAusleihzeit(durchschnitt.getAusleihzeit()/buchungszaehler);
 		durchschnittPkw.setAusleihzeit(durchschnittPkw.getAusleihzeit()/pkwZaehler);
 		durchschnittLkw.setAusleihzeit(durchschnittLkw.getAusleihzeit()/lkwZaehler);
 		durchschnittMoto.setAusleihzeit(durchschnittMoto.getAusleihzeit()/motoZaehler);
+		} catch(Exception e){
+			
+		}
 		eintraege.add(durchschnitt);
 		eintraege.add(durchschnittMoto);
 		eintraege.add(durchschnittLkw);
@@ -101,4 +125,31 @@ public class Statistik {
 		}
 		return eintraege;
 	}
+
+public static void ladeFahrzeuge() {
+    try {
+        JAXBContext context = JAXBContext
+                .newInstance(FahrzeugListWrapper.class);
+        Unmarshaller um = context.createUnmarshaller();
+
+        // Reading XML from the file and unmarshalling.
+        File f = new File("C:/Users/tgma07/git/pt-fuhrpark/src/resources/fahrzeugData.xml");
+        FahrzeugListWrapper wrapper = (FahrzeugListWrapper) um.unmarshal(f);
+
+        fahrzeugData.clear();
+        fahrzeugData.addAll(wrapper.getFahrzeug());
+
+        // Save the file path to the registry.
+        //setFahrzeugFilePath(file);
+
+    } catch (Exception e) { // catches ANY exception
+    	e.printStackTrace();
+    	Alert alert = new Alert(AlertType.ERROR);
+    	alert.setTitle("Error");
+    	alert.setHeaderText("Could not load data");
+    	alert.setContentText("Could not load data from file");
+
+    	alert.showAndWait();
+    }
+}
 }

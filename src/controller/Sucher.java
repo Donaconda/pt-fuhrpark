@@ -38,7 +38,7 @@ public class Sucher {
 
 	public static Fahrzeug sucheFahrzeug(ObservableList<Fahrzeug> liste, String fahrzeug){
 		for(Fahrzeug f : liste){
-			if(f.getKennzeichen().compareTo(fahrzeug)==0){
+			if(f.toString().compareTo(fahrzeug)==0){
 				return f;
 			}
 		}

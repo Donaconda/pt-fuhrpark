@@ -10,18 +10,34 @@
     </buchung>
     <buchung>
         <beginn>2015-04-13T13:00</beginn>
-        <ende>2015-05-13T15:00</ende>
-        <fahrzeug>Honda CBR 1100 XX</fahrzeug>
+        <ende>2015-04-14T14:00</ende>
+        <fahrzeug>VW Golf</fahrzeug>
         <id>2</id>
-        <mitarbeiter>Erik Bong</mitarbeiter>
+        <mitarbeiter>Michael Koch</mitarbeiter>
         <zweck>Stadtfahrt</zweck>
     </buchung>
     <buchung>
         <beginn>2004-12-12T08:00</beginn>
-        <ende>2004-12-12T10:30</ende>
+        <ende>2004-12-13T09:00</ende>
         <fahrzeug>Honda CBR 1100 XX</fahrzeug>
         <id>3</id>
-        <mitarbeiter>Max Mustermann</mitarbeiter>
+        <mitarbeiter>Michael Koch</mitarbeiter>
+        <zweck>Stadtfahrt</zweck>
+    </buchung>
+    <buchung>
+        <beginn>2017-04-02T06:00</beginn>
+        <ende>2017-04-04T23:00</ende>
+        <fahrzeug>MAN TGX</fahrzeug>
+        <id>4</id>
+        <mitarbeiter>Felix Schwarz</mitarbeiter>
+        <zweck>Langstreckenfahrt</zweck>
+    </buchung>
+    <buchung>
+        <beginn>2017-04-04T05:30</beginn>
+        <ende>2017-04-04T16:00</ende>
+        <fahrzeug>Fendt SuperTrecker5000</fahrzeug>
+        <id>5</id>
+        <mitarbeiter>Michelle Schlüter</mitarbeiter>
         <zweck>Stadtfahrt</zweck>
     </buchung>
 </buchungen>

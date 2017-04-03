@@ -26,10 +26,12 @@ import model.BuchungListWrapper;
 import model.Fahrzeug;
 import model.FahrzeugListWrapper;
 import view.StartFensterController;
+import view.AusleihzeitStatistikController;
 import view.BuchungController;
 import view.BuchungDialogController;
 import view.FahrzeugController;
 import view.FahrzeugDialogController;
+import view.FahrzeugHaeufigkeitController;
 import view.MitarbeiterController;
 import view.MitarbeiterDialogController;
 
@@ -85,15 +87,15 @@ public class MainApp extends Application{
         }
 
         // Try to load last opened person file.
-        File maFile = new File("C:/Users/koch_m/git/pt-fuhrpark/src/resources/mitarbeiterData.xml");
+        File maFile = new File("C:/Users/tgma07/git/pt-fuhrpark/src/resources/mitarbeiterData.xml");
         if (maFile != null) {
             loadMitarbeiterDataFromFile(maFile);
         }
-        File fzFile = new File("C:/Users/koch_m/git/pt-fuhrpark/src/resources/fahrzeugData.xml");
+        File fzFile = new File("C:/Users/tgma07/git/pt-fuhrpark/src/resources/fahrzeugData.xml");
         if (fzFile != null) {
             loadFahrzeugDataFromFile(fzFile);
         }
-        File buFile = new File("C:/Users/koch_m/git/pt-fuhrpark/src/resources/buchungData.xml");
+        File buFile = new File("C:/Users/tgma07/git/pt-fuhrpark/src/resources/buchungData.xml");
         if (buFile != null) {
             loadBuchungDataFromFile(buFile);
         }
@@ -493,6 +495,54 @@ public class MainApp extends Application{
         	alert.setContentText("Could not save data to file:\n" + file.getPath());
 
         	alert.showAndWait();
+        }
+    }
+    
+    public void showBirthdayStatistics() {
+        try {
+            // Load the fxml file and create a new stage for the popup.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/view/FahrzeugHaeufigkeitStatistik.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Fahrzeug Statistics");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the persons into the controller.
+            FahrzeugHaeufigkeitController controller = loader.getController();
+            controller.setData(buchungData);
+
+            dialogStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void showAusleihdauerStatistics() {
+        try {
+            // Load the fxml file and create a new stage for the popup.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/view/AusleihzeitStatistik.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Birthday Statistics");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the persons into the controller.
+            AusleihzeitStatistikController controller = loader.getController();
+            controller.setData(buchungData);
+
+            dialogStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
