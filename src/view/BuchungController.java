@@ -2,6 +2,9 @@ package view;
 
 
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -37,6 +40,7 @@ public class BuchungController {
 
 	public BuchungController(){
 	}
+	public int idCounter = 0;
 
 	@FXML
 	private void initialize() {
@@ -87,6 +91,8 @@ public class BuchungController {
 	@FXML
 	private void handleBuchungNeu() {
 		Buchung tempItem = new Buchung();
+		calculateID();
+		tempItem.setId(String.valueOf(idCounter+1)); /////////////////////////////////////////////////////////////////
 		boolean okClicked = mainApp.zeigeBuchungDialog(tempItem);
 		if (okClicked) {
 			mainApp.getBuchungData().add(tempItem);
@@ -116,5 +122,10 @@ public class BuchungController {
 			alert.setContentText("Bitte wählen Sie zuerst eine Buchung aus der Tabelle aus.");
 			alert.showAndWait();
 		}
+	}
+	
+	public void calculateID(){
+		ObservableList<Buchung> buchungen = mainApp.getBuchungData();
+		this.idCounter = buchungen.size();
 	}
 }

@@ -40,4 +40,20 @@
         <mitarbeiter>Michelle Schlüter</mitarbeiter>
         <zweck>Stadtfahrt</zweck>
     </buchung>
+    <buchung>
+        <beginn>1111-11-11T11:11</beginn>
+        <ende>1111-11-11T11:11</ende>
+        <fahrzeug>VW Golf</fahrzeug>
+        <id>6</id>
+        <mitarbeiter>Michael Koch</mitarbeiter>
+        <zweck>Stadtfahrt</zweck>
+    </buchung>
+    <buchung>
+        <beginn>1111-11-11T11:11</beginn>
+        <ende>1111-11-11T11:11</ende>
+        <fahrzeug>VW Golf</fahrzeug>
+        <id>7</id>
+        <mitarbeiter>Michael Koch</mitarbeiter>
+        <zweck>Stadtfahrt</zweck>
+    </buchung>
 </buchungen>
