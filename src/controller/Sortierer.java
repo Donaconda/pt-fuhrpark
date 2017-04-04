@@ -3,14 +3,14 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Buchung;
-import model.Fahrzeug;
-import model.Mitarbeiter;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 
 public class Sortierer {
 
-	public static ArrayList<? extends Comparable> sort(List<? extends Comparable> list) {
-		ArrayList<Object> sortiert = new ArrayList<Object>();
+	public static ObservableList<? extends Comparable> sort(List<? extends Comparable> list) {
+		ObservableList<Object> sortiert = FXCollections.observableArrayList();
 		int listursprungsgröße = list.size();
 		for (int y = 0; y < listursprungsgröße; y++) {
 			Object o = list.get(0);
@@ -24,6 +24,6 @@ public class Sortierer {
 			sortiert.add(o);
 			list.remove(merker);
 		}
-		return (ArrayList<? extends Comparable>) sortiert;
+		return (ObservableList<? extends Comparable>) sortiert;
 	}
 }

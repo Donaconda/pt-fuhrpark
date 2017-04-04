@@ -100,6 +100,9 @@ public class MainApp extends Application{
         if (buFile != null) {
             loadBuchungDataFromFile(buFile);
         }
+        this.buchungData = (ObservableList<Buchung>) Sortierer.sort(buchungData);
+        this.fahrzeugData = (ObservableList<Fahrzeug>) Sortierer.sort(fahrzeugData);
+        this.mitarbeiterData = (ObservableList<Mitarbeiter>) Sortierer.sort(mitarbeiterData);
     }
     
     public void zeigeMitarbeiterFenster() {
