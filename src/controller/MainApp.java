@@ -32,6 +32,7 @@ import view.BuchungDialogController;
 import view.FahrzeugController;
 import view.FahrzeugDialogController;
 import view.FahrzeugHaeufigkeitController;
+import view.MitarbeiterAusleihzeitController;
 import view.MitarbeiterController;
 import view.MitarbeiterDialogController;
 
@@ -537,6 +538,30 @@ public class MainApp extends Application{
 
             // Set the persons into the controller.
             AusleihzeitStatistikController controller = loader.getController();
+            controller.setData(buchungData);
+
+            dialogStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void showMitarbeiterAusleihzeitStatistics() {
+        try {
+            // Load the fxml file and create a new stage for the popup.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/view/MitarbeiterAusleihzeitStatistik.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Mitarbeiter Ausleihzeit");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the persons into the controller.
+            MitarbeiterAusleihzeitController controller = loader.getController();
             controller.setData(buchungData);
 
             dialogStage.show();

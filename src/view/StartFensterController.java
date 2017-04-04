@@ -35,4 +35,9 @@ public class StartFensterController {
 	private void handleAusleihzeitStatistics() {
 	  mainApp.showAusleihdauerStatistics();
 	}
+	
+	@FXML
+	private void handleMitarbeiterAusleihzeitStatistics() {
+	  mainApp.showMitarbeiterAusleihzeitStatistics();;
+	}
 }

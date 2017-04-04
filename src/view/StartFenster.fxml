@@ -26,6 +26,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#handleAusleihzeitStatistics" text="Ausleihzeit" />
                     <MenuItem mnemonicParsing="false" text="Delete" />
                         <MenuItem mnemonicParsing="false" onAction="#handleFahrzeugStatistics" text="Fahrzeug Häufigkeit" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleMitarbeiterAusleihzeitStatistics" text="Mitarbeiter Ausleihzeit" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Hilfe">

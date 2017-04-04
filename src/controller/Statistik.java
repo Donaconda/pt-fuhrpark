@@ -10,17 +10,20 @@ import javax.xml.bind.Unmarshaller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import model.Fahrzeug;
 import model.FahrzeugListWrapper;
 import model.Mitarbeiter;
+import model.MitarbeiterListWrapper;
 import model.Buchung;
 
 
 public class Statistik {
 
 	private static ObservableList<Fahrzeug> fahrzeugData = FXCollections.observableArrayList();
+	public static ObservableList<Mitarbeiter> mitarbeiterData = FXCollections.observableArrayList();
 	
 	public static ArrayList<Eintrag> calcAusgeliehen(List<Buchung> list){ // Ausbaustufe VII.1
 		ladeFahrzeuge();
@@ -110,17 +113,23 @@ public class Statistik {
 		return eintraege;
 	}
 
-	public List<Eintrag> mitarbeiterLeihtage(List<Buchung> list, ObservableList<Mitarbeiter> mlist){ // Ausbaustufe VII.3
-		List<Eintrag> eintraege= new ArrayList<Eintrag>();
+	public static ArrayList<Eintrag> mitarbeiterLeihtage(List<Buchung> list){ // Ausbaustufe VII.3
+		ladeMitarbeiter();
+		boolean eingetragen = false;
+		ArrayList<Eintrag> eintraege= new ArrayList<Eintrag>();
 		for(Buchung b : list){ // Für jede Buchung:
-			for(Eintrag e : eintraege){ // FÜr jeden Eintrag
-				if(e.getMitarbeiter() == Sucher.sucheMitarbeiter(mlist, b.getMitarbeiter())){ // Gibt es schon einen Eintrag für den Mitarbeiter?
-					e.setAusleihzeit((int) (e.getAusleihzeit()+b.dauer())); // Erhöhe seine Ausleihzeit um die Dauer der Buchung
-				} else{	// Sonst:
-					Eintrag a = new Eintrag();				// Erstelle einen neuen Eintrag
-					a.setMitarbeiter(Sucher.sucheMitarbeiter(mlist, b.getMitarbeiter()));	// für den Mitarbeiter aus der Buchung
-					eintraege.add(a);						// und füge ihn der Liste hinzu
+			for(Eintrag e : eintraege){
+				eingetragen=false;
+				if(e.getMitarbeiter()==Sucher.sucheMitarbeiter(mitarbeiterData, b.getMitarbeiter())){
+					e.setAusleihzeit((int) (e.getAusleihzeit()+b.dauer()));
+					eingetragen=true;
 				}
+			}
+			if(!eingetragen){
+				Eintrag e = new Eintrag();
+				e.setMitarbeiter(Sucher.sucheMitarbeiter(mitarbeiterData, b.getMitarbeiter()));
+				e.setAusleihzeit((int) (b.dauer()));
+				eintraege.add(e);
 			}
 		}
 		return eintraege;
@@ -139,8 +148,29 @@ public static void ladeFahrzeuge() {
         fahrzeugData.clear();
         fahrzeugData.addAll(wrapper.getFahrzeug());
 
-        // Save the file path to the registry.
-        //setFahrzeugFilePath(file);
+    } catch (Exception e) { // catches ANY exception
+    	e.printStackTrace();
+    	Alert alert = new Alert(AlertType.ERROR);
+    	alert.setTitle("Error");
+    	alert.setHeaderText("Could not load data");
+    	alert.setContentText("Could not load data from file");
+
+    	alert.showAndWait();
+    }
+}
+
+public static void ladeMitarbeiter() {
+    try {
+        JAXBContext context = JAXBContext
+                .newInstance(MitarbeiterListWrapper.class);
+        Unmarshaller um = context.createUnmarshaller();
+
+        // Reading XML from the file and unmarshalling.
+        File f = new File("C:/Users/tgma07/git/pt-fuhrpark/src/resources/mitarbeiterData.xml");
+        MitarbeiterListWrapper wrapper = (MitarbeiterListWrapper) um.unmarshal(f);
+
+        mitarbeiterData.clear();
+        mitarbeiterData.addAll(wrapper.getMitarbeiter());
 
     } catch (Exception e) { // catches ANY exception
     	e.printStackTrace();
