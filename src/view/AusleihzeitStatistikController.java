@@ -15,30 +15,29 @@ import model.Eintrag;
 
 public class AusleihzeitStatistikController {
 
-	 @FXML
-	    private BarChart<String, Integer> barChart;
+	@FXML
+	private BarChart<String, Integer> barChart;
 
-	    @FXML
-	    private CategoryAxis xAxis;
+	@FXML
+	private CategoryAxis xAxis;
 
-	    private ObservableList<String> xEintraege = FXCollections.observableArrayList();
+	private ObservableList<String> xEintraege = FXCollections.observableArrayList();
 
-	    @FXML
-	    private void initialize() {
-	        xEintraege.add("PKW");
-	        xEintraege.add("LKW");
-	        xEintraege.add("Motorrad");
-	        xEintraege.add("Gesamt");
-	        // Assign the month names as categories for the horizontal axis.
-	        xAxis.setCategories(xEintraege);
-	    }
-	    
-	    public void setData(List<Buchung> eintraege) {
-	        // Count the number of people having their birthday in a specific month.
-	        int[] counter = new int[4];
-	        ArrayList<Eintrag> statistik = Statistik.avrgTime(eintraege);
-	        
-	        
+	@FXML
+	private void initialize() {
+		xEintraege.add("PKW");
+		xEintraege.add("LKW");
+		xEintraege.add("Motorrad");
+		xEintraege.add("Gesamt");
+		// Assign the month names as categories for the horizontal axis.
+		xAxis.setCategories(xEintraege);
+	}
+
+	public void setData(List<Buchung> eintraege) {
+		// Count the number of people having their birthday in a specific month.
+		int[] counter = new int[4];
+		ArrayList<Eintrag> statistik = Statistik.avrgTime(eintraege);
+
 		for (Eintrag e : statistik) {
 			if (e.getFahrzeug() != null) {
 				if (e.getFahrzeug().getKlasse().compareTo("pkw") == 0) {
@@ -48,18 +47,18 @@ public class AusleihzeitStatistikController {
 				} else if (e.getFahrzeug().getKlasse().compareTo("motorrad") == 0) {
 					counter[2] = e.getAusleihzeit();
 				}
-			} else{
+			} else {
 				counter[3] = e.getAusleihzeit();
 			}
 		}
-	        
-	        XYChart.Series<String, Integer> series = new XYChart.Series<>();
 
-	        // Create a XYChart.Data object for each month. Add it to the series.
-	        for (int i = 0; i < counter.length; i++) {
-	            series.getData().add(new XYChart.Data<>(xEintraege.get(i), counter[i]));
-	        }
+		XYChart.Series<String, Integer> series = new XYChart.Series<>();
 
-	        barChart.getData().add(series);
-	    }
+		// Create a XYChart.Data object for each month. Add it to the series.
+		for (int i = 0; i < counter.length; i++) {
+			series.getData().add(new XYChart.Data<>(xEintraege.get(i), counter[i]));
+		}
+
+		barChart.getData().add(series);
+	}
 }

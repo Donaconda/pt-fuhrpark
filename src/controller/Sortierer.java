@@ -6,7 +6,6 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-
 public class Sortierer {
 
 	public static ObservableList<? extends Comparable> sort(List<? extends Comparable> list) {

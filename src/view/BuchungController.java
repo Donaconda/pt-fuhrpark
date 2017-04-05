@@ -1,6 +1,5 @@
 package view;
 
-
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -16,7 +15,8 @@ import model.Buchung;
 
 public class BuchungController {
 
-	// Attribute/IDs, die zur Verknüpfung der fxml-Datei mit dem Code benötigt werden
+	// Attribute/IDs, die zur Verknüpfung der fxml-Datei mit dem Code benötigt
+	// werden
 	@FXML
 	private TableView<Buchung> buchungTabelle;
 	@FXML
@@ -38,8 +38,9 @@ public class BuchungController {
 
 	private MainApp mainApp;
 
-	public BuchungController(){
+	public BuchungController() {
 	}
+
 	public int idCounter = 0;
 
 	@FXML
@@ -51,9 +52,10 @@ public class BuchungController {
 		// Initialisiere die Mitarbeiterinfo
 		zeigeBuchunginfo(null);
 
-		// Zeige die passenden Mitarbeiterdetails an, wenn sich die Auswahl ändert
-		buchungTabelle.getSelectionModel().selectedItemProperty().addListener(
-				(observable, oldValue, newValue) -> zeigeBuchunginfo(newValue));
+		// Zeige die passenden Mitarbeiterdetails an, wenn sich die Auswahl
+		// ändert
+		buchungTabelle.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> zeigeBuchunginfo(newValue));
 	}
 
 	public void setMainApp(MainApp mainApp) {
@@ -92,7 +94,7 @@ public class BuchungController {
 	private void handleBuchungNeu() {
 		Buchung tempItem = new Buchung();
 		calculateID();
-		tempItem.setId(String.valueOf(idCounter+1)); /////////////////////////////////////////////////////////////////
+		tempItem.setId(String.valueOf(idCounter + 1)); /////////////////////////////////////////////////////////////////
 		boolean okClicked = mainApp.zeigeBuchungDialog(tempItem);
 		if (okClicked) {
 			mainApp.getBuchungData().add(tempItem);
@@ -123,8 +125,8 @@ public class BuchungController {
 			alert.showAndWait();
 		}
 	}
-	
-	public void calculateID(){
+
+	public void calculateID() {
 		ObservableList<Buchung> buchungen = mainApp.getBuchungData();
 		this.idCounter = buchungen.size();
 	}

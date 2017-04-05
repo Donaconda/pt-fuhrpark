@@ -17,16 +17,20 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Buchung implements Comparable<Buchung>{
+public class Buchung implements Comparable<Buchung> {
 
 	private final StringProperty id;
-	private final StringProperty mitarbeiter; // Mitarbeiter als String gespeichert mit Vor- und Nachname
-	private final StringProperty fahrzeug; // Fahrzeug als String gespeichert mit Kennzeichen
+	private final StringProperty mitarbeiter; // Mitarbeiter als String
+												// gespeichert mit Vor- und
+												// Nachname
+	private final StringProperty fahrzeug; // Fahrzeug als String gespeichert
+											// mit Kennzeichen
 	private final StringProperty zweck;
 	private final ObjectProperty<LocalDateTime> beginn;
 	private final ObjectProperty<LocalDateTime> ende;
 
-	public Buchung(String _id, String _mitarbeiter, String _fahrzeug, String _zweck, LocalDateTime _beginn, LocalDateTime _ende) {
+	public Buchung(String _id, String _mitarbeiter, String _fahrzeug, String _zweck, LocalDateTime _beginn,
+			LocalDateTime _ende) {
 		this.id = new SimpleStringProperty(_id);
 		this.mitarbeiter = new SimpleStringProperty(_mitarbeiter);
 		this.fahrzeug = new SimpleStringProperty(_fahrzeug);
@@ -110,6 +114,7 @@ public class Buchung implements Comparable<Buchung>{
 	public StringProperty zweckProperty() {
 		return zweck;
 	}
+
 	@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
 	public LocalDateTime getBeginn() {
 		return beginn.get();

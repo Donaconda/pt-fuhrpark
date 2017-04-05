@@ -48,30 +48,31 @@ public class BuchungDialogController {
 	private void initialize() {
 	}
 
-	public void setMainApp(MainApp mainApp){
+	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
 
-	public void fillCombobox(){
-		try{
-			//Mitarbeiterliste für die ComboBox "mitarbeiterFeld"
+	public void fillCombobox() {
+		try {
+			// Mitarbeiterliste für die ComboBox "mitarbeiterFeld"
 			ObservableList<String> maListe = FXCollections.observableArrayList();
 			maListe.clear();
-			for(Mitarbeiter m : mainApp.getMitarbeiterData()){
+			for (Mitarbeiter m : mainApp.getMitarbeiterData()) {
 				maListe.add(m.toString());
 			}
 			mitarbeiterFeld.getItems().addAll(maListe);
 
-			//Fahrzeugliste für die ComboBox "fahrzeugFeld"
+			// Fahrzeugliste für die ComboBox "fahrzeugFeld"
 			ObservableList<String> fzListe = FXCollections.observableArrayList();
 			fzListe.clear();
-			for(Fahrzeug f : mainApp.getFahrzeugData()){
+			for (Fahrzeug f : mainApp.getFahrzeugData()) {
 				fzListe.add(f.toString());
 			}
 			fahrzeugFeld.getItems().addAll(fzListe);
 
-			zweckFeld.getItems().addAll("Stadtfahrt", "Langstreckenfahrt", "Transport von Arbeitsmaterialien", "Sonstiges");
-		} catch(Exception e){
+			zweckFeld.getItems().addAll("Stadtfahrt", "Langstreckenfahrt", "Transport von Arbeitsmaterialien",
+					"Sonstiges");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -102,7 +103,7 @@ public class BuchungDialogController {
 			startdatumFeld.setPromptText("dd.mm.yyyy hh:mm");
 			enddatumFeld.setText(bu.getEnde().format(formatter));
 			enddatumFeld.setPromptText("dd.mm.yyyy hh:mm");
-		} catch(Exception e){
+		} catch (Exception e) {
 
 		}
 
@@ -153,22 +154,25 @@ public class BuchungDialogController {
 		String errorMessage = "";
 
 		if (idFeld.getText() == null || idFeld.getText().length() == 0) {
-			errorMessage += "ID ungültig!\n"; 
+			errorMessage += "ID ungültig!\n";
 		}
-		//	        if (mitarbeiterFeld.getText() == null || mitarbeiterFeld.getText().length() == 0) {
-		//	            errorMessage += "Mitarbeiter ungültig!\n"; 
-		//	        }
-		//	        if (fahrzeugFeld.getText() == null || fahrzeugFeld.getText().length() == 0) {
-		//	            errorMessage += "Fahrzeug ungültig!\n"; 
-		//	        }
-		//		if (zweckFeld.getText() == null || zweckFeld.getText().length() == 0) {
-		//			errorMessage += "Zweck ungültig!\n"; 
-		//		}
+		// if (mitarbeiterFeld.getText() == null ||
+		// mitarbeiterFeld.getText().length() == 0) {
+		// errorMessage += "Mitarbeiter ungültig!\n";
+		// }
+		// if (fahrzeugFeld.getText() == null || fahrzeugFeld.getText().length()
+		// == 0) {
+		// errorMessage += "Fahrzeug ungültig!\n";
+		// }
+		// if (zweckFeld.getText() == null || zweckFeld.getText().length() == 0)
+		// {
+		// errorMessage += "Zweck ungültig!\n";
+		// }
 		if (startdatumFeld.getText() == null || startdatumFeld.getText().length() == 0) {
-			errorMessage += "Startdatum ungültig! (tt.mm.jjjj)\n"; 
+			errorMessage += "Startdatum ungültig! (tt.mm.jjjj)\n";
 		}
 		if (enddatumFeld.getText() == null || enddatumFeld.getText().length() == 0) {
-			errorMessage += "Enddatum ungültig! (tt.mm.jjjj)\n"; 
+			errorMessage += "Enddatum ungültig! (tt.mm.jjjj)\n";
 		}
 
 		if (errorMessage.length() == 0) {

@@ -21,8 +21,8 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 	private final StringProperty plz;
 	private final ObjectProperty<LocalDate> geburtstag;
 
-	public Mitarbeiter (String _vorname, String _nachname, String _strasse, String _wohnort,
-			String _plz, LocalDate _geburtstag) {
+	public Mitarbeiter(String _vorname, String _nachname, String _strasse, String _wohnort, String _plz,
+			LocalDate _geburtstag) {
 		this.vorname = new SimpleStringProperty(_vorname);
 		this.nachname = new SimpleStringProperty(_nachname);
 		this.strasse = new SimpleStringProperty(_strasse);
@@ -31,12 +31,11 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 		this.geburtstag = new SimpleObjectProperty<LocalDate>(_geburtstag);
 	}
 
-    public Mitarbeiter() {
-        this("", "", "", "", "", null);
-    }
+	public Mitarbeiter() {
+		this("", "", "", "", "", null);
+	}
 
-    //test kommentar
-
+	// test kommentar
 
 	@Override
 	public int compareTo(Mitarbeiter mi) {
@@ -77,13 +76,13 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 		} else {
 			return 1;
 		}
-		//return 1; // this object is greater than the specified object
-		//return -1; // this object is less than the specified object
-		//return 0;
+		// return 1; // this object is greater than the specified object
+		// return -1; // this object is less than the specified object
+		// return 0;
 	}
-	
+
 	// Gibt den Vor- und Nachnamen im formatierten String aus
-	public String toString(){
+	public String toString() {
 		return getVorname() + " " + getNachname();
 	}
 
@@ -156,8 +155,8 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 		this.geburtstag.set(_geburtstag);
 	}
 
-    public ObjectProperty<LocalDate> geburtstagProperty() {
-        return geburtstag;
-    }
+	public ObjectProperty<LocalDate> geburtstagProperty() {
+		return geburtstag;
+	}
 
 }

@@ -9,14 +9,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class MitarbeiterListWrapper {
 
 	private List<Mitarbeiter> mitarbeiter;
-	
-	 @XmlElement(name = "EinMitarbeiter")
-	 public List<Mitarbeiter> getMitarbeiter() {
-		 return mitarbeiter;
-	 }
-	 
-	 public void setMitarbeiter(List<Mitarbeiter> mitarbeiter) {
-		 this.mitarbeiter = mitarbeiter;
-	 }
-	
+
+	@XmlElement(name = "EinMitarbeiter")
+	public List<Mitarbeiter> getMitarbeiter() {
+		return mitarbeiter;
+	}
+
+	public void setMitarbeiter(List<Mitarbeiter> mitarbeiter) {
+		this.mitarbeiter = mitarbeiter;
+	}
+
 }

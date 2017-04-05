@@ -12,7 +12,8 @@ import model.Mitarbeiter;
 
 public class MitarbeiterController {
 
-	// Attribute/IDs, die zur Verknüpfung der fxml-Dateimit dem Code benötigt werden
+	// Attribute/IDs, die zur Verknüpfung der fxml-Dateimit dem Code benötigt
+	// werden
 	@FXML
 	private TableView<Mitarbeiter> mitarbeiterTabelle;
 	@FXML
@@ -32,12 +33,11 @@ public class MitarbeiterController {
 	@FXML
 	private Label geburtstagLabel;
 
-
 	private MainApp mainApp;
 
 	/**
-	 * The constructor.
-	 * The constructor is called before the initialize() method.
+	 * The constructor. The constructor is called before the initialize()
+	 * method.
 	 */
 	public MitarbeiterController() {
 	}
@@ -55,9 +55,10 @@ public class MitarbeiterController {
 		// Initialisiere die Mitarbeiterinfo
 		zeigeMitarbeiterinfo(null);
 
-		// Zeige die passenden Mitarbeiterdetails an, wenn sich die Auswahl ändert
-		mitarbeiterTabelle.getSelectionModel().selectedItemProperty().addListener(
-				(observable, oldValue, newValue) -> zeigeMitarbeiterinfo(newValue));
+		// Zeige die passenden Mitarbeiterdetails an, wenn sich die Auswahl
+		// ändert
+		mitarbeiterTabelle.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> zeigeMitarbeiterinfo(newValue));
 	}
 
 	/**
@@ -73,10 +74,11 @@ public class MitarbeiterController {
 	}
 
 	/**
-	 * Fills all text fields to show details about the person.
-	 * If the specified person is null, all text fields are cleared.
+	 * Fills all text fields to show details about the person. If the specified
+	 * person is null, all text fields are cleared.
 	 * 
-	 * @param person the person or null
+	 * @param person
+	 *            the person or null
 	 */
 	private void zeigeMitarbeiterinfo(Mitarbeiter ma) {
 		if (ma != null) {

@@ -37,50 +37,49 @@ public class MitarbeiterAusleihzeitController {
 	private void initialize() {
 		ladeMitarbeiter();
 	}
-	
+
 	public void setData(List<Buchung> eintraege) {
 		int schleifenzaehler = 0;
 		ArrayList<Eintrag> statistik = Statistik.mitarbeiterLeihtage(eintraege);
-        int[] ausleihzeit = new int[statistik.size()];
-        for (Eintrag e : statistik) {
-        	if(!mitarbeiterNamen.contains(e.getMitarbeiter().toString()))
-        		mitarbeiterNamen.add(e.getMitarbeiter().toString());
-            ausleihzeit[schleifenzaehler]=e.getAusleihzeit();
-            schleifenzaehler++;
-        }
-        xAxis.setCategories(mitarbeiterNamen);
+		int[] ausleihzeit = new int[statistik.size()];
+		for (Eintrag e : statistik) {
+			if (!mitarbeiterNamen.contains(e.getMitarbeiter().toString()))
+				mitarbeiterNamen.add(e.getMitarbeiter().toString());
+			ausleihzeit[schleifenzaehler] = e.getAusleihzeit();
+			schleifenzaehler++;
+		}
+		xAxis.setCategories(mitarbeiterNamen);
 
-        XYChart.Series<String, Integer> series = new XYChart.Series<>();
+		XYChart.Series<String, Integer> series = new XYChart.Series<>();
 
-        // Create a XYChart.Data and add it to the series.
-        for (int i = 0; i < mitarbeiterNamen.size(); i++) {
-            series.getData().add(new XYChart.Data<>(mitarbeiterNamen.get(i), ausleihzeit[i]));
-        }
+		// Create a XYChart.Data and add it to the series.
+		for (int i = 0; i < mitarbeiterNamen.size(); i++) {
+			series.getData().add(new XYChart.Data<>(mitarbeiterNamen.get(i), ausleihzeit[i]));
+		}
 
-        barChart.getData().add(series);
-    }
-	
+		barChart.getData().add(series);
+	}
+
 	public static void ladeMitarbeiter() {
-	    try {
-	        JAXBContext context = JAXBContext
-	                .newInstance(MitarbeiterListWrapper.class);
-	        Unmarshaller um = context.createUnmarshaller();
+		try {
+			JAXBContext context = JAXBContext.newInstance(MitarbeiterListWrapper.class);
+			Unmarshaller um = context.createUnmarshaller();
 
-	        // Reading XML from the file and unmarshalling.
-	        File f = new File("C:/Users/tgma07/git/pt-fuhrpark/src/resources/mitarbeiterData.xml");
-	        MitarbeiterListWrapper wrapper = (MitarbeiterListWrapper) um.unmarshal(f);
+			// Reading XML from the file and unmarshalling.
+			File f = new File("C:/Users/tgma07/git/pt-fuhrpark/src/resources/mitarbeiterData.xml");
+			MitarbeiterListWrapper wrapper = (MitarbeiterListWrapper) um.unmarshal(f);
 
-	        mitarbeiterData.clear();
-	        mitarbeiterData.addAll(wrapper.getMitarbeiter());
+			mitarbeiterData.clear();
+			mitarbeiterData.addAll(wrapper.getMitarbeiter());
 
-	    } catch (Exception e) { // catches ANY exception
-	    	e.printStackTrace();
-	    	Alert alert = new Alert(AlertType.ERROR);
-	    	alert.setTitle("Error");
-	    	alert.setHeaderText("Could not load data");
-	    	alert.setContentText("Could not load data from file");
+		} catch (Exception e) { // catches ANY exception
+			e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("Could not load data");
+			alert.setContentText("Could not load data from file");
 
-	    	alert.showAndWait();
-	    }
+			alert.showAndWait();
+		}
 	}
 }

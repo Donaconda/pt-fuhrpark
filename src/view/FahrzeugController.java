@@ -10,8 +10,9 @@ import controller.MainApp;
 import model.Fahrzeug;
 
 public class FahrzeugController {
-	
-	// Attribute/IDs, die zur Verknüpfung der fxml-Dateimit dem Code benötigt werden
+
+	// Attribute/IDs, die zur Verknüpfung der fxml-Dateimit dem Code benötigt
+	// werden
 	@FXML
 	private TableView<Fahrzeug> fahrzeugTabelle;
 	@FXML
@@ -28,10 +29,10 @@ public class FahrzeugController {
 	private Label klasseLabel;
 
 	private MainApp mainApp;
-	
-	public FahrzeugController(){
+
+	public FahrzeugController() {
 	}
-	
+
 	@FXML
 	private void initialize() {
 		// Initialisiere die Tabelle mit zwei Spalten
@@ -41,18 +42,19 @@ public class FahrzeugController {
 		// Initialisiere die Mitarbeiterinfo
 		zeigeFahrzeuginfo(null);
 
-		// Zeige die passenden Mitarbeiterdetails an, wenn sich die Auswahl ändert
-		fahrzeugTabelle.getSelectionModel().selectedItemProperty().addListener(
-				(observable, oldValue, newValue) -> zeigeFahrzeuginfo(newValue));
+		// Zeige die passenden Mitarbeiterdetails an, wenn sich die Auswahl
+		// ändert
+		fahrzeugTabelle.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> zeigeFahrzeuginfo(newValue));
 	}
-	
+
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 
 		// Fülle die Tabelle mit Daten aus der .xml-Datei
 		fahrzeugTabelle.setItems(mainApp.getFahrzeugData());
 	}
-	
+
 	private void zeigeFahrzeuginfo(Fahrzeug fz) {
 		if (fz != null) {
 			// Fülle die Labels mit den Daten aus dem Mitarbeiter Objekt
@@ -68,7 +70,7 @@ public class FahrzeugController {
 			klasseLabel.setText("");
 		}
 	}
-	
+
 	@FXML
 	private void handleFahrzeugLoeschen() {
 		int selectedIndex = fahrzeugTabelle.getSelectionModel().getSelectedIndex();

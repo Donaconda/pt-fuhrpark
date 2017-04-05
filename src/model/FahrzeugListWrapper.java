@@ -9,14 +9,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class FahrzeugListWrapper {
 
 	private List<Fahrzeug> fahrzeug;
-	
-	 @XmlElement(name = "fahrzeug")
-	 public List<Fahrzeug> getFahrzeug() {
-		 return fahrzeug;
-	 }
-	 
-	 public void setFahrzeug(List<Fahrzeug> fahrzeug) {
-		 this.fahrzeug = fahrzeug;
-	 }
-	
+
+	@XmlElement(name = "fahrzeug")
+	public List<Fahrzeug> getFahrzeug() {
+		return fahrzeug;
+	}
+
+	public void setFahrzeug(List<Fahrzeug> fahrzeug) {
+		this.fahrzeug = fahrzeug;
+	}
+
 }
