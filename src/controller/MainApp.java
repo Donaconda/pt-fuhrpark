@@ -86,15 +86,15 @@ public class MainApp extends Application {
 		}
 
 		// Try to load last opened person file.
-		File maFile = new File("C:/Users/tgma07/git/pt-fuhrpark/src/resources/mitarbeiterData.xml");
+		File maFile = new File("src/resources/mitarbeiterData.xml");
 		if (maFile != null) {
 			loadMitarbeiterDataFromFile(maFile);
 		}
-		File fzFile = new File("C:/Users/tgma07/git/pt-fuhrpark/src/resources/fahrzeugData.xml");
+		File fzFile = new File("src/resources/fahrzeugData.xml");
 		if (fzFile != null) {
 			loadFahrzeugDataFromFile(fzFile);
 		}
-		File buFile = new File("C:/Users/tgma07/git/pt-fuhrpark/src/resources/buchungData.xml");
+		File buFile = new File("src/resources/buchungData.xml");
 		if (buFile != null) {
 			loadBuchungDataFromFile(buFile);
 		}

@@ -66,7 +66,7 @@ public class MitarbeiterAusleihzeitController {
 			Unmarshaller um = context.createUnmarshaller();
 
 			// Reading XML from the file and unmarshalling.
-			File f = new File("C:/Users/tgma07/git/pt-fuhrpark/src/resources/mitarbeiterData.xml");
+			File f = new File("src/resources/mitarbeiterData.xml");
 			MitarbeiterListWrapper wrapper = (MitarbeiterListWrapper) um.unmarshal(f);
 
 			mitarbeiterData.clear();
