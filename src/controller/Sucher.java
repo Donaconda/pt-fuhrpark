@@ -1,7 +1,6 @@
 package controller;
 
-import java.util.Observable;
-
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Buchung;
 import model.Fahrzeug;
@@ -54,4 +53,16 @@ public class Sucher {
 		return null;
 	}
 
+	public static ObservableList<Buchung> sucheBuchungenNachFahrzeug(ObservableList<Buchung> liste, String fahrzeug){
+		ObservableList<Buchung> result = FXCollections.observableArrayList();
+		// Für jedes Element/jede Buchung in der Buchungsliste
+		for(Buchung bu : liste){
+			// Wenn die aktuelle Buchung das Fahrzeug enthält...
+			if(bu.getFahrzeug().compareTo(fahrzeug) == 0){
+				// ... Füge es der Ergebnisliste hinzu
+				result.add(bu);
+			}
+		}
+		return result;
+	}
 }

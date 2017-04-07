@@ -50,6 +50,10 @@ public class Fahrzeug implements Comparable<Fahrzeug> {
 	public String toString() {
 		return getMarke() + " " + getModel();
 	}
+	// Gibt den Marke, Modell und Kennzeichen im formatierten String aus (für GUI benötigt)
+	public String toStringGUI() {
+		return getMarke() + " " + getModel() + " (" + getKennzeichen() + ")";
+	}
 
 	public String getMarke() {
 		return marke.get();

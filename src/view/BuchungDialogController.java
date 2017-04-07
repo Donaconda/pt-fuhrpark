@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import controller.MainApp;
+import controller.Sucher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -174,7 +175,20 @@ public class BuchungDialogController {
 		if (enddatumFeld.getText() == null || enddatumFeld.getText().length() == 0) {
 			errorMessage += "Enddatum ungültig! (tt.mm.jjjj)\n";
 		}
-
+		// Überprüfe, ob Fahrzeug zum gegebenen Zeitraum schon vergeben ist
+		ObservableList<Buchung> tempBuData = Sucher.sucheBuchungenNachFahrzeug(mainApp.getBuchungData(), fahrzeugFeld.getSelectionModel().getSelectedItem());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+		LocalDateTime tempStartLDT = LocalDateTime.parse(startdatumFeld.getText(), formatter);
+		LocalDateTime tempEndLDT = LocalDateTime.parse(enddatumFeld.getText(), formatter);
+		for(Buchung bu : tempBuData){
+			// Wenn sich die Zeiträume überschneiden...
+			if(tempStartLDT.compareTo(bu.getEnde()) <= 0 && tempEndLDT.compareTo(bu.getBeginn()) >= 0){
+				// ... Werfe eine Fehlermeldung
+				errorMessage += "Das Fahrzeug ist bereits von " + bu.getBeginn().format(formatter) + " bis " + bu.getEnde().format(formatter) + " verbucht!\n";
+			}
+		}
+		
+		
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
