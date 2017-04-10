@@ -1,13 +1,11 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Sortierer {
-
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static ObservableList<? extends Comparable> sort(List<? extends Comparable> list) {
 		ObservableList<Object> sortiert = FXCollections.observableArrayList();
 		int listursprungsgröße = list.size();

@@ -63,6 +63,7 @@ public class MainApp extends Application {
 		initStartFenster();
 	}
 
+	@SuppressWarnings("unchecked")
 	public void initStartFenster() {
 		try {
 			// Load root layout from fxml file.

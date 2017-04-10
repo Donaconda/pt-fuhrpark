@@ -1,16 +1,12 @@
 package controller;
 
 import model.Eintrag;
-
 import java.io.File;
 import java.util.*;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import model.Fahrzeug;
@@ -24,8 +20,7 @@ public class Statistik {
 	private static ObservableList<Fahrzeug> fahrzeugData = FXCollections.observableArrayList();
 	public static ObservableList<Mitarbeiter> mitarbeiterData = FXCollections.observableArrayList();
 
-	public static ArrayList<Eintrag> calcAusgeliehen(List<Buchung> list) { // Ausbaustufe
-																			// VII.1
+	public static ArrayList<Eintrag> calcAusgeliehen(List<Buchung> list) { // Ausbaustufe VII.1
 		ladeFahrzeuge();
 		ArrayList<Eintrag> eintraege = new ArrayList<Eintrag>();
 		Eintrag lkwEintrag = new Eintrag();
@@ -46,7 +41,7 @@ public class Statistik {
 
 		for (int i = 0; i < list.size(); i++) {
 			Fahrzeug f;
-			String merker = list.get(i).getFahrzeug().toLowerCase();
+			//String merker = list.get(i).getFahrzeug().toLowerCase();
 			if (Sucher.sucheFahrzeug(fahrzeugData, list.get(i).getFahrzeug()) != null) {
 				f = Sucher.sucheFahrzeug(fahrzeugData, list.get(i).getFahrzeug());
 

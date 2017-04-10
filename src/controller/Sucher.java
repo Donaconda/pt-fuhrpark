@@ -53,12 +53,12 @@ public class Sucher {
 		return null;
 	}
 
-	public static ObservableList<Buchung> sucheBuchungenNachFahrzeug(ObservableList<Buchung> liste, String fahrzeug){
+	public static ObservableList<Buchung> sucheBuchungenNachKennzeichen(ObservableList<Buchung> liste, String kennzeichen){
 		ObservableList<Buchung> result = FXCollections.observableArrayList();
 		// Für jedes Element/jede Buchung in der Buchungsliste
 		for(Buchung bu : liste){
 			// Wenn die aktuelle Buchung das Fahrzeug enthält...
-			if(bu.getFahrzeug().compareTo(fahrzeug) == 0){
+			if(bu.getKennzeichen().compareTo(kennzeichen) == 0){
 				// ... Füge es der Ergebnisliste hinzu
 				result.add(bu);
 			}
