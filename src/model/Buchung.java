@@ -1,18 +1,10 @@
 package model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import controller.LocalDateAdapter;
 import controller.LocalDateTimeAdapter;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.LongProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -20,11 +12,8 @@ import javafx.beans.property.StringProperty;
 public class Buchung implements Comparable<Buchung> {
 
 	private final StringProperty id;
-	private final StringProperty mitarbeiter; // Mitarbeiter als String
-												// gespeichert mit Vor- und
-												// Nachname
-	private final StringProperty fahrzeug; // Fahrzeug als String gespeichert
-											// mit Kennzeichen
+	private final StringProperty mitarbeiter; // Mitarbeiter als String gespeichert mit Vor- und Nachname
+	private final StringProperty fahrzeug; // Fahrzeug als String gespeichert mit Marke, Modell und Kennzeichen
 	private final StringProperty zweck;
 	private final ObjectProperty<LocalDateTime> beginn;
 	private final ObjectProperty<LocalDateTime> ende;
@@ -103,6 +92,10 @@ public class Buchung implements Comparable<Buchung> {
 		return fahrzeug;
 	}
 
+	public String getKennzeichen() {
+		return fahrzeug.get().split("\\(")[1].split("\\)")[0];
+	}
+	
 	public String getZweck() {
 		return zweck.get();
 	}

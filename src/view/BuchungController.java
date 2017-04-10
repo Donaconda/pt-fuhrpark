@@ -1,8 +1,6 @@
 package view;
 
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
