@@ -105,7 +105,7 @@ public class BuchungDialogController {
 			enddatumFeld.setText(bu.getEnde().format(formatter));
 			enddatumFeld.setPromptText("dd.mm.yyyy hh:mm");
 		} catch (Exception e) {
-
+			
 		}
 
 	}
@@ -125,7 +125,6 @@ public class BuchungDialogController {
 	@FXML
 	private void handleOk() {
 		if (isInputValid()) {
-			bu.setId(idFeld.getText());
 			bu.setMitarbeiter(mitarbeiterFeld.getSelectionModel().getSelectedItem());
 			bu.setFahrzeug(fahrzeugFeld.getSelectionModel().getSelectedItem());
 			bu.setZweck(zweckFeld.getSelectionModel().getSelectedItem());
@@ -153,10 +152,7 @@ public class BuchungDialogController {
 	 */
 	private boolean isInputValid() {
 		String errorMessage = "";
-
-		if (idFeld.getText() == null || idFeld.getText().length() == 0) {
-			errorMessage += "ID ungültig!\n";
-		}
+		
 		// if (mitarbeiterFeld.getText() == null ||
 		// mitarbeiterFeld.getText().length() == 0) {
 		// errorMessage += "Mitarbeiter ungültig!\n";
@@ -176,15 +172,19 @@ public class BuchungDialogController {
 			errorMessage += "Enddatum ungültig! (tt.mm.jjjj)\n";
 		}
 		// Überprüfe, ob Fahrzeug zum gegebenen Zeitraum schon vergeben ist
-		ObservableList<Buchung> tempBuData = Sucher.sucheBuchungenNachFahrzeug(mainApp.getBuchungData(), fahrzeugFeld.getSelectionModel().getSelectedItem());
+		String fzkz = fahrzeugFeld.getSelectionModel().getSelectedItem().split("\\(")[1].split("\\)")[0];
+		ObservableList<Buchung> tempBuData = Sucher.sucheBuchungenNachKennzeichen(mainApp.getBuchungData(), fzkz);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 		LocalDateTime tempStartLDT = LocalDateTime.parse(startdatumFeld.getText(), formatter);
 		LocalDateTime tempEndLDT = LocalDateTime.parse(enddatumFeld.getText(), formatter);
 		for(Buchung bu : tempBuData){
-			// Wenn sich die Zeiträume überschneiden...
-			if(tempStartLDT.compareTo(bu.getEnde()) <= 0 && tempEndLDT.compareTo(bu.getBeginn()) >= 0){
-				// ... Werfe eine Fehlermeldung
-				errorMessage += "Das Fahrzeug ist bereits von " + bu.getBeginn().format(formatter) + " bis " + bu.getEnde().format(formatter) + " verbucht!\n";
+			// Wenn es sich nicht um die gleiche Buchung handelt...
+			if(bu.getId().compareTo(idFeld.getText()) != 0){
+				// ... Und sich die Zeiträume überschneiden...
+				if(tempStartLDT.compareTo(bu.getEnde()) <= 0 && tempEndLDT.compareTo(bu.getBeginn()) >= 0){
+					// ... Werfe eine Fehlermeldung
+					errorMessage += "Das ausgewählte Fahrzeug ist bereits von " + bu.getBeginn().format(formatter) + " bis " + bu.getEnde().format(formatter) + " verbucht!\n";
+				}
 			}
 		}
 		
