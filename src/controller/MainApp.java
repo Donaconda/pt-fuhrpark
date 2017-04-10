@@ -80,7 +80,6 @@ public class MainApp extends Application {
 			controller.setMainApp(this);
 
 			primaryStage.show();
-			zeigeMitarbeiterFenster();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -101,6 +100,7 @@ public class MainApp extends Application {
 		this.buchungData = (ObservableList<Buchung>) Sortierer.sort(buchungData);
 		this.fahrzeugData = (ObservableList<Fahrzeug>) Sortierer.sort(fahrzeugData);
 		this.mitarbeiterData = (ObservableList<Mitarbeiter>) Sortierer.sort(mitarbeiterData);
+		zeigeMitarbeiterFenster();
 	}
 
 	public void zeigeMitarbeiterFenster() {
