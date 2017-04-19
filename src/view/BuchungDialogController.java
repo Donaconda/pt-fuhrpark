@@ -94,16 +94,16 @@ public class BuchungDialogController {
 	 */
 	public void setBuchung(Buchung bu) {
 		this.bu = bu;
+		startdatumFeld.setPromptText("tt.mm.jjjj hh:mm");
+		enddatumFeld.setPromptText("tt.mm.jjjj hh:mm");
 		try {
 			idFeld.setText(bu.getId().toString());
-			zweckFeld.getSelectionModel().select(0);
-			mitarbeiterFeld.getSelectionModel().select(0);
-			fahrzeugFeld.getSelectionModel().select(0);
+			mitarbeiterFeld.getSelectionModel().select(bu.getMitarbeiter());
+			fahrzeugFeld.getSelectionModel().select(bu.getFahrzeug());
+			zweckFeld.getSelectionModel().select(bu.getZweck());
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 			startdatumFeld.setText(bu.getBeginn().format(formatter));
-			startdatumFeld.setPromptText("dd.mm.yyyy hh:mm");
 			enddatumFeld.setText(bu.getEnde().format(formatter));
-			enddatumFeld.setPromptText("dd.mm.yyyy hh:mm");
 		} catch (Exception e) {
 			
 		}
