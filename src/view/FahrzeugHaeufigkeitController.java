@@ -2,8 +2,6 @@ package view;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import controller.MainApp;
 import controller.Statistik;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +11,6 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
 import model.Buchung;
 import model.Eintrag;
-import model.Fahrzeug;
 
 public class FahrzeugHaeufigkeitController {
 

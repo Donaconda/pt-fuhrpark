@@ -57,8 +57,7 @@ public class Statistik {
 		return eintraege;
 	}
 
-	public static ArrayList<Eintrag> avrgTime(List<Buchung> list) { // Ausbaustufe
-																	// VII.2
+	public static ArrayList<Eintrag> avrgTime(List<Buchung> list) { // Ausbaustufe VII.2
 		ladeFahrzeuge();
 		ArrayList<Eintrag> eintraege = new ArrayList<Eintrag>();
 		Eintrag durchschnitt = new Eintrag();
@@ -81,7 +80,7 @@ public class Statistik {
 		for (Buchung b : list) { // For-Each Schleife
 			durchschnitt.setAusleihzeit((int) (durchschnitt.getAusleihzeit() + b.dauer()));
 			buchungszaehler++;
-			String fahrzeug = Sucher.sucheFahrzeug(fahrzeugData, b.getFahrzeug()).getKlasse();
+			String fahrzeug = Sucher.sucheFahrzeug(fahrzeugData, b.getFahrzeug()).getKlasse().toLowerCase();
 			if (fahrzeug.toLowerCase().compareTo("pkw") == 0) {
 				durchschnittPkw.setAusleihzeit((int) (durchschnittPkw.getAusleihzeit() + b.dauer()));
 				pkwZaehler++;
@@ -108,12 +107,11 @@ public class Statistik {
 		return eintraege;
 	}
 
-	public static ArrayList<Eintrag> mitarbeiterLeihtage(List<Buchung> list) { // Ausbaustufe
-																				// VII.3
+	public static ArrayList<Eintrag> mitarbeiterLeihtage(List<Buchung> list) { // Ausbaustufe VII.3
 		ladeMitarbeiter();
 		boolean eingetragen = false;
 		ArrayList<Eintrag> eintraege = new ArrayList<Eintrag>();
-		for (Buchung b : list) { // Für jede Buchung:
+		for (Buchung b : list) { // Für jede Buchung
 			for (Eintrag e : eintraege) {
 				eingetragen = false;
 				if (e.getMitarbeiter() == Sucher.sucheMitarbeiter(mitarbeiterData, b.getMitarbeiter())) {
