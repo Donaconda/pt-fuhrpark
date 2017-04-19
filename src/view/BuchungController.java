@@ -1,6 +1,5 @@
 package view;
 
-import java.time.format.DateTimeFormatter;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -70,9 +69,8 @@ public class BuchungController {
 			mitarbeiterLabel.setText(bu.getMitarbeiter());
 			fahrzeugLabel.setText(bu.getFahrzeug());
 			zweckLabel.setText(bu.getZweck());
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-			startdatumLabel.setText(bu.getBeginn().format(formatter));
-			enddatumLabel.setText(bu.getEnde().format(formatter));
+			startdatumLabel.setText(bu.getBeginn().format(mainApp.getDTFormatter()));
+			enddatumLabel.setText(bu.getEnde().format(mainApp.getDTFormatter()));
 		} else {
 			// Mitarbeiter ist null, zeige nichts an
 			idLabel.setText("");
@@ -92,7 +90,7 @@ public class BuchungController {
 	private void handleBuchungNeu() {
 		Buchung tempItem = new Buchung();
 		calculateID();
-		tempItem.setId(String.valueOf(idCounter + 1)); /////////////////////////////////////////////////////////////////
+		tempItem.setId(String.valueOf(idCounter + 1));
 		boolean okClicked = mainApp.zeigeBuchungDialog(tempItem);
 		if (okClicked) {
 			mainApp.getBuchungData().add(tempItem);

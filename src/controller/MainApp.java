@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.prefs.Preferences;
 
 import javax.xml.bind.JAXBContext;
@@ -47,6 +48,7 @@ public class MainApp extends Application {
 	private ObservableList<Mitarbeiter> mitarbeiterData = FXCollections.observableArrayList();
 	private ObservableList<Buchung> buchungData = FXCollections.observableArrayList();
 	private ObservableList<Fahrzeug> fahrzeugData = FXCollections.observableArrayList();
+	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
 	public static void main(String[] args) {
 		launch(args);
@@ -564,5 +566,9 @@ public class MainApp extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public DateTimeFormatter getDTFormatter(){
+		return formatter;
 	}
 }

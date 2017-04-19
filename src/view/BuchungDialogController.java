@@ -1,8 +1,6 @@
 package view;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import controller.MainApp;
 import controller.Sucher;
 import javafx.collections.FXCollections;
@@ -101,9 +99,8 @@ public class BuchungDialogController {
 			mitarbeiterFeld.getSelectionModel().select(bu.getMitarbeiter());
 			fahrzeugFeld.getSelectionModel().select(bu.getFahrzeug());
 			zweckFeld.getSelectionModel().select(bu.getZweck());
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-			startdatumFeld.setText(bu.getBeginn().format(formatter));
-			enddatumFeld.setText(bu.getEnde().format(formatter));
+			startdatumFeld.setText(bu.getBeginn().format(mainApp.getDTFormatter()));
+			enddatumFeld.setText(bu.getEnde().format(mainApp.getDTFormatter()));
 		} catch (Exception e) {
 			
 		}
@@ -128,9 +125,8 @@ public class BuchungDialogController {
 			bu.setMitarbeiter(mitarbeiterFeld.getSelectionModel().getSelectedItem());
 			bu.setFahrzeug(fahrzeugFeld.getSelectionModel().getSelectedItem());
 			bu.setZweck(zweckFeld.getSelectionModel().getSelectedItem());
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-			bu.setBeginn(LocalDateTime.parse(startdatumFeld.getText(), formatter));
-			bu.setEnde(LocalDateTime.parse(enddatumFeld.getText(), formatter));
+			bu.setBeginn(LocalDateTime.parse(startdatumFeld.getText(), mainApp.getDTFormatter()));
+			bu.setEnde(LocalDateTime.parse(enddatumFeld.getText(), mainApp.getDTFormatter()));
 
 			okClicked = true;
 			dialogStage.close();
@@ -153,37 +149,24 @@ public class BuchungDialogController {
 	private boolean isInputValid() {
 		String errorMessage = "";
 		
-		// if (mitarbeiterFeld.getText() == null ||
-		// mitarbeiterFeld.getText().length() == 0) {
-		// errorMessage += "Mitarbeiter ungültig!\n";
-		// }
-		// if (fahrzeugFeld.getText() == null || fahrzeugFeld.getText().length()
-		// == 0) {
-		// errorMessage += "Fahrzeug ungültig!\n";
-		// }
-		// if (zweckFeld.getText() == null || zweckFeld.getText().length() == 0)
-		// {
-		// errorMessage += "Zweck ungültig!\n";
-		// }
 		if (startdatumFeld.getText() == null || startdatumFeld.getText().length() == 0) {
-			errorMessage += "Startdatum ungültig! (tt.mm.jjjj)\n";
+			errorMessage += "Startdatum ungültig! (tt.mm.jjjj hh:mm)\n";
 		}
 		if (enddatumFeld.getText() == null || enddatumFeld.getText().length() == 0) {
-			errorMessage += "Enddatum ungültig! (tt.mm.jjjj)\n";
+			errorMessage += "Enddatum ungültig! (tt.mm.jjjj hh:mm)\n";
 		}
 		// Überprüfe, ob Fahrzeug zum gegebenen Zeitraum schon vergeben ist
 		String fzkz = fahrzeugFeld.getSelectionModel().getSelectedItem().split("\\(")[1].split("\\)")[0];
 		ObservableList<Buchung> tempBuData = Sucher.sucheBuchungenNachKennzeichen(mainApp.getBuchungData(), fzkz);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-		LocalDateTime tempStartLDT = LocalDateTime.parse(startdatumFeld.getText(), formatter);
-		LocalDateTime tempEndLDT = LocalDateTime.parse(enddatumFeld.getText(), formatter);
+		LocalDateTime tempStartLDT = LocalDateTime.parse(startdatumFeld.getText(), mainApp.getDTFormatter());
+		LocalDateTime tempEndLDT = LocalDateTime.parse(enddatumFeld.getText(), mainApp.getDTFormatter());
 		for(Buchung bu : tempBuData){
 			// Wenn es sich nicht um die gleiche Buchung handelt...
 			if(bu.getId().compareTo(idFeld.getText()) != 0){
 				// ... Und sich die Zeiträume überschneiden...
 				if(tempStartLDT.compareTo(bu.getEnde()) <= 0 && tempEndLDT.compareTo(bu.getBeginn()) >= 0){
 					// ... Werfe eine Fehlermeldung
-					errorMessage += "Das ausgewählte Fahrzeug ist bereits von " + bu.getBeginn().format(formatter) + " bis " + bu.getEnde().format(formatter) + " verbucht!\n";
+					errorMessage += "Das ausgewählte Fahrzeug ist bereits von " + bu.getBeginn().format(mainApp.getDTFormatter()) + " bis " + bu.getEnde().format(mainApp.getDTFormatter()) + " verbucht!\n";
 				}
 			}
 		}
