@@ -1,18 +1,19 @@
 package view;
 
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import controller.MainApp;
 import model.Fahrzeug;
 
 public class FahrzeugController {
 
-	// Attribute/IDs, die zur Verknüpfung der fxml-Dateimit dem Code benötigt
-	// werden
+	// Attribute/IDs, die zur Verknüpfung der fxml-Datei mit dem Code benötigt werden
 	@FXML
 	private TableView<Fahrzeug> fahrzeugTabelle;
 	@FXML
@@ -27,6 +28,8 @@ public class FahrzeugController {
 	private Label kennzeichenLabel;
 	@FXML
 	private Label klasseLabel;
+	@FXML
+	private TextField sucheFeld;
 
 	private MainApp mainApp;
 
@@ -37,15 +40,19 @@ public class FahrzeugController {
 	private void initialize() {
 		// Initialisiere die Tabelle mit zwei Spalten
 		kennzeichenSpalte.setCellValueFactory(cellData -> cellData.getValue().KennzeichenProperty());
-		modellSpalte.setCellValueFactory(cellData -> cellData.getValue().ModelProperty());
+		modellSpalte.setCellValueFactory(cellData -> cellData.getValue().MarkeProperty().concat(' ').concat(cellData.getValue().ModelProperty()));
 
 		// Initialisiere die Mitarbeiterinfo
 		zeigeFahrzeuginfo(null);
 
-		// Zeige die passenden Mitarbeiterdetails an, wenn sich die Auswahl
-		// ändert
+		// Zeige die passenden Mitarbeiterdetails an, wenn sich die Auswahl ändert
 		fahrzeugTabelle.getSelectionModel().selectedItemProperty()
-				.addListener((observable, oldValue, newValue) -> zeigeFahrzeuginfo(newValue));
+				.addListener((observable, oldValue, newValue) -> zeigeFahrzeuginfo(newValue)); 
+		
+		// Aktualisiere die Tabelle jedes Mal, wenn sich das "Suchen"-Feld ändert
+        sucheFeld.textProperty().addListener((observable, oldValue, newValue) -> {
+        	filterTabelle(newValue);
+        });
 	}
 
 	public void setMainApp(MainApp mainApp) {
@@ -124,5 +131,31 @@ public class FahrzeugController {
 			alert.setContentText("Bitte wählen Sie zuerst ein Fahrzeug aus der Tabelle aus.");
 			alert.showAndWait();
 		}
+	}
+	
+	// Filtert die Tabelle nach dem gegebenen String
+	private void filterTabelle(String newValue){
+		// Packe alle Fahrzeugdaten in ein FilteredList-Objekt
+		FilteredList<Fahrzeug> filteredData = new FilteredList<>(mainApp.getFahrzeugData(), p -> true);
+		// Setze den Filtertext (Prädikat) auf die Liste
+        filteredData.setPredicate(fz -> {
+            // Wenn das Suchfeld leer ist, zeige alle Daten an
+            if (newValue == null || newValue.isEmpty()) {
+                return true;
+            }
+            // Vergleiche Kennzeichen, Marke und Modell jedes Fahrzeugs mit dem Prädikat
+            String lowerCaseFilter = newValue.toLowerCase();
+            if (fz.getKennzeichen().toLowerCase().contains(lowerCaseFilter)) {
+                return true;
+            } else if (fz.getMarke().toLowerCase().contains(lowerCaseFilter)) {
+                return true;
+            } else if(fz.getModel().toLowerCase().contains(lowerCaseFilter)) {
+                return true;
+            }
+            // Gebe false zurück, wenn das Prädikat nicht passt
+            return false;
+        });
+        // Aktualisiere die Tabelle
+        fahrzeugTabelle.setItems(filteredData);
 	}
 }
