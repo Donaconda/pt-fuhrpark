@@ -166,7 +166,7 @@ public class BuchungDialogController {
 				// ... Und sich die Zeiträume überschneiden...
 				if(tempStartLDT.compareTo(bu.getEnde()) <= 0 && tempEndLDT.compareTo(bu.getBeginn()) >= 0){
 					// ... Werfe eine Fehlermeldung
-					errorMessage += "Das ausgewählte Fahrzeug ist bereits von " + bu.getBeginn().format(mainApp.getDTFormatter()) + " bis " + bu.getEnde().format(mainApp.getDTFormatter()) + " verbucht!\n";
+					errorMessage += "Das ausgewählte Fahrzeug ist bereits von " + bu.getBeginn().format(mainApp.getDTFormatter()) + " bis " + bu.getEnde().format(mainApp.getDTFormatter()) + " an " + bu.getMitarbeiter() + " verbucht!\n";
 				}
 			}
 		}

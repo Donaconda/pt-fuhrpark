@@ -45,11 +45,11 @@ public class FahrzeugController {
 		// Initialisiere die Mitarbeiterinfo
 		zeigeFahrzeuginfo(null);
 
-		// Zeige die passenden Mitarbeiterdetails an, wenn sich die Auswahl ändert
+		// Zeige die passenden Mitarbeiterdetails an, wenn sich die Auswahl in der Tabelle ändert
 		fahrzeugTabelle.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> zeigeFahrzeuginfo(newValue)); 
 		
-		// Aktualisiere die Tabelle jedes Mal, wenn sich das "Suchen"-Feld ändert
+		// Aktualisiere die Tabelle jedes Mal, wenn sich das Suchfeld ändert
         sucheFeld.textProperty().addListener((observable, oldValue, newValue) -> {
         	filterTabelle(newValue);
         });

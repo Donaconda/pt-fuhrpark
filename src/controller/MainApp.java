@@ -493,7 +493,7 @@ public class MainApp extends Application {
 
 			// Set the persons into the controller.
 			FahrzeugHaeufigkeitController controller = loader.getController();
-			controller.setData(buchungData);
+			controller.setData(buchungData, fahrzeugData);
 
 			dialogStage.show();
 
@@ -517,7 +517,7 @@ public class MainApp extends Application {
 
 			// Set the persons into the controller.
 			AusleihzeitStatistikController controller = loader.getController();
-			controller.setData(buchungData);
+			controller.setData(buchungData, fahrzeugData);
 
 			dialogStage.show();
 
@@ -541,7 +541,7 @@ public class MainApp extends Application {
 
 			// Set the persons into the controller.
 			MitarbeiterAusleihzeitController controller = loader.getController();
-			controller.setData(buchungData);
+			controller.setData(buchungData, mitarbeiterData);
 
 			dialogStage.show();
 

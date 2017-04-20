@@ -54,18 +54,14 @@ public class FahrzeugDialogController {
 	 */
 	public void setFahrzeug(Fahrzeug fz) {
 		this.fz = fz;
-
-		markeFeld.setText(fz.getMarke());
-		modellFeld.setText(fz.getModel());
-		kennzeichenFeld.setText(fz.getKennzeichen());
-		int a = 0;
-		if (fz.getKlasse() == "PKW")
-			a = 0;
-		if (fz.getKlasse() == "LKW")
-			a = 1;
-		if (fz.getKlasse() == "Motorrad")
-			a = 2;
-		klasseFeld.getSelectionModel().select(a);
+		try {
+			markeFeld.setText(fz.getMarke());
+			modellFeld.setText(fz.getModel());
+			kennzeichenFeld.setText(fz.getKennzeichen());
+			klasseFeld.getSelectionModel().select(fz.getKlasse());
+		} catch(Exception e) {
+			
+		}
 	}
 
 	/**
