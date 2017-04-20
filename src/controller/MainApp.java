@@ -285,14 +285,8 @@ public class MainApp extends Application {
 		Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
 		if (file != null) {
 			prefs.put("maFilePath", file.getPath());
-
-			// Update the stage title.
-			primaryStage.setTitle("AddressApp - " + file.getName());
 		} else {
 			prefs.remove("maFilePath");
-
-			// Update the stage title.
-			primaryStage.setTitle("AddressApp");
 		}
 	}
 
@@ -310,14 +304,8 @@ public class MainApp extends Application {
 		Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
 		if (file != null) {
 			prefs.put("fzFilePath", file.getPath());
-
-			// Update the stage title.
-			primaryStage.setTitle("AddressApp - " + file.getName());
 		} else {
 			prefs.remove("fzFilePath");
-
-			// Update the stage title.
-			primaryStage.setTitle("AddressApp");
 		}
 	}
 
@@ -335,14 +323,8 @@ public class MainApp extends Application {
 		Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
 		if (file != null) {
 			prefs.put("buFilePath", file.getPath());
-
-			// Update the stage title.
-			primaryStage.setTitle("AddressApp - " + file.getName());
 		} else {
 			prefs.remove("buFilePath");
-
-			// Update the stage title.
-			primaryStage.setTitle("AddressApp");
 		}
 	}
 
@@ -363,9 +345,9 @@ public class MainApp extends Application {
 		} catch (Exception e) { // catches ANY exception
 			e.printStackTrace();
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error");
-			alert.setHeaderText("Could not load data");
-			alert.setContentText("Could not load data from file:\n" + file.getPath());
+			alert.setTitle("Fehler");
+			alert.setHeaderText("Laden der Daten gescheitert");
+			alert.setContentText("Die Daten konnten nicht geladen werden von:\n" + file.getPath());
 
 			alert.showAndWait();
 		}
@@ -388,9 +370,9 @@ public class MainApp extends Application {
 		} catch (Exception e) { // catches ANY exception
 			e.printStackTrace();
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error");
-			alert.setHeaderText("Could not load data");
-			alert.setContentText("Could not load data from file:\n" + file.getPath());
+			alert.setTitle("Fehler");
+			alert.setHeaderText("Laden der Daten gescheitert");
+			alert.setContentText("Die Daten konnten nicht geladen werden von:\n" + file.getPath());
 
 			alert.showAndWait();
 		}
@@ -413,9 +395,9 @@ public class MainApp extends Application {
 		} catch (Exception e) { // catches ANY exception
 			e.printStackTrace();
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error");
-			alert.setHeaderText("Could not load data");
-			alert.setContentText("Could not load data from file:\n" + file.getPath());
+			alert.setTitle("Fehler");
+			alert.setHeaderText("Laden der Daten gescheitert");
+			alert.setContentText("Die Daten konnten nicht geladen werden von:\n" + file.getPath());
 
 			alert.showAndWait();
 		}
@@ -438,9 +420,9 @@ public class MainApp extends Application {
 			setMitarbeiterFilePath(file);
 		} catch (Exception e) { // catches ANY exception
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error");
-			alert.setHeaderText("Could not save data");
-			alert.setContentText("Could not save data to file:\n" + file.getPath());
+			alert.setTitle("Fehler");
+			alert.setHeaderText("Speichern der Daten gescheitert");
+			alert.setContentText("Die Daten konnten nicht gespeichert werden in:\n" + file.getPath());
 
 			alert.showAndWait();
 		}
@@ -463,9 +445,9 @@ public class MainApp extends Application {
 			setFahrzeugFilePath(file);
 		} catch (Exception e) { // catches ANY exception
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error");
-			alert.setHeaderText("Could not save data");
-			alert.setContentText("Could not save data to file:\n" + file.getPath());
+			alert.setTitle("Fehler");
+			alert.setHeaderText("Speichern der Daten gescheitert");
+			alert.setContentText("Die Daten konnten nicht gespeichert werden in:\n" + file.getPath());
 
 			alert.showAndWait();
 		}
@@ -488,9 +470,9 @@ public class MainApp extends Application {
 			setBuchungFilePath(file);
 		} catch (Exception e) { // catches ANY exception
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error");
-			alert.setHeaderText("Could not save data");
-			alert.setContentText("Could not save data to file:\n" + file.getPath());
+			alert.setTitle("Fehler");
+			alert.setHeaderText("Speichern der Daten gescheitert");
+			alert.setContentText("Die Daten konnten nicht gespeichert werden in:\n" + file.getPath());
 
 			alert.showAndWait();
 		}
