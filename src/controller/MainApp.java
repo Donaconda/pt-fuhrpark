@@ -27,6 +27,7 @@ import model.BuchungListWrapper;
 import model.Fahrzeug;
 import model.FahrzeugListWrapper;
 import view.StartFensterController;
+import view.StatistikController;
 import view.AusleihzeitStatistikController;
 import view.BuchungController;
 import view.BuchungDialogController;
@@ -156,6 +157,25 @@ public class MainApp extends Application {
 
 			// Give the controller access to the main app.
 			BuchungController controller = loader.getController();
+			controller.setMainApp(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void zeigeStatistikFenster() {
+		try {
+			// Load person overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("/view/Statistik.fxml"));
+			AnchorPane statistikFenster = (AnchorPane) loader.load();
+
+			// Set person overview into the center of root layout.
+			startFenster.setCenter(statistikFenster);
+
+			// Give the controller access to the main app.
+			StatistikController controller = loader.getController();
 			controller.setMainApp(this);
 
 		} catch (IOException e) {
@@ -479,6 +499,22 @@ public class MainApp extends Application {
 	}
 
 	public void showBirthdayStatistics() {
+		try {
+			// Load person overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("/view/Mitarbeiter.fxml"));
+			AnchorPane mitarbeiterFenster = (AnchorPane) loader.load();
+
+			// Set person overview into the center of root layout.
+			startFenster.setCenter(mitarbeiterFenster);
+
+			// Give the controller access to the main app.
+			MitarbeiterController controller = loader.getController();
+			controller.setMainApp(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		try {
 			// Load the fxml file and create a new stage for the popup.
 			FXMLLoader loader = new FXMLLoader();

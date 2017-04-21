@@ -25,6 +25,11 @@ public class StartFensterController {
 	public void handleTabBuchung() {
 		mainApp.zeigeBuchungFenster();
 	}
+	
+	@FXML
+	public void handleTabStatistik() {
+		mainApp.zeigeStatistikFenster();
+	}
 
 	@FXML
 	private void handleFahrzeugStatistics() {
