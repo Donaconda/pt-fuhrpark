@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<buchungen>
+    <buchung>
+        <beginn>2017-02-10T10:00</beginn>
+        <ende>2017-02-11T11:00</ende>
+        <fahrzeug>Fendt SuperTrecker5000 (PB-MS1995)</fahrzeug>
+        <id>1</id>
+        <mitarbeiter>Erik Bong</mitarbeiter>
+        <zweck>Stadtfahrt</zweck>
+    </buchung>
+    <buchung>
+        <beginn>2015-04-13T13:00</beginn>
+        <ende>2015-04-14T14:00</ende>
+        <fahrzeug>Honda CBR 1100 XX (B-HC1100)</fahrzeug>
+        <id>2</id>
+        <mitarbeiter>Michael Koch</mitarbeiter>
+        <zweck>Stadtfahrt</zweck>
+    </buchung>
+    <buchung>
+        <beginn>2004-12-12T08:00</beginn>
+        <ende>2004-12-13T09:00</ende>
+        <fahrzeug>Honda CBR 1100 XX (B-HC1100)</fahrzeug>
+        <id>3</id>
+        <mitarbeiter>Michael Koch</mitarbeiter>
+        <zweck>Transport von Arbeitsmaterialien</zweck>
+    </buchung>
+    <buchung>
+        <beginn>2017-04-02T06:00</beginn>
+        <ende>2017-04-04T23:00</ende>
+        <fahrzeug>MAN TGX (FF-LK4763)</fahrzeug>
+        <id>4</id>
+        <mitarbeiter>Felix Schwarz</mitarbeiter>
+        <zweck>Langstreckenfahrt</zweck>
+    </buchung>
+    <buchung>
+        <beginn>2017-04-04T05:30</beginn>
+        <ende>2017-04-04T16:00</ende>
+        <fahrzeug>Fendt SuperTrecker5000 (PB-MS1995)</fahrzeug>
+        <id>5</id>
+        <mitarbeiter>Michelle Schlüter</mitarbeiter>
+        <zweck>Stadtfahrt</zweck>
+    </buchung>
+    <buchung>
+        <beginn>1111-11-11T11:11</beginn>
+        <ende>1111-11-11T11:12</ende>
+        <fahrzeug>VW Golf (H-CT2016)</fahrzeug>
+        <id>6</id>
+        <mitarbeiter>Michael Koch</mitarbeiter>
+        <zweck>Stadtfahrt</zweck>
+    </buchung>
+    <buchung>
+        <beginn>1111-11-11T11:11</beginn>
+        <ende>1111-11-11T11:12</ende>
+        <fahrzeug>VW Passat (H-CO4114)</fahrzeug>
+        <id>7</id>
+        <mitarbeiter>Max Mustermann</mitarbeiter>
+        <zweck>Stadtfahrt</zweck>
+    </buchung>
+    <buchung>
+        <beginn>2017-04-07T08:00</beginn>
+        <ende>2017-04-10T18:00</ende>
+        <fahrzeug>Suzuki Intruder (H-CO1928)</fahrzeug>
+        <id>8</id>
+        <mitarbeiter>Michael Koch</mitarbeiter>
+        <zweck>Sonstiges</zweck>
+    </buchung>
+</buchungen>

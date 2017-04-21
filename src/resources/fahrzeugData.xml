@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<fahrzeuge>
+    <fahrzeug>
+        <kennzeichen>PB-MS1995</kennzeichen>
+        <klasse>PKW</klasse>
+        <marke>Fendt</marke>
+        <model>SuperTrecker5000</model>
+    </fahrzeug>
+    <fahrzeug>
+        <kennzeichen>B-HC1100</kennzeichen>
+        <klasse>Motorrad</klasse>
+        <marke>Honda</marke>
+        <model>CBR 1100 XX</model>
+    </fahrzeug>
+    <fahrzeug>
+        <kennzeichen>T-GM2258</kennzeichen>
+        <klasse>LKW</klasse>
+        <marke>MAN</marke>
+        <model>TGM</model>
+    </fahrzeug>
+    <fahrzeug>
+        <kennzeichen>FF-LK4763</kennzeichen>
+        <klasse>LKW</klasse>
+        <marke>MAN</marke>
+        <model>TGX</model>
+    </fahrzeug>
+    <fahrzeug>
+        <kennzeichen>H-CL5721</kennzeichen>
+        <klasse>LKW</klasse>
+        <marke>MAN</marke>
+        <model>TGX</model>
+    </fahrzeug>
+    <fahrzeug>
+        <kennzeichen>H-CO1928</kennzeichen>
+        <klasse>Motorrad</klasse>
+        <marke>Suzuki</marke>
+        <model>Intruder</model>
+    </fahrzeug>
+    <fahrzeug>
+        <kennzeichen>H-CT2016</kennzeichen>
+        <klasse>PKW</klasse>
+        <marke>VW</marke>
+        <model>Golf</model>
+    </fahrzeug>
+    <fahrzeug>
+        <kennzeichen>H-CT2017</kennzeichen>
+        <klasse>PKW</klasse>
+        <marke>VW</marke>
+        <model>Golf</model>
+    </fahrzeug>
+    <fahrzeug>
+        <kennzeichen>H-CO4114</kennzeichen>
+        <klasse>PKW</klasse>
+        <marke>VW</marke>
+        <model>Passat</model>
+    </fahrzeug>
+</fahrzeuge>

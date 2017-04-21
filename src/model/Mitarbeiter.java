@@ -2,11 +2,9 @@ package model;
 
 import java.time.LocalDate;
 
-// import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter; // aus tutorial
-
-import javafx.beans.property.IntegerProperty;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import controller.LocalDateAdapter;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -17,23 +15,72 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 	private final StringProperty nachname;
 	private final StringProperty strasse;
 	private final StringProperty wohnort;
-	private final IntegerProperty plz;
+	private final StringProperty plz;
 	private final ObjectProperty<LocalDate> geburtstag;
 
-	public Mitarbeiter (String _vorname, String _nachname, String _strasse, String _wohnort,
-			int _plz, LocalDate _geburtstag) {
+	public Mitarbeiter(String _vorname, String _nachname, String _strasse, String _wohnort, String _plz,
+			LocalDate _geburtstag) {
 		this.vorname = new SimpleStringProperty(_vorname);
 		this.nachname = new SimpleStringProperty(_nachname);
 		this.strasse = new SimpleStringProperty(_strasse);
 		this.wohnort = new SimpleStringProperty(_wohnort);
-		this.plz = new SimpleIntegerProperty(_plz);
+		this.plz = new SimpleStringProperty(_plz);
 		this.geburtstag = new SimpleObjectProperty<LocalDate>(_geburtstag);
 	}
 
+	public Mitarbeiter() {
+		this("", "", "", "", "", null);
+	}
+
+	// test kommentar
+
 	@Override
 	public int compareTo(Mitarbeiter mi) {
-		// TODO -------------------------------------------------------
-		return 0;
+		if (this.getNachname().compareTo(mi.getNachname()) == 0) {
+			if (this.getVorname().compareTo(mi.getVorname()) == 0) {
+				if (this.getStrasse().compareTo(mi.getStrasse()) == 0) {
+					if (this.getWohnort().compareTo(mi.getWohnort()) == 0) {
+						if (this.getPlz().compareTo(mi.getPlz()) == 0) {
+							if (this.getGeburtstag().compareTo(mi.getGeburtstag()) == 0) {
+								return 0;
+							} else if (this.getGeburtstag().compareTo(mi.getGeburtstag()) < 0) {
+								return -1;
+							} else {
+								return 1;
+							}
+						} else if (this.getPlz().compareTo(mi.getPlz()) < 0) {
+							return -1;
+						} else {
+							return 1;
+						}
+					} else if (this.getWohnort().compareTo(mi.getWohnort()) < 0) {
+						return -1;
+					} else {
+						return 1;
+					}
+				} else if (this.getStrasse().compareTo(mi.getStrasse()) < 0) {
+					return -1;
+				} else {
+					return 1;
+				}
+			} else if (this.getVorname().compareTo(mi.getVorname()) < 0) {
+				return -1;
+			} else {
+				return 1;
+			}
+		} else if (this.getNachname().compareTo(mi.getNachname()) < 0) {
+			return -1;
+		} else {
+			return 1;
+		}
+		// return 1; // this object is greater than the specified object
+		// return -1; // this object is less than the specified object
+		// return 0;
+	}
+
+	// Gibt den Vor- und Nachnamen im formatierten String aus
+	public String toString() {
+		return getVorname() + " " + getNachname();
 	}
 
 	public String getVorname() {
@@ -84,19 +131,19 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 		return wohnort;
 	}
 
-	public Integer getPlz() {
+	public String getPlz() {
 		return plz.get();
 	}
 
-	public void setPlz(int _plz) {
+	public void setPlz(String _plz) {
 		this.plz.set(_plz);
 	}
 
-	public IntegerProperty plzProperty() {
+	public StringProperty plzProperty() {
 		return plz;
 	}
 
-	// @XmlJavaTypeAdapter(LocalDateAdapter.class) // aus Tutorial?!
+	@XmlJavaTypeAdapter(LocalDateAdapter.class) // aus Tutorial?!
 	public LocalDate getGeburtstag() {
 		return geburtstag.get();
 	}
@@ -105,8 +152,8 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 		this.geburtstag.set(_geburtstag);
 	}
 
-    public ObjectProperty<LocalDate> geburtstagProperty() {
-        return geburtstag;
-    }
+	public ObjectProperty<LocalDate> geburtstagProperty() {
+		return geburtstag;
+	}
 
 }

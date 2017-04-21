@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="300.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="donny.address.view.PersonEditDialogController">
+<AnchorPane prefHeight="300.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MitarbeiterDialogController">
    <children>
       <GridPane layoutX="20.0" layoutY="80.0" prefHeight="217.0" prefWidth="391.0" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="14.0">
         <columnConstraints>
@@ -25,12 +25,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="firstNameField" GridPane.columnIndex="1" />
-            <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="streetField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="cityField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="postalCodeField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="birthdayField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="vornameFeld" GridPane.columnIndex="1" />
+            <TextField fx:id="nachnameFeld" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="strasseFeld" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="wohnortFeld" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="plzFeld" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="geburtstagFeld" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label text="Vorname" />
             <Label text="Nachname" GridPane.rowIndex="1" />
             <Label text="Straße" GridPane.rowIndex="2" />

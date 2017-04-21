@@ -10,24 +10,28 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BuchungController">
    <children>
       <SplitPane dividerPositions="0.3333" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="200.0">
                <children>
-                  <TableView layoutX="28.0" layoutY="65.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="buchungTabelle" layoutX="28.0" layoutY="65.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="100.0" text="ID" />
-                      <TableColumn prefWidth="100.0" text="Mitarbeiter" />
+                      <TableColumn fx:id="idSpalte" prefWidth="100.0" text="ID" />
+                      <TableColumn fx:id="mitarbeiterSpalte" prefWidth="100.0" text="Mitarbeiter" />
                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Label layoutX="14.0" layoutY="14.0" text="Buchungsinfo" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                  <Label layoutX="14.0" layoutY="14.0" text="Buchungsinfo" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Label>
                   <GridPane layoutX="14.0" layoutY="39.0" prefHeight="176.0" prefWidth="332.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -43,24 +47,23 @@
                     </rowConstraints>
                      <children>
                         <Label text="ID" />
-                        <Label text="Label" GridPane.columnIndex="1" />
+                        <Label fx:id="idLabel" text="Label" GridPane.columnIndex="1" />
                         <Label text="Mitarbeiter" GridPane.rowIndex="1" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="mitarbeiterLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Startdatum" GridPane.rowIndex="4" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="fahrzeugLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="Enddatum" GridPane.rowIndex="5" />
                         <Label text="Fahrzeug" GridPane.rowIndex="2" />
                         <Label text="Zweck" GridPane.rowIndex="3" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="zweckLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="startdatumLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="enddatumLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
-                  <ButtonBar layoutX="81.0" layoutY="244.0" prefHeight="40.0" prefWidth="300.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="5.0">
+                  <ButtonBar layoutX="25.0" layoutY="219.0" prefHeight="40.0" prefWidth="211.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="5.0">
                     <buttons>
-                        <Button mnemonicParsing="false" text="Neu..." />
-                      <Button mnemonicParsing="false" text="Bearbeiten..." />
-                        <Button mnemonicParsing="false" text="Löschen" />
+                        <Button mnemonicParsing="false" onAction="#handleBuchungNeu" text="Neu" />
+                      <Button mnemonicParsing="false" onAction="#handleBuchungBearbeiten" text="Bearbeiten" />
                     </buttons>
                   </ButtonBar>
                </children>
