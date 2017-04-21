@@ -30,20 +30,4 @@ public class StartFensterController {
 	public void handleTabStatistik() {
 		mainApp.zeigeStatistikFenster();
 	}
-
-	@FXML
-	private void handleFahrzeugStatistics() {
-		mainApp.showBirthdayStatistics();
-	}
-
-	@FXML
-	private void handleAusleihzeitStatistics() {
-		mainApp.showAusleihdauerStatistics();
-	}
-
-	@FXML
-	private void handleMitarbeiterAusleihzeitStatistics() {
-		mainApp.showMitarbeiterAusleihzeitStatistics();
-		;
-	}
 }

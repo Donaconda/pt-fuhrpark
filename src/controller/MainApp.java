@@ -4,11 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.prefs.Preferences;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,13 +26,10 @@ import model.Fahrzeug;
 import model.FahrzeugListWrapper;
 import view.StartFensterController;
 import view.StatistikController;
-import view.AusleihzeitStatistikController;
 import view.BuchungController;
 import view.BuchungDialogController;
 import view.FahrzeugController;
 import view.FahrzeugDialogController;
-import view.FahrzeugHaeufigkeitController;
-import view.MitarbeiterAusleihzeitController;
 import view.MitarbeiterController;
 import view.MitarbeiterDialogController;
 
@@ -495,94 +490,6 @@ public class MainApp extends Application {
 			alert.setContentText("Die Daten konnten nicht gespeichert werden in:\n" + file.getPath());
 
 			alert.showAndWait();
-		}
-	}
-
-	public void showBirthdayStatistics() {
-		try {
-			// Load person overview.
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("/view/Mitarbeiter.fxml"));
-			AnchorPane mitarbeiterFenster = (AnchorPane) loader.load();
-
-			// Set person overview into the center of root layout.
-			startFenster.setCenter(mitarbeiterFenster);
-
-			// Give the controller access to the main app.
-			MitarbeiterController controller = loader.getController();
-			controller.setMainApp(this);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			// Load the fxml file and create a new stage for the popup.
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("/view/FahrzeugHaeufigkeitStatistik.fxml"));
-			AnchorPane page = (AnchorPane) loader.load();
-			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Fahrzeug Statistik");
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.initOwner(primaryStage);
-			Scene scene = new Scene(page);
-			dialogStage.setScene(scene);
-
-			// Set the persons into the controller.
-			FahrzeugHaeufigkeitController controller = loader.getController();
-			controller.setData(buchungData, fahrzeugData);
-
-			dialogStage.show();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void showAusleihdauerStatistics() {
-		try {
-			// Load the fxml file and create a new stage for the popup.
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("/view/AusleihzeitStatistik.fxml"));
-			AnchorPane page = (AnchorPane) loader.load();
-			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Durchschnittliche Ausleihdauer");
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.initOwner(primaryStage);
-			Scene scene = new Scene(page);
-			dialogStage.setScene(scene);
-
-			// Set the persons into the controller.
-			AusleihzeitStatistikController controller = loader.getController();
-			controller.setData(buchungData, fahrzeugData);
-
-			dialogStage.show();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void showMitarbeiterAusleihzeitStatistics() {
-		try {
-			// Load the fxml file and create a new stage for the popup.
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("/view/MitarbeiterAusleihzeitStatistik.fxml"));
-			AnchorPane page = (AnchorPane) loader.load();
-			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Mitarbeiter Ausleihzeit");
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.initOwner(primaryStage);
-			Scene scene = new Scene(page);
-			dialogStage.setScene(scene);
-
-			// Set the persons into the controller.
-			MitarbeiterAusleihzeitController controller = loader.getController();
-			controller.setData(buchungData, mitarbeiterData);
-
-			dialogStage.show();
-
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 	
