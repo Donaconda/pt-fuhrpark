@@ -11,7 +11,7 @@ import model.Eintrag;
 public class Statistik {
 	
 	// Ausbaustufe VII.1 - Häufigkeit der Buchungen für jeden Fahrzeugtyp
-	public static ArrayList<Eintrag> calcFzTypHaeufigkeit(List<Buchung> buchungData, ObservableList<Fahrzeug> fahrzeugData) {
+	public static ArrayList<Eintrag> calcFzTypHaeufigkeit(ObservableList<Buchung> buchungData, ObservableList<Fahrzeug> fahrzeugData) {
 		// Erstelle für jeden Fahrzeugtyp einen neuen Eintrag
 		ArrayList<Eintrag> eintraege = new ArrayList<Eintrag>();
 		eintraege.add(new Eintrag("PKW", 0));
@@ -19,14 +19,14 @@ public class Statistik {
 		eintraege.add(new Eintrag("Motorrad", 0));
 		// Berechnung 
 		for (Buchung b : buchungData) {
-			String fzKlasse = Sucher.sucheFahrzeug(fahrzeugData, b.getFahrzeug()).getKlasse();
+			String fzKlasse = ((Fahrzeug) Sucher.suche(fahrzeugData, b.getFahrzeug())).getKlasse();
 			if (fzKlasse != null) {
 				if (fzKlasse.compareTo(eintraege.get(0).getX()) == 0) {
-					eintraege.get(0).setY(eintraege.get(0).getY() + 1);
+					eintraege.get(0).setY(eintraege.get(0).getY() + 1);			// Y-Wert(Säule im Diagramm) um 1 erhöhen
 				} else if (fzKlasse.compareTo(eintraege.get(1).getX()) == 0) {
-					eintraege.get(1).setY(eintraege.get(1).getY() + 1);
+					eintraege.get(1).setY(eintraege.get(1).getY() + 1);			// Y-Wert(Säule im Diagramm) um 1 erhöhen
 				} else if (fzKlasse.compareTo(eintraege.get(2).getX()) == 0) {
-					eintraege.get(2).setY(eintraege.get(2).getY() + 1);
+					eintraege.get(2).setY(eintraege.get(2).getY() + 1);			// Y-Wert(Säule im Diagramm) um 1 erhöhen
 				}
 			}
 		}
@@ -52,7 +52,7 @@ public class Statistik {
 			int motoZaehler = 0;
 			for (Buchung b : buchungData) { // For-Each Schleife
 				eintraege.get(3).setY((int) (eintraege.get(3).getY() + b.dauer()));
-				String fzKlasse = Sucher.sucheFahrzeug(fahrzeugData, b.getFahrzeug()).getKlasse();
+				String fzKlasse = ((Fahrzeug) Sucher.suche(fahrzeugData, b.getFahrzeug())).getKlasse();
 				if (fzKlasse.compareTo(eintraege.get(0).getX()) == 0) {
 					eintraege.get(0).setY((int) (eintraege.get(0).getY() + b.dauer()));
 					pkwZaehler++;
@@ -81,12 +81,12 @@ public class Statistik {
 	
 	
 	// Ausbaustufe VII.3 - Gesamte Leihzeit jedes Mitarbeiters
-	public static ArrayList<Eintrag> calcMitarbeiterLeihzeit(List<Buchung> buchungData, ObservableList<Mitarbeiter> mitarbeiterData) {
+	public static ArrayList<Eintrag> calcMitarbeiterLeihzeit(ObservableList<Buchung> buchungData, ObservableList<Mitarbeiter> mitarbeiterData) {
 		// Erstelle für jeden Mitarbeiter einen neuen Eintrag und berechne die Leihzeit
 		boolean eingetragen = false;
 		ArrayList<Eintrag> eintraege = new ArrayList<Eintrag>();
 		for (Buchung b : buchungData) { // Für jede Buchung
-			String ma = Sucher.sucheMitarbeiter(mitarbeiterData, b.getMitarbeiter()).toString();
+			String ma = Sucher.suche(mitarbeiterData, b.getMitarbeiter()).toString();
 			for (Eintrag e : eintraege) {
 				eingetragen = false;
 				if (e.getX().compareTo(ma) == 0 ) {
