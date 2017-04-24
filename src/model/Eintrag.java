@@ -2,8 +2,8 @@ package model;
 
 public class Eintrag { // Klasse zur Darstellung der Statistik
 
-	private String X; // x-Koordiante
-	private int Y; // y-Koordiante
+	private String X;	// x-Koordiante
+	private int Y;		// y-Koordiante
 
 	// Konstruktor:
 	public Eintrag(String X, int Y){
