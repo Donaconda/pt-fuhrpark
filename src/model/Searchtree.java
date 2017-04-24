@@ -1,18 +1,21 @@
 package model;
 
-public class Searchtree<T extends Comparable<T>> {
+public class Searchtree<T extends Comparable<T>> { // Modell eines binären Suchbaums:
 
+	// Attribute:
 	private class Knoten {
-		T wert; // Wert des Knoten
-		Knoten links; // linker Unterbaum
-		Knoten rechts; // rechter Unterbaum
+		T wert; 		// Wert des Knoten
+		Knoten links; 	// linker Unterbaum
+		Knoten rechts; 	// rechter Unterbaum
 	}
 
+	// Oberstes Element
 	private Knoten wurzel;
 
+	// Methode zum Hinzufügen eines neuen Elements
 	void insert(T elem) {
 		Knoten knoten = wurzel; // Hilfsknoten
-		Knoten vater = null; // Vater von knoten
+		Knoten vater = null; 	// Vater von knoten
 		int diff = 0;
 
 		while (knoten != null) {
@@ -32,17 +35,18 @@ public class Searchtree<T extends Comparable<T>> {
 		knoten.links = knoten.rechts = null;
 		knoten.wert = elem;
 
-		if (vater == null) { // Baum war bisher leer
-			wurzel = knoten; // dann ist jetzt knoten die Wurzel
-		} else { // ansonsten wird knoten Unterbaum von vater
-			if (diff > 0) { // vater.wert > elem => neuer linker Unterbaum
+		if (vater == null) { 	// Baum war bisher leer
+			wurzel = knoten; 	// dann ist jetzt knoten die Wurzel
+		} else { 				// ansonsten wird knoten Unterbaum von vater
+			if (diff > 0) { 	// vater.wert > elem => neuer linker Unterbaum
 				vater.links = knoten;
-			} else { // vater.wert < elem => neuer rechter Unterbaum
+			} else { 			// vater.wert < elem => neuer rechter Unterbaum
 				vater.rechts = knoten;
 			}
 		}
 	}
 
+	// Methode zum Löschen eines spezifischen Elements
 	void delete(T elem) {
 		Knoten knoten = wurzel;
 		Knoten vater = null;
@@ -114,7 +118,7 @@ public class Searchtree<T extends Comparable<T>> {
 			} else {
 				knoten2 = vater.rechts.rechts;
 				while (knoten2.links != null) { // finde den Knoten mit dem
-												// nächs höheren Wert im Baum
+												// nächst höheren Wert im Baum
 					vater2 = knoten2;
 					knoten2 = knoten2.links;
 				}
@@ -130,4 +134,3 @@ public class Searchtree<T extends Comparable<T>> {
 		}
 	}
 }
-// testkommentar

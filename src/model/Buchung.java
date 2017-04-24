@@ -9,15 +9,17 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Buchung implements Comparable<Buchung> {
+public class Buchung implements Comparable<Buchung> { // Modell einer Buchung:
 
-	private final StringProperty id;
-	private final StringProperty mitarbeiter; // Mitarbeiter als String gespeichert mit Vor- und Nachname
-	private final StringProperty fahrzeug; // Fahrzeug als String gespeichert mit Marke, Modell und Kennzeichen
-	private final StringProperty zweck;
-	private final ObjectProperty<LocalDateTime> beginn;
-	private final ObjectProperty<LocalDateTime> ende;
+	// Attribute:
+	private final StringProperty id; 					// eindeutige Identifizierungsnummer für eine Buchunga
+	private final StringProperty mitarbeiter; 			// Mitarbeiter gespeichert mit Vor- und Nachname
+	private final StringProperty fahrzeug; 				// Fahrzeug gespeichert mit Marke, Modell und Kennzeichen
+	private final StringProperty zweck; 				// Verwendungszweck des Fahrzeugs
+	private final ObjectProperty<LocalDateTime> beginn; // Beginn der Buchung
+	private final ObjectProperty<LocalDateTime> ende; 	// Ende der Buchung
 
+	// Konstruktor:
 	public Buchung(String _id, String _mitarbeiter, String _fahrzeug, String _zweck, LocalDateTime _beginn,
 			LocalDateTime _ende) {
 		this.id = new SimpleStringProperty(_id);
@@ -28,10 +30,12 @@ public class Buchung implements Comparable<Buchung> {
 		this.ende = new SimpleObjectProperty<LocalDateTime>(_ende);
 	}
 
+	// leerer Konstruktor:
 	public Buchung() {
 		this(null, null, null, null, null, null);
 	}
 
+	// Vergleichsmethode für zwei Buchungen (Implementierung des Comparable-Interfaces):
 	@Override
 	public int compareTo(Buchung bu) {
 		if (this.getId().compareTo(bu.getId()) == 0)
@@ -52,10 +56,11 @@ public class Buchung implements Comparable<Buchung> {
 			return 1;
 	}
 
-	public long dauer() { // Dauer in Stunden returned
-		return this.getBeginn().until(this.getEnde(), ChronoUnit.HOURS);
+	public long dauer() { // Berechnung des Buchungszeitraums
+		return this.getBeginn().until(this.getEnde(), ChronoUnit.HOURS); // Dauer wird in Stunden returned
 	}
 
+	// Getter- und Setter-Methoden (insgesamt drei pro Attribut, da die Property auch returned werden kann):
 	public String getId() {
 		return id.get();
 	}
@@ -95,7 +100,7 @@ public class Buchung implements Comparable<Buchung> {
 	public String getKennzeichen() {
 		return fahrzeug.get().split("\\(")[1].split("\\)")[0];
 	}
-	
+
 	public String getZweck() {
 		return zweck.get();
 	}
@@ -133,5 +138,4 @@ public class Buchung implements Comparable<Buchung> {
 	public ObjectProperty<LocalDateTime> endeProperty() {
 		return ende;
 	}
-
 }

@@ -9,15 +9,17 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Mitarbeiter implements Comparable<Mitarbeiter> {
+public class Mitarbeiter implements Comparable<Mitarbeiter> { // Modell eines Mitarbeiters:
 
-	private final StringProperty vorname;
-	private final StringProperty nachname;
-	private final StringProperty strasse;
-	private final StringProperty wohnort;
-	private final StringProperty plz;
-	private final ObjectProperty<LocalDate> geburtstag;
+	// Attribute:
+	private final StringProperty vorname;	// Vorname des Mitarbeiters
+	private final StringProperty nachname;	// Nachname des Mitarbeiters
+	private final StringProperty strasse;	// Straße des Mitarbeiters
+	private final StringProperty wohnort;	// Wohnort des Mitarbeiters
+	private final StringProperty plz;		// Postleitzahl des Wohnorts des Mitarbeiters
+	private final ObjectProperty<LocalDate> geburtstag; // Geburtstag des Mitarbeiters
 
+	// Konstruktor:
 	public Mitarbeiter(String _vorname, String _nachname, String _strasse, String _wohnort, String _plz,
 			LocalDate _geburtstag) {
 		this.vorname = new SimpleStringProperty(_vorname);
@@ -28,12 +30,12 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 		this.geburtstag = new SimpleObjectProperty<LocalDate>(_geburtstag);
 	}
 
+	// leerer Konstruktor:
 	public Mitarbeiter() {
 		this("", "", "", "", "", null);
 	}
 
-	// test kommentar
-
+	// Vergleichsmethode für zwei Mitarbeiter (Implementierung des Comparable-Interfaces):
 	@Override
 	public int compareTo(Mitarbeiter mi) {
 		if (this.getNachname().compareTo(mi.getNachname()) == 0) {
@@ -83,6 +85,7 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 		return getVorname() + " " + getNachname();
 	}
 
+	// Getter- und Setter-Methoden (insgesamt drei pro Attribut, da die Property auch returned werden kann):
 	public String getVorname() {
 		return vorname.get();
 	}
@@ -143,7 +146,7 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 		return plz;
 	}
 
-	@XmlJavaTypeAdapter(LocalDateAdapter.class) // aus Tutorial?!
+	@XmlJavaTypeAdapter(LocalDateAdapter.class)
 	public LocalDate getGeburtstag() {
 		return geburtstag.get();
 	}
@@ -155,5 +158,4 @@ public class Mitarbeiter implements Comparable<Mitarbeiter> {
 	public ObjectProperty<LocalDate> geburtstagProperty() {
 		return geburtstag;
 	}
-
 }

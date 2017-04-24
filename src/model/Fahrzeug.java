@@ -3,13 +3,15 @@ package model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Fahrzeug implements Comparable<Fahrzeug> {
+public class Fahrzeug implements Comparable<Fahrzeug> { // Modell eines Fahrzeugs:
 
-	private final StringProperty marke;
-	private final StringProperty model;
-	private final StringProperty kennzeichen;
-	private final StringProperty klasse;
+	// Attribute:
+	private final StringProperty marke; 		// Marke des Fahrzeugs
+	private final StringProperty model; 		// Modell des Fahrzeugs
+	private final StringProperty kennzeichen; 	// Kennzeichen des Fahrzeugs
+	private final StringProperty klasse; 		// Auto, Motorrad, etc
 
+	// Konstruktor:
 	public Fahrzeug(String _marke, String _model, String _kennzeichen, String _klasse) {
 		this.marke = new SimpleStringProperty(_marke);
 		this.model = new SimpleStringProperty(_model);
@@ -17,10 +19,12 @@ public class Fahrzeug implements Comparable<Fahrzeug> {
 		this.klasse = new SimpleStringProperty(_klasse);
 	}
 
+	// leerer Konstruktor:
 	public Fahrzeug() {
 		this(null, null, null, null);
 	}
 
+	// Vergleichsmethode für zwei Fahrzeuge (Implementierung des Comparable-Interfaces):
 	@Override
 	public int compareTo(Fahrzeug fa) {
 		if (this.getMarke().compareTo(fa.getMarke()) == 0)
@@ -46,15 +50,12 @@ public class Fahrzeug implements Comparable<Fahrzeug> {
 			return 1;
 	}
 
-//	// Gibt den Marke und Modell im formatierten String aus
-//	public String toString() {
-//		return getMarke() + " " + getModel();
-//	}
-	// Gibt den Marke, Modell und Kennzeichen im formatierten String aus
+	// Gibt die Marke, das Modell und das Kennzeichen in einem formatierten String aus
 	public String toString() {
 		return getMarke() + " " + getModel() + " (" + getKennzeichen() + ")";
 	}
 
+	// Getter- und Setter-Methoden (insgesamt drei pro Attribut, da die Property auch returned werden kann):
 	public String getMarke() {
 		return marke.get();
 	}
@@ -102,5 +103,4 @@ public class Fahrzeug implements Comparable<Fahrzeug> {
 	public StringProperty KlasseProperty() {
 		return klasse;
 	}
-
 }
