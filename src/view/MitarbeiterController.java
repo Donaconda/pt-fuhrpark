@@ -10,10 +10,11 @@ import javafx.scene.control.TableView;
 import controller.MainApp;
 import model.Mitarbeiter;
 
+// Controller für Mitarbeiter.fxml
+
 public class MitarbeiterController {
 
-	// Attribute/IDs, die zur Verknüpfung der fxml-Dateimit dem Code benötigt
-	// werden
+	// Attribute/IDs, die zur Verknüpfung der fxml-Datei mit dem Code benötigt werden
 	@FXML
 	private TableView<Mitarbeiter> mitarbeiterTabelle;
 	@FXML
@@ -35,54 +36,30 @@ public class MitarbeiterController {
 
 	private MainApp mainApp;
 
-	/**
-	 * The constructor. The constructor is called before the initialize()
-	 * method.
-	 */
-	public MitarbeiterController() {
-	}
-
-	/**
-	 * Initializes the controller class. This method is automatically called
-	 * after the fxml file has been loaded.
-	 */
+	// Initialisiert diese Controller-Klasse automatisch, nachdem die zugehörige fxml-Datei fertig geladen ist
 	@FXML
 	private void initialize() {
 		// Initialisiere die Tabelle mit zwei Spalten
 		vornameSpalte.setCellValueFactory(cellData -> cellData.getValue().vornameProperty());
 		nachnameSpalte.setCellValueFactory(cellData -> cellData.getValue().nachnameProperty());
-
 		// Initialisiere die Mitarbeiterinfo
 		zeigeMitarbeiterinfo(null);
-
-		// Zeige die passenden Mitarbeiterdetails an, wenn sich die Auswahl
-		// ändert
+		// Zeige die passenden Mitarbeiterdetails an, wenn sich die Auswahl ändert
 		mitarbeiterTabelle.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> zeigeMitarbeiterinfo(newValue));
 	}
 
-	/**
-	 * Is called by the main application to give a reference back to itself.
-	 * 
-	 * @param mainApp
-	 */
+	
+	// Wird in MainApp.java aufgerufen, um dieser Klasse eine Referenz zu sich selbst zu geben
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
-
 		// Fülle die Tabelle mit Daten aus der .xml-Datei
 		mitarbeiterTabelle.setItems(mainApp.getMitarbeiterData());
 	}
 
-	/**
-	 * Fills all text fields to show details about the person. If the specified
-	 * person is null, all text fields are cleared.
-	 * 
-	 * @param person
-	 *            the person or null
-	 */
 	private void zeigeMitarbeiterinfo(Mitarbeiter ma) {
 		if (ma != null) {
-			// Fülle die Labels mit den Daten aus dem Mitarbeiter Objekt
+			// Fülle die Labels mit den Daten aus dem Mitarbeiter-Objekt
 			vornameLabel.setText(ma.getVorname());
 			nachnameLabel.setText(ma.getNachname());
 			strasseLabel.setText(ma.getStrasse());
@@ -101,9 +78,6 @@ public class MitarbeiterController {
 		}
 	}
 
-	/**
-	 * Called when the user clicks on the delete button.
-	 */
 	@FXML
 	private void handleMitarbeiterLoeschen() {
 		int selectedIndex = mitarbeiterTabelle.getSelectionModel().getSelectedIndex();
@@ -121,10 +95,6 @@ public class MitarbeiterController {
 		}
 	}
 
-	/**
-	 * Called when the user clicks the new button. Opens a dialog to edit
-	 * details for a new person.
-	 */
 	@FXML
 	private void handleMitarbeiterNeu() {
 		Mitarbeiter tempItem = new Mitarbeiter();
@@ -135,10 +105,6 @@ public class MitarbeiterController {
 		}
 	}
 
-	/**
-	 * Called when the user clicks the edit button. Opens a dialog to edit
-	 * details for the selected person.
-	 */
 	@FXML
 	private void handleMitarbeiterBearbeiten() {
 		Mitarbeiter selectedItem = mitarbeiterTabelle.getSelectionModel().getSelectedItem();

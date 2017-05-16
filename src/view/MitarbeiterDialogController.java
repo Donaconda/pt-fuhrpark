@@ -10,11 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Mitarbeiter;
 
-/**
- * Dialog to edit details of a person.
- */
+//Controller für MitarbeiterDialog.fxml
+
 public class MitarbeiterDialogController {
 
+	// Attribute/IDs, die zur Verknüpfung der fxml-Datei mit dem Code benötigt werden
 	@FXML
 	private TextField vornameFeld;
 	@FXML
@@ -32,28 +32,16 @@ public class MitarbeiterDialogController {
 	private Mitarbeiter ma;
 	private boolean okClicked = false;
 
-	/**
-	 * Initializes the controller class. This method is automatically called
-	 * after the fxml file has been loaded.
-	 */
 	@FXML
 	private void initialize() {
 	}
 
-	/**
-	 * Sets the stage of this dialog.
-	 * 
-	 * @param dialogStage
-	 */
+	// Setze die Stage dieses Dialogs, damit sich ein neues Fenster öffnet
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
 	}
 
-	/**
-	 * Sets the person to be edited in the dialog.
-	 * 
-	 * @param person
-	 */
+	// Setze die Details in die zugehörigen Textfelder aus dem ausgewählten Mitarbeiter-Objekt
 	public void setMitarbeiter(Mitarbeiter ma) {
 		this.ma = ma;
 
@@ -72,18 +60,10 @@ public class MitarbeiterDialogController {
 
 	}
 
-	/**
-	 * Returns true if the user clicked OK, false otherwise.
-	 * 
-	 * @return
-	 */
 	public boolean isOkClicked() {
 		return okClicked;
 	}
 
-	/**
-	 * Called when the user clicks ok.
-	 */
 	@FXML
 	private void handleOk() {
 		if (isInputValid()) {
@@ -100,22 +80,14 @@ public class MitarbeiterDialogController {
 		}
 	}
 
-	/**
-	 * Called when the user clicks cancel.
-	 */
 	@FXML
 	private void handleCancel() {
 		dialogStage.close();
 	}
 
-	/**
-	 * Validates the user input in the text fields.
-	 * 
-	 * @return true if the input is valid
-	 */
+	// Überprüfe, ob die Eingabe gültig ist
 	private boolean isInputValid() {
 		String errorMessage = "";
-
 		if (vornameFeld.getText() == null || vornameFeld.getText().length() == 0) {
 			errorMessage += "Vorname ungültig!\n";
 		}
@@ -125,31 +97,24 @@ public class MitarbeiterDialogController {
 		if (strasseFeld.getText() == null || strasseFeld.getText().length() == 0) {
 			errorMessage += "Straße ungültig!\n";
 		}
-
 		if (plzFeld.getText() == null || plzFeld.getText().length() != 5) {
 			errorMessage += "PLZ ungültig!\n";
 		}
-
 		if (wohnortFeld.getText() == null || wohnortFeld.getText().length() == 0) {
 			errorMessage += "Wohnort ungültig!\n";
 		}
-
 		if (geburtstagFeld.getText() == null || geburtstagFeld.getText().length() == 0) {
 			errorMessage += "Geburtstag ungültig! (tt.mm.jjjj)\n";
 		}
-
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
-			// Show the error message.
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.initOwner(dialogStage);
 			alert.setTitle("Ungültige Felder");
 			alert.setHeaderText("Bitte korrigieren Sie die ungültigen Felder");
 			alert.setContentText(errorMessage);
-
 			alert.showAndWait();
-
 			return false;
 		}
 	}

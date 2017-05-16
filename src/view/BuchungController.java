@@ -10,10 +10,11 @@ import javafx.scene.control.TableView;
 import controller.MainApp;
 import model.Buchung;
 
+//Controller für Buchung.fxml
+
 public class BuchungController {
 
-	// Attribute/IDs, die zur Verknüpfung der fxml-Datei mit dem Code benötigt
-	// werden
+	// Attribute/IDs, die zur Verknüpfung der fxml-Datei mit dem Code benötigt werden
 	@FXML
 	private TableView<Buchung> buchungTabelle;
 	@FXML
@@ -40,31 +41,29 @@ public class BuchungController {
 
 	public int idCounter = 0;
 
+	// Initialisiert diese Controller-Klasse automatisch, nachdem die zugehörige fxml-Datei fertig geladen ist
 	@FXML
 	private void initialize() {
 		// Initialisiere die Tabelle mit zwei Spalten
 		idSpalte.setCellValueFactory(cellData -> cellData.getValue().idProperty());
 		mitarbeiterSpalte.setCellValueFactory(cellData -> cellData.getValue().mitarbeiterProperty());
-
-		// Initialisiere die Mitarbeiterinfo
+		// Initialisiere die Buchungsinfo
 		zeigeBuchunginfo(null);
-
-		// Zeige die passenden Mitarbeiterdetails an, wenn sich die Auswahl
-		// ändert
+		// Zeige die passenden Buchungsdetails an, wenn sich die Auswahl ändert
 		buchungTabelle.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> zeigeBuchunginfo(newValue));
 	}
 
+	// Wird in MainApp.java aufgerufen, um dieser Klasse eine Referenz zu sich selbst zu geben
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
-
 		// Fülle die Tabelle mit Daten aus der .xml-Datei
 		buchungTabelle.setItems(mainApp.getBuchungData());
 	}
 
 	private void zeigeBuchunginfo(Buchung bu) {
 		if (bu != null) {
-			// Fülle die Labels mit den Daten aus dem Mitarbeiter Objekt
+			// Fülle die Labels mit den Daten aus dem Buchung-Objekt
 			idLabel.setText(bu.getId());
 			mitarbeiterLabel.setText(bu.getMitarbeiter());
 			fahrzeugLabel.setText(bu.getFahrzeug());
@@ -72,7 +71,7 @@ public class BuchungController {
 			startdatumLabel.setText(bu.getBeginn().format(mainApp.getDTFormatter()));
 			enddatumLabel.setText(bu.getEnde().format(mainApp.getDTFormatter()));
 		} else {
-			// Mitarbeiter ist null, zeige nichts an
+			// Buchung ist null, zeige nichts an
 			idLabel.setText("");
 			mitarbeiterLabel.setText("");
 			fahrzeugLabel.setText("");
@@ -82,10 +81,6 @@ public class BuchungController {
 		}
 	}
 
-	/**
-	 * Called when the user clicks the new button. Opens a dialog to edit
-	 * details for a new person.
-	 */
 	@FXML
 	private void handleBuchungNeu() {
 		Buchung tempItem = new Buchung();
@@ -98,10 +93,6 @@ public class BuchungController {
 		}
 	}
 
-	/**
-	 * Called when the user clicks the edit button. Opens a dialog to edit
-	 * details for the selected person.
-	 */
 	@FXML
 	private void handleBuchungBearbeiten() {
 		Buchung selectedItem = buchungTabelle.getSelectionModel().getSelectedItem();
@@ -122,6 +113,7 @@ public class BuchungController {
 		}
 	}
 
+	// Methode, um jeder Buchung eine einzigartige ID zu verleihen
 	public void calculateID() {
 		ObservableList<Buchung> buchungen = mainApp.getBuchungData();
 		this.idCounter = buchungen.size();

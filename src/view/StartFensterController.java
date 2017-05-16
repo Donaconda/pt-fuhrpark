@@ -3,6 +3,8 @@ package view;
 import controller.MainApp;
 import javafx.fxml.FXML;
 
+// Controller für StartFenster.fxml
+
 public class StartFensterController {
 
 	private MainApp mainApp;

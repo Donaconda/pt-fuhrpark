@@ -11,6 +11,8 @@ import javafx.scene.control.TextField;
 import controller.MainApp;
 import model.Fahrzeug;
 
+//Controller für Fahrzeug.fxml
+
 public class FahrzeugController {
 
 	// Attribute/IDs, die zur Verknüpfung der fxml-Datei mit dem Code benötigt werden
@@ -36,41 +38,39 @@ public class FahrzeugController {
 	public FahrzeugController() {
 	}
 
+	// Initialisiert diese Controller-Klasse automatisch, nachdem die zugehörige fxml-Datei fertig geladen ist
 	@FXML
 	private void initialize() {
 		// Initialisiere die Tabelle mit zwei Spalten
 		kennzeichenSpalte.setCellValueFactory(cellData -> cellData.getValue().KennzeichenProperty());
 		modellSpalte.setCellValueFactory(cellData -> cellData.getValue().MarkeProperty().concat(' ').concat(cellData.getValue().ModelProperty()));
-
-		// Initialisiere die Mitarbeiterinfo
+		// Initialisiere die Fahrzeuginfo
 		zeigeFahrzeuginfo(null);
-
-		// Zeige die passenden Mitarbeiterdetails an, wenn sich die Auswahl in der Tabelle ändert
+		// Zeige die passenden Fahrzeugdetails an, wenn sich die Auswahl in der Tabelle ändert
 		fahrzeugTabelle.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> zeigeFahrzeuginfo(newValue)); 
-		
 		// Aktualisiere die Tabelle jedes Mal, wenn sich das Suchfeld ändert
         sucheFeld.textProperty().addListener((observable, oldValue, newValue) -> {
         	filterTabelle(newValue);
         });
 	}
 
+	// Wird in MainApp.java aufgerufen, um dieser Klasse eine Referenz zu sich selbst zu geben
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
-
 		// Fülle die Tabelle mit Daten aus der .xml-Datei
 		fahrzeugTabelle.setItems(mainApp.getFahrzeugData());
 	}
 
 	private void zeigeFahrzeuginfo(Fahrzeug fz) {
 		if (fz != null) {
-			// Fülle die Labels mit den Daten aus dem Mitarbeiter Objekt
+			// Fülle die Labels mit den Daten aus dem Fahrzeug-Objekt
 			markeLabel.setText(fz.getMarke());
 			modellLabel.setText(fz.getModel());
 			kennzeichenLabel.setText(fz.getKennzeichen());
 			klasseLabel.setText(fz.getKlasse());
 		} else {
-			// Mitarbeiter ist null, zeige nichts an
+			// Fahrzeug ist null, zeige nichts an
 			markeLabel.setText("");
 			modellLabel.setText("");
 			kennzeichenLabel.setText("");
@@ -95,10 +95,6 @@ public class FahrzeugController {
 		}
 	}
 
-	/**
-	 * Called when the user clicks the new button. Opens a dialog to edit
-	 * details for a new person.
-	 */
 	@FXML
 	private void handleFahrzeugNeu() {
 		Fahrzeug tempItem = new Fahrzeug();
@@ -109,10 +105,6 @@ public class FahrzeugController {
 		}
 	}
 
-	/**
-	 * Called when the user clicks the edit button. Opens a dialog to edit
-	 * details for the selected person.
-	 */
 	@FXML
 	private void handleFahrzeugBearbeiten() {
 		Fahrzeug selectedItem = fahrzeugTabelle.getSelectionModel().getSelectedItem();

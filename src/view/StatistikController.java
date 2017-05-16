@@ -10,27 +10,30 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import model.Eintrag;
 
+//Controller für Statistik.fxml
+
 public class StatistikController {
 
+	// Attribute/IDs, die zur Verknüpfung der fxml-Datei mit dem Code benötigt werden
 	@FXML
 	private BarChart<String, Integer> diagramm;
-	
 	@FXML
 	private Label statistikInfo;
-
 	@FXML
 	private CategoryAxis xAchse;
-
+	
 	private MainApp mainApp;
 	
 	@FXML
 	private void initialize() {
 	}
 
+	// Wird in MainApp.java aufgerufen, um dieser Klasse eine Referenz zu sich selbst zu geben
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
 	
+	// Zeige Häufigkeit der Buchungen für jeden Fahrzeugtyp
 	public void zeigeFzTypHauefigkeitDaten() {
 		statistikInfo.setText("Häufigkeit der Buchungen pro Fahrzeugtyp");
 		diagramm.getData().clear();
@@ -45,6 +48,7 @@ public class StatistikController {
 		diagramm.getData().add(series);
 	}
 
+	// Zeige Durchschnittszeit der Buchungen für jeden Fahrzeugtyp
 	public void zeigeFzTypDurchschnittszeitDaten() {
 		statistikInfo.setText("Durchschnittliche Leihdauer der Buchungen pro Fahrzeugtyp");
 		diagramm.getData().clear();
@@ -59,6 +63,7 @@ public class StatistikController {
 		diagramm.getData().add(series);
 	}
 	
+	// Zeige gesamte Leihzeit jedes Mitarbeiters
 	public void zeigeMitarbeiterLeihzeitDaten() {
 		statistikInfo.setText("Summe der Leihzeiten pro Mitarbeiter");
 		diagramm.getData().clear();

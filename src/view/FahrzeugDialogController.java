@@ -10,11 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Fahrzeug;
 
-/**
- * Dialog to edit details of a person.
- */
+//Controller für FahrzeugDialog.fxml
+
 public class FahrzeugDialogController {
 
+	// Attribute/IDs, die zur Verknüpfung der fxml-Datei mit dem Code benötigt werden
 	@FXML
 	private TextField markeFeld;
 	@FXML
@@ -28,30 +28,19 @@ public class FahrzeugDialogController {
 	private Fahrzeug fz;
 	private boolean okClicked = false;
 
-	/**
-	 * Initializes the controller class. This method is automatically called
-	 * after the fxml file has been loaded.
-	 */
+	// Initialisiert diese Controller-Klasse automatisch, nachdem die zugehörige fxml-Datei fertig geladen ist
 	@FXML
 	private void initialize() {
 		ObservableList<String> options = FXCollections.observableArrayList("PKW", "LKW", "Motorrad");
 		klasseFeld.getItems().addAll(options);
 	}
 
-	/**
-	 * Sets the stage of this dialog.
-	 * 
-	 * @param dialogStage
-	 */
+	// Setze die Stage dieses Dialogs, damit sich ein neues Fenster öffnet
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
 	}
 
-	/**
-	 * Sets the person to be edited in the dialog.
-	 * 
-	 * @param person
-	 */
+	// Setze die Details in die zugehörigen Textfelder aus dem ausgewählten Fahrzeug-Objekt
 	public void setFahrzeug(Fahrzeug fz) {
 		this.fz = fz;
 		try {
@@ -64,18 +53,10 @@ public class FahrzeugDialogController {
 		}
 	}
 
-	/**
-	 * Returns true if the user clicked OK, false otherwise.
-	 * 
-	 * @return
-	 */
 	public boolean isOkClicked() {
 		return okClicked;
 	}
 
-	/**
-	 * Called when the user clicks ok.
-	 */
 	@FXML
 	private void handleOk() {
 		if (isInputValid()) {
@@ -89,22 +70,14 @@ public class FahrzeugDialogController {
 		}
 	}
 
-	/**
-	 * Called when the user clicks cancel.
-	 */
 	@FXML
 	private void handleCancel() {
 		dialogStage.close();
 	}
 
-	/**
-	 * Validates the user input in the text fields.
-	 * 
-	 * @return true if the input is valid
-	 */
+	// Überprüfe, ob die Eingabe gültig ist
 	private boolean isInputValid() {
 		String errorMessage = "";
-
 		if (markeFeld.getText() == null || markeFeld.getText().length() == 0) {
 			errorMessage += "Marke ungültig!\n";
 		}
@@ -117,15 +90,12 @@ public class FahrzeugDialogController {
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
-			// Show the error message.
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.initOwner(dialogStage);
 			alert.setTitle("Ungültige Felder");
 			alert.setHeaderText("Bitte korrigieren Sie die ungültigen Felder");
 			alert.setContentText(errorMessage);
-
 			alert.showAndWait();
-
 			return false;
 		}
 	}

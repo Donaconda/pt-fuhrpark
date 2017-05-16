@@ -16,11 +16,11 @@ import model.Buchung;
 import model.Fahrzeug;
 import model.Mitarbeiter;
 
-/**
- * Dialog to edit details of a person.
- */
+//Controller für BuchungDialog.fxml
+
 public class BuchungDialogController {
 
+	// Attribute/IDs, die zur Verknüpfung der fxml-Datei mit dem Code benötigt werden
 	@FXML
 	private Label idFeld;
 	@FXML
@@ -39,10 +39,6 @@ public class BuchungDialogController {
 	private Buchung bu;
 	private boolean okClicked = false;
 
-	/**
-	 * Initializes the controller class. This method is automatically called
-	 * after the fxml file has been loaded.
-	 */
 	@FXML
 	private void initialize() {
 	}
@@ -51,6 +47,8 @@ public class BuchungDialogController {
 		this.mainApp = mainApp;
 	}
 
+	// Füllt die Auswahlfelder "Mitarbeiter" und "Fahrzeug" mit den Daten aus den XML-Dateien
+	// und "Zweck" mit den hier definierten Strings
 	public void fillCombobox() {
 		try {
 			// Mitarbeiterliste für die ComboBox "mitarbeiterFeld"
@@ -69,6 +67,7 @@ public class BuchungDialogController {
 			}
 			fahrzeugFeld.getItems().addAll(fzListe);
 
+			// Strings für die ComboBox "zweckFeld"
 			zweckFeld.getItems().addAll("Stadtfahrt", "Langstreckenfahrt", "Transport von Arbeitsmaterialien",
 					"Sonstiges");
 		} catch (Exception e) {
@@ -76,20 +75,12 @@ public class BuchungDialogController {
 		}
 	}
 
-	/**
-	 * Sets the stage of this dialog.
-	 * 
-	 * @param dialogStage
-	 */
+	// Setze die Stage dieses Dialogs, damit sich ein neues Fenster öffnet
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
 	}
 
-	/**
-	 * Sets the person to be edited in the dialog.
-	 * 
-	 * @param person
-	 */
+	// Setze die Details in die zugehörigen Textfelder aus dem ausgewählten Buchung-Objekt
 	public void setBuchung(Buchung bu) {
 		this.bu = bu;
 		startdatumFeld.setPromptText("tt.mm.jjjj hh:mm");
@@ -107,18 +98,10 @@ public class BuchungDialogController {
 
 	}
 
-	/**
-	 * Returns true if the user clicked OK, false otherwise.
-	 * 
-	 * @return
-	 */
 	public boolean isOkClicked() {
 		return okClicked;
 	}
 
-	/**
-	 * Called when the user clicks ok.
-	 */
 	@FXML
 	private void handleOk() {
 		if (isInputValid()) {
@@ -133,19 +116,12 @@ public class BuchungDialogController {
 		}
 	}
 
-	/**
-	 * Called when the user clicks cancel.
-	 */
 	@FXML
 	private void handleCancel() {
 		dialogStage.close();
 	}
 
-	/**
-	 * Validates the user input in the text fields.
-	 * 
-	 * @return true if the input is valid
-	 */
+	// Überprüfe, ob die Eingabe gültig ist
 	private boolean isInputValid() {
 		String errorMessage = "";
 		
@@ -170,20 +146,15 @@ public class BuchungDialogController {
 				}
 			}
 		}
-		
-		
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
-			// Show the error message.
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.initOwner(dialogStage);
 			alert.setTitle("Ungültige Felder");
 			alert.setHeaderText("Bitte korrigieren Sie die ungültigen Felder");
 			alert.setContentText(errorMessage);
-
 			alert.showAndWait();
-
 			return false;
 		}
 	}
