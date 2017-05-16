@@ -266,7 +266,7 @@ public class MainApp extends Application {
 	}
 	
 	// -------------------------------------------------------------------
-	// Methoden für die Speicherung der Daten in XML-Dateien
+	// Methoden für die Speicherung und das Laden der Daten in bzw. aus XML-Dateien
 	// -------------------------------------------------------------------
 	
 	// Getter und Setter der Dateipfade
