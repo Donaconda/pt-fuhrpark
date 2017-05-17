@@ -3,11 +3,12 @@ package view;
 import java.time.LocalDateTime;
 import controller.MainApp;
 import controller.Sucher;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -33,7 +34,13 @@ public class BuchungDialogController {
 	private TextField startdatumFeld;
 	@FXML
 	private TextField enddatumFeld;
-
+	@FXML
+	private CheckBox checkPkw;
+	@FXML
+	private CheckBox checkLkw;
+	@FXML
+	private CheckBox checkMotorrad;
+	
 	private Stage dialogStage;
 	private MainApp mainApp;
 	private Buchung bu;
@@ -52,20 +59,14 @@ public class BuchungDialogController {
 	public void fillCombobox() {
 		try {
 			// Mitarbeiterliste für die ComboBox "mitarbeiterFeld"
-			ObservableList<String> maListe = FXCollections.observableArrayList();
-			maListe.clear();
 			for (Mitarbeiter m : mainApp.getMitarbeiterData()) {
-				maListe.add(m.toString());
+				mitarbeiterFeld.getItems().add(m.toString());
 			}
-			mitarbeiterFeld.getItems().addAll(maListe);
-
+			
 			// Fahrzeugliste für die ComboBox "fahrzeugFeld"
-			ObservableList<String> fzListe = FXCollections.observableArrayList();
-			fzListe.clear();
 			for (Fahrzeug f : mainApp.getFahrzeugData()) {
-				fzListe.add(f.toString());
+				fahrzeugFeld.getItems().add(f.toString());
 			}
-			fahrzeugFeld.getItems().addAll(fzListe);
 
 			// Strings für die ComboBox "zweckFeld"
 			zweckFeld.getItems().addAll("Stadtfahrt", "Langstreckenfahrt", "Transport von Arbeitsmaterialien",
@@ -157,5 +158,33 @@ public class BuchungDialogController {
 			alert.showAndWait();
 			return false;
 		}
+	}
+	
+	// Filtert die Fahrzeuge-Auswahlliste nach den ausgewählten Fahrzeugtyp-Checkboxen
+	@FXML
+	private void handleCheckboxChanged(){
+		// Packe alle Fahrzeugdaten in ein FilteredList-Objekt
+		FilteredList<Fahrzeug> filteredData = new FilteredList<>(mainApp.getFahrzeugData(), p -> true);
+		// Setze das Kriterium (Prädikat) auf die Liste
+        filteredData.setPredicate(fz -> {
+            // Ist ein Klassentyp ausgewählt, vergleiche, ob dieser dem Klassentyp des Fahrzeugs entspricht
+            if(checkPkw.isSelected() && fz.getKlasse().toLowerCase().equals("pkw")) {
+                return true;
+            } else if (checkLkw.isSelected() && fz.getKlasse().toLowerCase().equals("lkw")) {
+                return true;
+            } else if(checkMotorrad.isSelected() && fz.getKlasse().toLowerCase().equals("motorrad")) {
+                return true;
+            }
+            // Gebe false zurück, wenn das Prädikat nicht passt
+            return false;
+        });
+        // Aktualisiere das Fahrzeug-Auswahlfeld
+        String preselection = fahrzeugFeld.getSelectionModel().getSelectedItem();
+        fahrzeugFeld.getItems().clear();
+		for (Fahrzeug f : filteredData) {
+			fahrzeugFeld.getItems().add(f.toString());
+		}
+		fahrzeugFeld.getSelectionModel().select(preselection);
+        
 	}
 }
